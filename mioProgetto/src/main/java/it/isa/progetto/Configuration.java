@@ -1,7 +1,7 @@
 package it.isa.progetto;
 
 import java.util.Calendar;
-
+//alcuni DB vogliono la data attuale quindi uso Calendar anche se con Mysql non serve
 
 
 
