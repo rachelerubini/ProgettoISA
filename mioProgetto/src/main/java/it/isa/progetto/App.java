@@ -6,8 +6,22 @@ package it.isa.progetto;
  */
 public class App 
 {
-    public static void main( String[] args )
+   public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
-    }
-}
+
+        
+        App.showFrame();
+        
+        
+        
+
+        
+     }
+
+     public static FirstFrame showFrame()
+        {
+            FirstFrame firstFrame = new FirstFrame();
+            return firstFrame;
+        }
+   
+ }
