@@ -56,12 +56,19 @@ public class DAOFactory {
   }
 
   
-  public UtenteDAO getUtenteDAO() {
-    return new UtenteDAO(connection);
+  public AmministratoreDAO getAmministratoreDAO() {
+    return new AmministratoreDAO(connection);
   }
 
-  
-  public BranoDAO getBranoDAO() {
-    return new BranoDAO(connection);
+  public ClienteDAO getClienteDAO() {
+    return new ClienteDAO(connection);
+  }
+
+  public RecensioneDAO getRecensioneDAO() {
+    return new RecensioneDAO(connection);
+  }
+
+  public CorsoDAO getCorsoDAO() {
+    return new CorsoDAO(connection);
   }
 }
