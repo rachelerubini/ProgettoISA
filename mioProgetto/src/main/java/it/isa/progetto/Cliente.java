@@ -13,16 +13,16 @@ public class Cliente {
   private String NASCITA;
   private boolean DELETED;
   /* N:M */
-  private Iscrizione[] iscrizione;
+  private Corso[] iscrizione;  //o cosi o con le liste quindi avro per ogni cliente una lsita o array di corso a cui è iscritto
   /* 1:N */
   private Recensione[] recensioni;
 
 
-  public Iscrizione getIscrizione() {
+  public Corso[] getCorso() {
     return iscrizione;
   }
 
-  public void setIscrizione(Iscrizione iscrizione) {
+  public void setCorso(Corso[] iscrizione) {
     this.iscrizione = iscrizione;
   }
 

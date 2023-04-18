@@ -9,7 +9,7 @@ public class Corso {
     private String LIVELLO;
     private boolean DELETED;
     /* N:M */
-    private Iscrizione[] iscrizione;
+    private Cliente[] iscrizione;  // per ogni corso ho la lista di cliente che sono iscritti a quel corso
     /* 1:N */
     private Recensione[] recensioni;
 
@@ -62,11 +62,11 @@ public class Corso {
         this.recensioni[index] = recensioni;
     }
 
-    public Iscrizione getIscrizione() {
+    public Cliente[] getCliente() {
         return iscrizione;
       }
     
-      public void setIscrizione(Iscrizione iscrizione) {
+      public void setCliente(Cliente[] iscrizione) {
         this.iscrizione = iscrizione;
       }
 
