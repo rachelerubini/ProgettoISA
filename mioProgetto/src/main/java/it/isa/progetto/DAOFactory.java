@@ -7,10 +7,7 @@ import java.sql.Connection;
 public class DAOFactory {
 
 
-
   private Connection connection;
-
-  
 
   
   public void beginTransaction() {
