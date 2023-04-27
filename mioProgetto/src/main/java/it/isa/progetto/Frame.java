@@ -60,10 +60,10 @@ public class Frame extends JFrame {
         container.add(ncp, "9");
         container.add(clap, "10");
 
-        //DA MODIFICARE DA QUI IN POI
-        
+        //parto dall hompegae che è la schermata container 1
         cl.show(container, "1");
 
+        //qua metto tutti i pulsanti della mia applicazione
         fp.jButton1.addActionListener(new ActionListener(){
 
             @Override
