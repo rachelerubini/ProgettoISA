@@ -64,17 +64,81 @@ public class Frame extends JFrame {
         cl.show(container, "1");
 
         //qua metto tutti i pulsanti della mia applicazione
-        fp.jButton1.addActionListener(new ActionListener(){
+
+        //registrati
+        hp.jButton7.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                cl.show(container, "2");
+                cl.show(container, "4");
                 
             }
             
         });
 
-        fp.jButton2.addActionListener(new ActionListener(){
+
+        //DA FINIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        //login posso andare se sono cliente in 2 se sono amministratore nella 3
+        hp.jButton1.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "");
+                
+            }
+            
+        });
+
+
+        //vado dalla homepage del cliente ai corsi per il cliente
+         hcp.jButton3.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "5");
+                
+            }
+            
+        });
+
+             //vado dalla homepage del cliente alle recensioni per il cliente
+        hcp.jButton4.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "6");
+                
+            }
+            
+        });
+
+
+        //dalla homepage degli amministartori vado alla pagina dei clienti per gli amministratori
+        hap.jButton5.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "10");
+                
+            }
+            
+        });
+
+        //dalla homepage degli amministartori vado alla pagina dei corsi per gli amministratori
+
+        hap.jButton6.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "8");
+                
+            }
+            
+        });
+
+
+        //dalla pagina clienti per l'amministratore, l'amministratore va alla sua homepage
+        clap.jButton1.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -84,6 +148,54 @@ public class Frame extends JFrame {
             
         });
 
+        //dalla pagina corsi per l'amministratore, l'amministratore va alla sua homepage
+        cap.jButton2.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "3");
+                
+            }
+            
+        });
+
+        //dalla pagina corsi per l'amministratore, vado sull apagina per creare un nuovo corso
+        cap.jButton1.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "9");
+                
+            }
+            
+        });
+
+
+
+//DA QUI CONTINUA I BOTTONI (ABBIAMO FATTO TUTTE LE HOMEPAGE E I CLIENTIAMMINISTRATORE E CORSIAMMINISTRATORE)
+//poi si stema login e attenta all aregistrazione e poi guarda la parte finale di brina di questo file
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//da qui in poi di brina
+
+        
+//login sistema il nostro!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         lp.jButton1.addActionListener(new ActionListener(){
 
             @Override
@@ -174,15 +286,7 @@ public class Frame extends JFrame {
             
         });
 
-        lp.jButton2.addActionListener(new ActionListener(){
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(container, "1");
-                
-            }
-            
-        });
+       //nuovo cliente fallo anche per noi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
         rp.jButton1.addActionListener(new ActionListener(){
 
@@ -202,15 +306,7 @@ public class Frame extends JFrame {
             
         });
 
-        rp.jButton2.addActionListener(new ActionListener(){
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(container, "1");
-                
-            }
-            
-        });
+        
 
         
 
@@ -219,7 +315,7 @@ public class Frame extends JFrame {
 
         
 
-        
+        //DA GUARDARE COSA SONO E SE CI SERVONOOOOOOOOOOOOOOOOOOOOOOOOOO
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
@@ -234,15 +330,6 @@ public class Frame extends JFrame {
         
 
 
-
-        
-
-
-        
-       
-
-
-        
         
 
         
