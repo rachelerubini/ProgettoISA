@@ -159,7 +159,7 @@ public class Frame extends JFrame {
             
         });
 
-        //dalla pagina corsi per l'amministratore, vado sull apagina per creare un nuovo corso
+        //dalla pagina corsi per l'amministratore, vado sulla pagina per creare un nuovo corso
         cap.jButton1.addActionListener(new ActionListener(){
 
             @Override
@@ -170,10 +170,81 @@ public class Frame extends JFrame {
             
         });
 
+        
+        //dalla pagina corsi per i clienti, vado sulla loro homepage
+        ccp.jButton1.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "2");
+                
+            }
+            
+        });
+
+        //dalla pagina recensioni per i clienti, vado sulla loro homepage
+        rp.jButton1.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "2");
+                
+            }
+            
+        });
+
+        //dalla pagina recensioni per i clienti, vado sulla nuova recensione
+        rp.jButton2.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "7");
+                
+            }
+            
+        });
 
 
-//DA QUI CONTINUA I BOTTONI (ABBIAMO FATTO TUTTE LE HOMEPAGE E I CLIENTIAMMINISTRATORE E CORSIAMMINISTRATORE)
+        //dalla pagina iscrizione vado nella homepeage generica
+        ip.jButton1.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "1");
+                
+            }
+            
+        });
+
+
+        //dalla pagina nuova recensione vado nella pagina recensioni
+        nrp.jButton1.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "6");
+                
+            }
+            
+        });
+
+
+        //dalla pagina nuovo corso vado nella pagina dei corsi per amministratori
+        ncp.jButton1.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cl.show(container, "8");
+                
+            }
+            
+        });
+
+
+
+
 //poi si stema login e attenta all aregistrazione e poi guarda la parte finale di brina di questo file
+//modifica i campi da inserire in nuova recensione, nuovo corso e iscrizione
 
 
 
