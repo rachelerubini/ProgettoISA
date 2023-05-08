@@ -206,24 +206,41 @@ public class Frame extends JFrame {
 
 
         //dalla pagina iscrizione vado nella homepeage generica
+        //ATTENZIONE: BRINA AVEVA SCRITTO: String.valueOf(rp.jTextField2.getPASSWORD()) MA SERVE QUESTO String.valueof????
         ip.jButton1.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
+
+                ipc.register(ip.jTextField1.getSSN(), ip.jTextField2.getNOME(), ip.jTextField5.getPASSWORD(), ip.jTextField4.getMAIL(), ip.jTextField3.getCOGNOME(), ip.jTextField6.getNASCITA());
+                JOptionPane.showMessageDialog(lp, "Registrazione avvenuta con successo!");
                 cl.show(container, "1");
-                
+                }
+                catch(DuplicatedObjectException ex)
+                {
+                    JOptionPane.showMessageDialog(ip, "L'utente esiste già!");
+                }
             }
-            
         });
 
 
         //dalla pagina nuova recensione vado nella pagina recensioni
+        //ATTENZIONE, SERVE UN CONTROLLO PER DIRE CHE IL CORSO INSERITO DEVE ESISTERE, BBIAMO PENSATO AL MISSING OBJECT EXCEPTION MA NON SAPPIAMO COME LEGARLO AL CAMPO CORSO!!!!!!!!!!!!!!!!!!!!!!
         nrp.jButton1.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
+
+                nrpc.register(nrp.jTextField1.getVOTO(), nrp.jTextField2.getDATA(), nrp.jTextField3.getCorso());
+                JOptionPane.showMessageDialog(lp, "Creazione recensione avvenuta con successo!");
                 cl.show(container, "6");
-                
+                }
+                catch(MissingObjectException ex)
+                {
+                    JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste!");
+                }
             }
             
         });
@@ -234,10 +251,17 @@ public class Frame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                try{
+
+                ncpc.register(ncp.jTextField2.getTIPO(), ncp.jTextField1.getNOME(), ncp.jTextField3.getLIVELLO());
+                JOptionPane.showMessageDialog(lp, "Creazione corso avvenuta con successo!");
                 cl.show(container, "8");
-                
+                }
+                catch(DuplicatedObjectException ex)
+                {
+                    JOptionPane.showMessageDialog(ncp, "Il corso esiste già!");
+                }
             }
-            
         });
 
 
@@ -357,25 +381,6 @@ public class Frame extends JFrame {
             
         });
 
-       //nuovo cliente fallo anche per noi!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-        rp.jButton1.addActionListener(new ActionListener(){
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-
-                rpc.register(rp.jTextField1.getText(), String.valueOf(rp.jTextField2.getPassword()));
-                JOptionPane.showMessageDialog(lp, "Registrazione avvenuta con successo!");
-                cl.show(container, "1");
-                }
-                catch(DuplicatedObjectException ex)
-                {
-                    JOptionPane.showMessageDialog(lp, "L'utente esiste già!");
-                }
-            }
-            
-        });
 
         
 
