@@ -122,4 +122,40 @@ public class ClienteDAO {
     }
 
   }
+
+  //Trova il cliente (tutti i campi) a partire dalla mail, lo usiamo nel login
+  public Cliente findByMAILCliente(String MAIL) {
+
+    PreparedStatement ps;
+    Cliente cliente = null;
+
+    try {
+
+      String sql
+              = " SELECT * "
+              + "   FROM cliente "
+              + " WHERE "
+              + "   MAIL = ?"
+              + "   AND DELETED = 'N' ";
+
+      ps = conn.prepareStatement(sql);
+      ps.setString(1, MAIL);
+
+      ResultSet resultSet = ps.executeQuery();
+      if(resultSet.next()) 
+      {
+          cliente = read(resultSet);
+      }
+      resultSet.close();
+      ps.close();
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return cliente;
+
+  }
+
+  //DA IMPLEMENTARE LA READ (vedi fine file ClidenteDAO)
 }

@@ -76,14 +76,50 @@ public class Frame extends JFrame {
             
         });
 
-
-        //DA FINIREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+        //NOTA: il login di brina è diverso ma non lo capiamo e forse non va bene per il nostro
         //login posso andare se sono cliente in 2 se sono amministratore nella 3
         hp.jButton1.addActionListener(new ActionListener(){
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-                cl.show(container, "");
+            public void actionPerformed(ActionEvent e) 
+            {
+
+                    // le due funzioni finByMAIL sono da implementare nei dao, gli passo la mil e mi restituiscono l'utente con quella mail, se non c'è null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    Cliente cliente = ClienteDAO.findByMAILCliente(hp.jTextField1.getMAIL());
+                    Amministratore amministratore = AmministratoreDAO.findByMAILAmministratore(hp.jTextField1.getMAIL());
+
+
+                    if (cliente == null && amministratore==null)
+                    {
+                        JOptionPane.showMessageDialog(hp, "Mail errata!");
+                        cl.show(container, "1");
+                    }
+                    else if (cliente != null && amministratore==null)
+                    {
+                        if (!cliente.getPASSWORD().equals(hp.jTextField2.getPASSWORD()))
+                        {
+                            JOptionPane.showMessageDialog(hp, "Password errata!");
+                            cl.show(container, "1");
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(hp, "Login avvenuto con successo!");
+                            cl.show(container, "2");
+                        }
+                    }
+                    else 
+                    {
+                        if (!amministratore.getPASSWORD().equals(hp.jTextField2.getPASSWORD()))
+                        {
+                            JOptionPane.showMessageDialog(hp, "Password errata!");
+                            cl.show(container, "1");
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(hp, "Login avvenuto con successo!");
+                            cl.show(container, "3");
+                        }
+                    }
                 
             }
             
@@ -125,7 +161,6 @@ public class Frame extends JFrame {
         });
 
         //dalla homepage degli amministartori vado alla pagina dei corsi per gli amministratori
-
         hap.jButton6.addActionListener(new ActionListener(){
 
             @Override
@@ -207,6 +242,7 @@ public class Frame extends JFrame {
 
         //dalla pagina iscrizione vado nella homepeage generica
         //ATTENZIONE: BRINA AVEVA SCRITTO: String.valueOf(rp.jTextField2.getPASSWORD()) MA SERVE QUESTO String.valueof????
+        //NOTA: VA IMPLEMENTATA REGISTERISCRIZIONECLIENTE
         ip.jButton1.addActionListener(new ActionListener(){
 
             @Override
@@ -227,6 +263,7 @@ public class Frame extends JFrame {
 
         //dalla pagina nuova recensione vado nella pagina recensioni
         //ATTENZIONE,non siamo sicure vada bene il controllo per vedere se il corso esiste!!!
+        //NOTA: VA IMPLEMENTATA REGISTERRECENSIONE
         nrp.jButton1.addActionListener(new ActionListener(){
             int i=0;
 
@@ -248,6 +285,7 @@ public class Frame extends JFrame {
 
 
         //dalla pagina nuovo corso vado nella pagina dei corsi per amministratori
+        //NOTA: VA IMPLEMENTATA REGISTERCORSO
         ncp.jButton1.addActionListener(new ActionListener(){
 
             @Override
@@ -265,150 +303,6 @@ public class Frame extends JFrame {
             }
         });
 
-
-
-
-//poi si stema login  poi guarda la parte finale di brina di questo file
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//da qui in poi di brina
-
-        
-//login sistema il nostro!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        lp.jButton1.addActionListener(new ActionListener(){
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try{
-                    Utente utente = lpc.login(lp.jTextField1.getText(), String.valueOf(lp.jTextField2.getPassword()));
-                    JOptionPane.showMessageDialog(lp, "Login avvenuto con successo!");
-                
-                    
-                    mp= new MainPanel(mpc.findAllBrani(), utente);
-                    mp.jButton4.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e)
-                        {
-                            cl.show(container, "1");
-                            if (mp.jButton3.isEnabled())
-                            mpc.stop();
-                            
-                        }
-                    }); 
-                    
-                
-                    mp.jButton1.addActionListener(new ActionListener(){
-
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                           try{ 
-
-                            if (mp.jButton3.isEnabled())
-                            mpc.stop();
-                           
-                           mp = new MainPanel((mpc.findByString(mp.jTextField1.getText())), mpc.aggiornaUtente(utente));
-                           mp.jButton1.addActionListener(this);
-                           mp.jButton4.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e)
-                            {
-                                cl.show(container, "1");
-                                if (mp.jButton3.isEnabled())
-                            mpc.stop();
-                            }
-                        }); 
-                           
-                           
-                           
-                           container.add(mp, "7");
-            
-                           cl.show(container, "7");
-            
-            
-                           }
-            
-                           catch(MissingObjectException ex){
-            
-                            JOptionPane.showMessageDialog( mp, "Nessun Brano!");
-            
-                           }
-                          
-                            
-                                
-            
-                               
-                                
-            
-                             
-                             
-                        }
-                        
-                        
-                        
-                    });
-
-
-                    container.add(mp, "7");
-                    cl.show(container, "7");
-                }
-                catch(MissingObjectException ex)
-                {
-                    JOptionPane.showMessageDialog(lp, "L'utente non esiste!");
-                }
-
-                catch(WrongPasswordException ex)
-                {
-                    JOptionPane.showMessageDialog(lp, "Password Errata!");
-                }
-                
-            }
-            
-        });
-
-
-        
-
-        
-
-
-       
-
-        
-
-        //DA GUARDARE COSA SONO E SE CI SERVONOOOOOOOOOOOOOOOOOOOOOOOOOO
-
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            @Override
-            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-
-                
-                file.delete();
-                
-                }
-                
-            });
-        
-
-
-        
-
         
         add(container);
         setSize(800, 800);
@@ -416,11 +310,6 @@ public class Frame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
-
-
-    
-
-
     
 
     
