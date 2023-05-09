@@ -213,7 +213,7 @@ public class Frame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try{
 
-                ipc.register(ip.jTextField1.getSSN(), ip.jTextField2.getNOME(), ip.jTextField5.getPASSWORD(), ip.jTextField4.getMAIL(), ip.jTextField3.getCOGNOME(), ip.jTextField6.getNASCITA());
+                ipc.registerIscrizioneCliente(ip.jTextField1.getSSN(), ip.jTextField2.getNOME(), ip.jTextField5.getPASSWORD(), ip.jTextField4.getMAIL(), ip.jTextField3.getCOGNOME(), ip.jTextField6.getNASCITA());
                 JOptionPane.showMessageDialog(lp, "Registrazione avvenuta con successo!");
                 cl.show(container, "1");
                 }
@@ -226,21 +226,22 @@ public class Frame extends JFrame {
 
 
         //dalla pagina nuova recensione vado nella pagina recensioni
-        //ATTENZIONE, SERVE UN CONTROLLO PER DIRE CHE IL CORSO INSERITO DEVE ESISTERE, BBIAMO PENSATO AL MISSING OBJECT EXCEPTION MA NON SAPPIAMO COME LEGARLO AL CAMPO CORSO!!!!!!!!!!!!!!!!!!!!!!
+        //ATTENZIONE,non siamo sicure vada bene il controllo per vedere se il corso esiste!!!
         nrp.jButton1.addActionListener(new ActionListener(){
+            int i=0;
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{
-
-                nrpc.register(nrp.jTextField1.getVOTO(), nrp.jTextField2.getDATA(), nrp.jTextField3.getCorso());
-                JOptionPane.showMessageDialog(lp, "Creazione recensione avvenuta con successo!");
-                cl.show(container, "6");
-                }
-                catch(MissingObjectException ex)
-                {
+                try{ nrp.jTextField3.getCorso();} catch(MissingObjectException ex)
+                {     i=1;
                     JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste!");
                 }
+                if(i==0){
+                nrpc.registerRecensione(nrp.jTextField1.getVOTO(), nrp.jTextField2.getDATA(),nrp.jTextField3.getCorso());
+                JOptionPane.showMessageDialog(nrp, "Creazione recensione avvenuta con successo!");
+                cl.show(container, "6");
+                }
+                
             }
             
         });
@@ -253,7 +254,7 @@ public class Frame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try{
 
-                ncpc.register(ncp.jTextField2.getTIPO(), ncp.jTextField1.getNOME(), ncp.jTextField3.getLIVELLO());
+                ncpc.registerCorso(ncp.jTextField2.getTIPO(), ncp.jTextField1.getNOME(), ncp.jTextField3.getLIVELLO());
                 JOptionPane.showMessageDialog(lp, "Creazione corso avvenuta con successo!");
                 cl.show(container, "8");
                 }
@@ -267,8 +268,8 @@ public class Frame extends JFrame {
 
 
 
-//poi si stema login e attenta all aregistrazione e poi guarda la parte finale di brina di questo file
-//modifica i campi da inserire in nuova recensione, nuovo corso e iscrizione
+//poi si stema login  poi guarda la parte finale di brina di questo file
+
 
 
 
