@@ -242,15 +242,17 @@ public class Frame extends JFrame {
 
         //dalla pagina iscrizione vado nella homepeage generica
         //ATTENZIONE: BRINA AVEVA SCRITTO: String.valueOf(rp.jTextField2.getPASSWORD()) MA SERVE QUESTO String.valueof????
-        //NOTA: VA IMPLEMENTATA REGISTERISCRIZIONECLIENTE
         ip.jButton1.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
 
-                ipc.registerIscrizioneCliente(ip.jTextField1.getSSN(), ip.jTextField2.getNOME(), ip.jTextField5.getPASSWORD(), ip.jTextField4.getMAIL(), ip.jTextField3.getCOGNOME(), ip.jTextField6.getNASCITA());
-                JOptionPane.showMessageDialog(lp, "Registrazione avvenuta con successo!");
+                DAOFactory df = new DAOFactory();
+                df.beginTransaction();
+                ClienteDAO dao = df.getClienteDAO();
+                dao.create(ip.jTextField1.getSSN(),ip.jTextField2.getNOME(),ip.jTextField3.getCOGNOME(), ip.jTextField4.getMAIL(), ip.jTextField5.getPASSWORD(), ip.jTextField6.getNASCITA());
+                JOptionPane.showMessageDialog(ip, "Registrazione avvenuta con successo!");
                 cl.show(container, "1");
                 }
                 catch(DuplicatedObjectException ex)
@@ -263,7 +265,6 @@ public class Frame extends JFrame {
 
         //dalla pagina nuova recensione vado nella pagina recensioni
         //ATTENZIONE,non siamo sicure vada bene il controllo per vedere se il corso esiste!!!
-        //NOTA: VA IMPLEMENTATA REGISTERRECENSIONE
         nrp.jButton1.addActionListener(new ActionListener(){
             int i=0;
 
@@ -274,7 +275,11 @@ public class Frame extends JFrame {
                     JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste!");
                 }
                 if(i==0){
-                nrpc.registerRecensione(nrp.jTextField1.getVOTO(), nrp.jTextField2.getDATA(),nrp.jTextField3.getCorso());
+
+                DAOFactory df = new DAOFactory();
+                df.beginTransaction();
+                RecensioneDAO dao = df.getRecensioneDAO();
+                dao.create(nrp.jTextField1.getVOTO(), nrp.jTextField2.getDATA(),nrp.jTextField3.getCorso());
                 JOptionPane.showMessageDialog(nrp, "Creazione recensione avvenuta con successo!");
                 cl.show(container, "6");
                 }
@@ -285,15 +290,17 @@ public class Frame extends JFrame {
 
 
         //dalla pagina nuovo corso vado nella pagina dei corsi per amministratori
-        //NOTA: VA IMPLEMENTATA REGISTERCORSO
         ncp.jButton1.addActionListener(new ActionListener(){
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 try{
 
-                ncpc.registerCorso(ncp.jTextField2.getTIPO(), ncp.jTextField1.getNOME(), ncp.jTextField3.getLIVELLO());
-                JOptionPane.showMessageDialog(lp, "Creazione corso avvenuta con successo!");
+                DAOFactory df = new DAOFactory();
+                df.beginTransaction();
+                CorsoDAO dao = df.getCorsoDAO();
+                dao.registerCorso( ncp.jTextField1.getNOME(), ncp.jTextField2.getTIPO(), ncp.jTextField3.getLIVELLO());
+                JOptionPane.showMessageDialog(ncp, "Creazione corso avvenuta con successo!");
                 cl.show(container, "8");
                 }
                 catch(DuplicatedObjectException ex)

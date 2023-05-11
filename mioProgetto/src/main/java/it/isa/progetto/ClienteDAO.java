@@ -17,7 +17,7 @@ public class ClienteDAO {
   }
   
   public Cliente create(
-          int ID_CL,
+          //int ID_CL,
           String SSN,
           String NOME,
           String COGNOME,
