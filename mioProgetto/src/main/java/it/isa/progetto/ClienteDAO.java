@@ -157,5 +157,41 @@ public class ClienteDAO {
 
   }
 
-  //DA IMPLEMENTARE LA READ (vedi fine file ClidenteDAO)
+  Cliente read(ResultSet rs) {
+    Cliente cliente = new Cliente();
+
+    try {
+      cliente.setID_CL(rs.getInt("ID_CL"));
+    } catch (SQLException sqle) {
+    }
+    try {
+      cliente.setSSN(rs.getString("SSN"));
+    } catch (SQLException sqle) {
+    }
+    try {
+      cliente.setNOME(rs.getString("NOME"));
+    } catch (SQLException sqle) {
+    }
+    try {
+      cliente.setCOGNOME(rs.getString("COGNOME"));
+    } catch (SQLException sqle) {
+    }
+    try {
+      cliente.setMAIL(rs.getString("MAIL"));
+    } catch (SQLException sqle) {
+    }
+    try {
+      cliente.setPASSWORD(rs.getString("PASSWORD"));
+    } catch (SQLException sqle) {
+    }
+    try {
+      cliente.setNASCITA(rs.getString("NASCITA"));
+    } catch (SQLException sqle) {
+    }
+    try {
+      cliente.setDELETED(rs.getBoolean("DELETED"));
+    } catch (SQLException sqle) {
+    }
+    return cliente;
+  }
 }

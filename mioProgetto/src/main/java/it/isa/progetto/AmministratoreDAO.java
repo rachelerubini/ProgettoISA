@@ -46,7 +46,22 @@ public class AmministratoreDAO {
 
 }
 
+Amministratore read(ResultSet rs) {
+  Amministratore amministratore = new Amministratore();
 
-//IMPLEMENTA READ
+  try {
+    amministratore.setID_A(rs.getInt("ID_A"));
+  } catch (SQLException sqle) {
+  }
+  try {
+    amministratore.setMAIL(rs.getString("MAIL"));
+  } catch (SQLException sqle) {
+  }
+  try {
+    amministratore.setPASSWORD(rs.getString("PASSWORD"));
+  } catch (SQLException sqle) {
+  }
+  return amministratore;
+}
 
 }
