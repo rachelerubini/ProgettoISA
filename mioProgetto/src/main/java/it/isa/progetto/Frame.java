@@ -3,11 +3,13 @@ package it.isa.progetto;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
+import java.util.*;
+import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
 
 public class Frame extends JFrame {
 
@@ -22,20 +24,36 @@ public class Frame extends JFrame {
     private PANELNuovaRecenesione nrp = new PANELNuovaRecensione();
     private PANELCorsiAmministratore cap = new PANELCorsiAmministratore();
     private PANELNuovoCorso ncp = new PANELNuovoCorso();
-    private PANELClientiAmministratore clap = new PANELClientiAmministratore();
+
+   
+   
+    public List<Cliente> findAllClienti() 
+    {
+    DAOFactory df= new DAOFactory();
+    List<Cliente> clienti = new ArrayList<Cliente>();
+    df.beginTransaction();
+    ClienteDAO dao= df.getClienteDAO();
+    clienti  = dao.findAllClienti();
+    dao.commitTransaction();
+    dao.closeTransaction();
+    return clienti;
+}
+    private PANELClientiAmministratore clap = new PANELClientiAmministratore(findAllClienti());  //da implementare findClienti!!!!!!!!
+  
+
 
     private CardLayout cl = new CardLayout();
 
-    private PANELHomepageController hpc = new PANELHomepageController();
-    private PANELHomepageClienteController hcpc = new PANELHomepageClienteController();
-    private PANELHomepageAmministratoreController hapc = new PANELHomepageAmministratoreController();
-    private PANELIscrizioneController ipc = new PANELIscrizioneController();
-    private PANELCorsiClientiController ccpc = new PANELCorsiClientiController();
-    private PANELRecensioniController rpc = new PANELRecensioniController();
-    private PANELNuovaRecenesioneController nrpc = new PANELNuovaRecensioneController();
-    private PANELCorsiAmministratoreController capc = new PANELCorsiAmministratoreController();
-    private PANELNuovoCorsoController ncpc = new PANELNuovoCorsoController();
-    private PANELClientiAmministratoreController clapc = new PANELClientiAmministratoreController();
+    //private PANELHomepageController hpc = new PANELHomepageController();
+    //private PANELHomepageClienteController hcpc = new PANELHomepageClienteController();
+    //private PANELHomepageAmministratoreController hapc = new PANELHomepageAmministratoreController();
+    //private PANELIscrizioneController ipc = new PANELIscrizioneController();
+    //private PANELCorsiClientiController ccpc = new PANELCorsiClientiController();
+    //private PANELRecensioniController rpc = new PANELRecensioniController();
+    //private PANELNuovaRecenesioneController nrpc = new PANELNuovaRecensioneController();
+    //private PANELCorsiAmministratoreController capc = new PANELCorsiAmministratoreController();
+    //private PANELNuovoCorsoController ncpc = new PANELNuovoCorsoController();
+    //private PANELClientiAmministratoreController clapc = new PANELClientiAmministratoreController();
 
 
     //private PANELClienti cliente= new PANELClienti();

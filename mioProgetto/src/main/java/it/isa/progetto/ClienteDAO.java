@@ -157,6 +157,16 @@ public class ClienteDAO {
 
   }
 
+
+  public List<Cliente> findAllClienti(){
+  
+  
+  return 
+
+  }
+
+
+
   Cliente read(ResultSet rs) {
     Cliente cliente = new Cliente();
 
@@ -194,4 +204,5 @@ public class ClienteDAO {
     }
     return cliente;
   }
+
 }

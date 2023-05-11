@@ -18,9 +18,9 @@ public class App
         
      }
 
-     public static FirstFrame showFrame()
+     public static Frame showFrame()
         {
-            FirstFrame firstFrame = new FirstFrame();
+            Frame firstFrame = new Frame();
             return firstFrame;
         }
    
