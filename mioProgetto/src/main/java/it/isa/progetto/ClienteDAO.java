@@ -158,11 +158,37 @@ public class ClienteDAO {
   }
 
 
-  public List<Cliente> findAllClienti(){
-  
-  
-  return 
+  public List<Cliente> findClienti() {
 
+    PreparedStatement ps;
+    Cliente EL;
+    ArrayList<Cliente> TOT = new ArrayList<Cliente>();
+
+    try {
+
+      String sql
+              = " SELECT * "
+              + " FROM cliente"
+              + " WHERE DELETED='N'"
+              +" ORDER BY cliente.NOME";
+
+      ps = conn.prepareStatement(sql);
+
+      ResultSet resultSet = ps.executeQuery();
+
+      while (resultSet.next()) {
+        EL = read(resultSet);
+        TOT.add(EL);
+      }
+
+      resultSet.close();
+      ps.close();
+
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+
+    return TOT;
   }
 
 
