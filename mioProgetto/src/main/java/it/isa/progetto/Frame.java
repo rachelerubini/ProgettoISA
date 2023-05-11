@@ -34,8 +34,8 @@ public class Frame extends JFrame {
     df.beginTransaction();
     ClienteDAO dao= df.getClienteDAO();
     clienti  = dao.findAllClienti();
-    dao.commitTransaction();
-    dao.closeTransaction();
+    df.commitTransaction();
+    df.closeTransaction();
     return clienti;
 }
     private PANELClientiAmministratore clap = new PANELClientiAmministratore(findAllClienti());  //da implementare findClienti!!!!!!!!
@@ -270,6 +270,8 @@ public class Frame extends JFrame {
                 df.beginTransaction();
                 ClienteDAO dao = df.getClienteDAO();
                 dao.create(ip.jTextField1.getSSN(),ip.jTextField2.getNOME(),ip.jTextField3.getCOGNOME(), ip.jTextField4.getMAIL(), ip.jTextField5.getPASSWORD(), ip.jTextField6.getNASCITA());
+                df.commitTransaction();
+                df.closeTransaction();
                 JOptionPane.showMessageDialog(ip, "Registrazione avvenuta con successo!");
                 cl.show(container, "1");
                 }
@@ -298,6 +300,8 @@ public class Frame extends JFrame {
                 df.beginTransaction();
                 RecensioneDAO dao = df.getRecensioneDAO();
                 dao.create(nrp.jTextField1.getVOTO(), nrp.jTextField2.getDATA(),nrp.jTextField3.getCorso());
+                df.commitTransaction();
+                df.closeTransaction();
                 JOptionPane.showMessageDialog(nrp, "Creazione recensione avvenuta con successo!");
                 cl.show(container, "6");
                 }
@@ -318,6 +322,8 @@ public class Frame extends JFrame {
                 df.beginTransaction();
                 CorsoDAO dao = df.getCorsoDAO();
                 dao.registerCorso( ncp.jTextField1.getNOME(), ncp.jTextField2.getTIPO(), ncp.jTextField3.getLIVELLO());
+                df.commitTransaction();
+                df.closeTransaction();
                 JOptionPane.showMessageDialog(ncp, "Creazione corso avvenuta con successo!");
                 cl.show(container, "8");
                 }

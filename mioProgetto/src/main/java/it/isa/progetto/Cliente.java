@@ -11,7 +11,7 @@ public class Cliente {
   private String MAIL;
   private String PASSWORD;
   private String NASCITA;
-  private boolean DELETED;
+  private char DELETED;
   /* N:M */
   private Corso[] iscrizione;  //o cosi o con le liste quindi avro per ogni cliente una lsita o array di corso a cui è iscritto
   /* 1:N */
@@ -80,11 +80,11 @@ public class Cliente {
     this.NASCITA = NASCITA;
   }
 
-  public boolean isDELETED() {
+  public char isDELETED() {
     return DELETED;
   }
 
-  public void setDELETED(boolean DELETED) {
+  public void setDELETED(char DELETED) {
     this.DELETED = DELETED;
   }
 

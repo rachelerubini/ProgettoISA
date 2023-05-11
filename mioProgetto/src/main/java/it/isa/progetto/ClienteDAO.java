@@ -158,7 +158,7 @@ public class ClienteDAO {
   }
 
 
-  public List<Cliente> findClienti() {
+  public List<Cliente> findAllClienti() {
 
     PreparedStatement ps;
     Cliente EL;

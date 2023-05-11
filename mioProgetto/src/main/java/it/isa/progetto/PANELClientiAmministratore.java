@@ -1,6 +1,15 @@
 package it.isa.progetto;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import java.util.List;
+
 
 public class PANELClientiAmministratore extends javax.swing.JPanel {
 
@@ -18,7 +27,7 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
      */
     //@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(List<Cliente> clienti) {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -53,7 +62,40 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-    }// </editor-fold>                        
+    
+
+        //Il for lo aggiungiamo noi per mostrare tutti i clienti e poterli cancellare
+        for(int i=0; i<clienti.size(); i++)
+        {
+    
+            JPanel panel = new JPanel();
+            if(clienti.get(i).isDELETED()=='N'){
+            JButton button = new JButton(makeButtonText(clienti.get(i)));
+            button.setName(Integer.toString(clienti.get(i).getID_CL()));
+            panel.add(button);
+            //button.addActionListener(this);
+            //panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));       serve?
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.weightx = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            pannello.mainList.add(panel, gbc, 0);      //DA MODIFICAREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE, CREARE PANNELLO
+            }
+        }
+
+    validate();
+    repaint();
+
+    }// </editor-fold>      
+    
+    //aggiunto da noi per il for:  per il i-esimo cliente con delted = N , creo il bottone per eliminarlo
+    public String makeButtonText(Cliente cliente)
+    {
+       
+        return ("SSN: "+cliente.getSSN()+"\t Nome: "+cliente.getNOME()+"\t Cognome: "+cliente.getCOGNOME());
+        
+
+    }
 
 
     // Variables declaration - do not modify                     
