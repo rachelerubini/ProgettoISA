@@ -110,4 +110,75 @@ public class RecensioneDAO {
         }
 
     }
+
+    public List<Recensione> findRecensioni() {
+
+        PreparedStatement ps;
+        Recensione oggetto;
+        ArrayList<Recensione> lista = new ArrayList<Recensione>();
+
+        try {
+
+            String sql
+                    = " SELECT *"
+                    + " FROM recensione"
+                    + " WHERE DELETED='N'"
+                    + " ORDER BY recensione.DATA DESC";
+
+            ps = conn.prepareStatement(sql);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                oggetto = read(resultSet);
+                lista.add(oggetto);
+            }
+
+            resultSet.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return lista;
+    }
+
+    Recensione read(ResultSet rs) {
+        Recensione recensione = new Recensione();
+        Corso corso = new Corso();
+        Cliente cliente = new Cliente();
+
+
+        recensione.setCorso(corso);
+        recensione.setCliente(cliente);
+
+
+
+        try {
+            recensione.getCorso().setID_CO(rs.getInt("ID_COR"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            recensione.getCliente().setID_CL(rs.getInt("ID_CLR"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            recensione.setID_R(rs.getInt("ID_R"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            recensione.setVOTO(rs.getInt("VOTO"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            recensione.setDATA(rs.getString("DATA"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            recensione.setDELETED(rs.getString("DELETED"));
+        } catch (SQLException sqle) {
+        }
+        return recensione;
+    }
 }
