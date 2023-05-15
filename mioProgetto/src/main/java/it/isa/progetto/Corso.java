@@ -7,7 +7,7 @@ public class Corso {
     private String NOME;
     private String TIPO;
     private String LIVELLO;
-    private boolean DELETED;
+    private String DELETED;
     /* N:M */
     private Cliente[] iscrizione;  // per ogni corso ho la lista di cliente che sono iscritti a quel corso
     /* 1:N */
@@ -70,11 +70,11 @@ public class Corso {
         this.iscrizione = iscrizione;
       }
 
-      public boolean isDELETED() {
+      public String isDELETED() {
         return DELETED;
       }
     
-      public void setDELETED(boolean DELETED) {
+      public void setDELETED(String DELETED) {
         this.DELETED = DELETED;
       }
 

@@ -95,7 +95,7 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
         {
     
             JPanel panel = new JPanel();
-            if(clienti.get(i).isDELETED()=='N'){
+            if(clienti.get(i).isDELETED().equals("N")){
             JButton button = new JButton(makeButtonText(clienti.get(i)));
             button.setName(Integer.toString(clienti.get(i).getID_CL()));
             panel.add(button);
