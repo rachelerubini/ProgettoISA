@@ -225,7 +225,11 @@ public class ClienteDAO {
     } catch (SQLException sqle) {
     }
     try {
+<<<<<<< HEAD
       cliente.setDELETED(rs.getString("DELETED"));
+=======
+      cliente.setDELETED(rs.get("DELETED"));
+>>>>>>> 24c6238ea03c4352415113fbe126d16a75d3bf74
     } catch (SQLException sqle) {
     }
     return cliente;
