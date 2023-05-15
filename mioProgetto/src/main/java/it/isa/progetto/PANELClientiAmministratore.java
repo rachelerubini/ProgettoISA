@@ -3,6 +3,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -88,8 +91,9 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
        
-    
-
+           
+        
+        //SISTEMA addActionListener!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //Il for lo aggiungiamo noi per mostrare tutti i clienti e poterli cancellare
         for(int i=0; i<clienti.size(); i++)
         {
@@ -99,7 +103,24 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
             JButton button = new JButton(makeButtonText(clienti.get(i)));
             button.setName(Integer.toString(clienti.get(i).getID_CL()));
             panel.add(button);
-            //button.addActionListener(this);
+
+            // le prossime righe servono perchè quando clicco il bottone voglio che si elimini quel cliente
+            button.addActionListener((ActionListener) this);
+            button.addActionListener(new ActionListener(){
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                DAOFactory df= new DAOFactory();
+                df.beginTransaction();
+                ClienteDAO dao= df.getClienteDAO();
+                dao.delete(clienti.get(i));
+                df.commitTransaction();
+                df.closeTransaction();
+                    
+                }
+                
+            });
+
             //panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));       serve?
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridwidth = GridBagConstraints.REMAINDER;

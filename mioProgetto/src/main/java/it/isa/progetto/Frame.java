@@ -21,12 +21,22 @@ public class Frame extends JFrame {
     private PANELHomepageAmministratore hap = new PANELHomepageAmministratore();
     private PANELIscrizione ip = new PANELIscrizione();
     private PANELCorsiClienti ccp = new PANELCorsiClienti();
-    private PANELRecensioni rp = new PANELRecensioni();
     private PANELNuovaRecenesione nrp = new PANELNuovaRecensione();
     private PANELCorsiAmministratore cap = new PANELCorsiAmministratore();
     private PANELNuovoCorso ncp = new PANELNuovoCorso();
 
-   
+    public List<Recensione> findAllRecensioni() 
+    {
+    DAOFactory df= new DAOFactory();
+    List<Recensione> recensioni = new ArrayList<Recensione>();
+    df.beginTransaction();
+    RecensioneDAO dao= df.getRecensioneDAO();
+    recensioni  = dao.findAllRecensioni();
+    df.commitTransaction();
+    df.closeTransaction();
+    return recensioni;
+}
+    private PANELRecensioni rp = new PANELRecensioni(findAllRecensioni());
    
     public List<Cliente> findAllClienti() 
     {

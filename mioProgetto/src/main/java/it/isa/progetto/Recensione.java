@@ -6,7 +6,7 @@ public class Recensione {
     private int ID_R;
     private int VOTO;
     private String DATA;
-    private boolean DELETED;
+    private String DELETED;
     /* N:1 */
     private Corso corso;
     /* N:1 */
@@ -53,11 +53,11 @@ public class Recensione {
         this.DATA = DATA;
     }
 
-    public boolean isDELETED() {
+    public String isDELETED() {
         return DELETED;
     }
 
-    public void setDELETED(boolean DELETED) {
+    public void setDELETED(String DELETED) {
         this.DELETED = DELETED;
     }
 
