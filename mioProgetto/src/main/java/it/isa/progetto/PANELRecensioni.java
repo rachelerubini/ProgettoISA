@@ -2,6 +2,7 @@ package it.isa.progetto;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import java.lang.Integer;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -109,23 +110,7 @@ public class PANELRecensioni extends javax.swing.JPanel {
 
         // le prossime righe servono perchè quando clicco il bottone voglio che si elimini quel cliente
         button.addActionListener((ActionListener) this);
-        button.addActionListener(new ActionListener(){
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            DAOFactory df= new DAOFactory();
-            df.beginTransaction();
-            RecensioneDAO dao= df.getRecensioneDAO();
-            if(recensioni.get(i).getCliente().getID_CL() ==  // ID cliente loggato)
-            //BISOGNA IN QUALCHE MODO PASSARE ID DEL CLIENTE LOGGATO E PUO ELIMINARE SOLO IL CLIENTE LOGGATO CHE HA SCRITTO QUELLA RECENSIONE SE NO MOSTRA TIPO 'RECENSIONE NON TUA'
-            dao.delete(recensioni.get(i));
-            df.commitTransaction();
-            df.closeTransaction();
-                
-            }
-            
-        });
-
+    
         //panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));       serve?
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -140,6 +125,18 @@ repaint();
 
 }// </editor-fold>                           
 
+public void actionPerformed(ActionEvent e ) {
+    DAOFactory df= new DAOFactory();
+    df.beginTransaction();
+    RecensioneDAO dao= df.getRecensioneDAO();
+    Recensione rec= dao.findRecensioneByID(Integer.parseInt(((JButton)e.getSource()).getName()));
+    //if(rec.getCliente().getID_CL() ==  // ID cliente loggato)
+    //BISOGNA IN QUALCHE MODO PASSARE ID DEL CLIENTE LOGGATO E PUO ELIMINARE SOLO IL CLIENTE LOGGATO CHE HA SCRITTO QUELLA RECENSIONE SE NO MOSTRA TIPO 'RECENSIONE NON TUA'
+    dao.delete(rec);
+    df.commitTransaction();
+    df.closeTransaction();
+        
+    }
 
   //aggiunto da noi per il for:  per il i-esimo cliente con delted = N , creo il bottone per eliminarlo
   public String makeButtonText(Recensione recensione)

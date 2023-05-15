@@ -157,6 +157,39 @@ public class ClienteDAO {
 
   }
 
+  public Cliente findClienteByID(int ID_CL) {
+        
+    PreparedStatement ps;
+    Cliente cliente = null;
+
+    try {
+
+        String sql
+                = " SELECT * "
+                + "   FROM cliente "
+                + " WHERE "
+                + "   ID_CL = ?";
+
+        ps = conn.prepareStatement(sql);
+        ps.setInt(1, ID_CL);
+
+        ResultSet resultSet = ps.executeQuery();
+
+        if (resultSet.next()) {
+            cliente = read(resultSet);
+        }
+        resultSet.close();
+        ps.close();
+
+    } catch (SQLException e) {
+        throw new RuntimeException(e);
+    }
+
+    return cliente;
+
+}
+
+
 
   public List<Cliente> findAllClienti() {
 

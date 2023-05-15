@@ -106,20 +106,7 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
 
             // le prossime righe servono perchè quando clicco il bottone voglio che si elimini quel cliente
             button.addActionListener((ActionListener) this);
-            button.addActionListener(new ActionListener(){
-
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                DAOFactory df= new DAOFactory();
-                df.beginTransaction();
-                ClienteDAO dao= df.getClienteDAO();
-                dao.delete(clienti.get(i));
-                df.commitTransaction();
-                df.closeTransaction();
-                    
-                }
-                
-            });
+           
 
             //panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));       serve?
             GridBagConstraints gbc = new GridBagConstraints();
@@ -177,7 +164,19 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
             return new Dimension(200, 200);
         }
     }
+   
 
+    
+    public void actionPerformed(ActionEvent e) {
+    DAOFactory df= new DAOFactory();
+    df.beginTransaction();
+    ClienteDAO dao= df.getClienteDAO();
+    Cliente cl= dao.findClienteByID(Integer.parseInt(((JButton)e.getSource()).getName()));
+    dao.delete(cl);
+    df.commitTransaction();
+    df.closeTransaction();
+        
+    }
 
     // Variables declaration - do not modify                     
     private javax.swing.JButton jButton1;

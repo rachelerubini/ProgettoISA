@@ -88,6 +88,39 @@ public class RecensioneDAO {
     }
 
 
+    public Recensione findRecensioneByID(int ID_R) {
+        
+        PreparedStatement ps;
+        Recensione recensione = null;
+
+        try {
+
+            String sql
+                    = " SELECT * "
+                    + "   FROM recensione "
+                    + " WHERE "
+                    + "   ID_R = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ID_R);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                recensione = read(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return recensione;
+
+    }
+
+
     public void delete(Recensione recensione) {
 
         PreparedStatement ps;
