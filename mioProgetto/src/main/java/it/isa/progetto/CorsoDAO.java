@@ -106,5 +106,34 @@ public class CorsoDAO {
         }
     
       }
+
     
+
+      Corso read(ResultSet rs) {
+        Corso corso = new Corso();
+
+
+        try {
+            corso.setID_CO(rs.getInt("ID_CO"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            corso.setNOME(rs.getString("NOME"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            corso.setTIPO(rs.getString("TIPO"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            corso.setLIVELLO(rs.getString("LIVELLO"));
+        } catch (SQLException sqle) {
+        }
+        try {
+            corso.setDELETED(rs.getString("DELETED"));
+          } catch (SQLException sqle) {
+          }
+
+        return corso;
+    }
 }
