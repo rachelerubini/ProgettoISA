@@ -179,7 +179,7 @@ public class PANELClientiAmministratore extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
+    javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private TestPane pannello;

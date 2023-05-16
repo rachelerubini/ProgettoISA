@@ -10,15 +10,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
-//com
 
 public class Frame extends JFrame {
 
     private JPanel container = new JPanel();
 
     private PANELHomepage hp = new PANELHomepage();
-    private PANELHomepageCliente hcp = new PANELHomepageCliente();
-    private PANELHomepageAmministratore hap = new PANELHomepageAmministratore();
+    private Cliente cliente= new Cliente();
+    private PANELHomepageCliente hcp = new PANELHomepageCliente(cliente);
+    private Amministratore amministratore= new Amministratore();
+    private PANELHomepageAmministratore hap = new PANELHomepageAmministratore(amministratore);
     private PANELIscrizione ip = new PANELIscrizione();
     private PANELCorsiClienti ccp = new PANELCorsiClienti();
     private PANELNuovaRecenesione nrp = new PANELNuovaRecensione();
@@ -36,7 +37,8 @@ public class Frame extends JFrame {
     df.closeTransaction();
     return recensioni;
 }
-    private PANELRecensioni rp = new PANELRecensioni(findAllRecensioni());
+
+    private PANELRecensioni rp = new PANELRecensioni(cliente, findAllRecensioni());
    
     public List<Cliente> findAllClienti() 
     {
@@ -114,7 +116,7 @@ public class Frame extends JFrame {
             {
 
                     // le due funzioni finByMAIL sono da implementare nei dao, gli passo la mil e mi restituiscono l'utente con quella mail, se non c'è null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    Cliente cliente = ClienteDAO.findByMAILCliente(hp.jTextField1.getMAIL());
+                    Cliente cliente = ClienteDAO.findByMAILCliente(hp.jTextField2.getMAIL());
                     Amministratore amministratore = AmministratoreDAO.findByMAILAmministratore(hp.jTextField1.getMAIL());
 
 
@@ -131,9 +133,22 @@ public class Frame extends JFrame {
                             cl.show(container, "1");
                         }
                         else
-                        {
+                        {   
                             JOptionPane.showMessageDialog(hp, "Login avvenuto con successo!");
+
+                            hcp= new PANELHomepageCliente(cliente);
+
+                            rp= new PANELRecensioni(cliente,findAllRecensioni());
+                            //logout
+                            hcp.jButton1.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e)
+                                {
+                                    cl.show(container, "1");}  }); 
+
                             cl.show(container, "2");
+
+
                         }
                     }
                     else 
@@ -146,6 +161,14 @@ public class Frame extends JFrame {
                         else
                         {
                             JOptionPane.showMessageDialog(hp, "Login avvenuto con successo!");
+                            hap= new PANELHomepageAmministratore(amministratore);
+                            //logout
+                            hap.jButton1.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e)
+                                {
+                                    cl.show(container, "1");}  }); 
+
                             cl.show(container, "3");
                         }
                     }

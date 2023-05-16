@@ -5,8 +5,8 @@ public class PANELHomepageCliente extends javax.swing.JPanel {
     /**
      * Creates new form PanelHomepage
      */
-    public PANELHomepageCliente() {
-        initComponents();
+    public PANELHomepageCliente(Cliente cliente) {
+        initComponents(cliente);
     }
 
     /**
@@ -16,11 +16,14 @@ public class PANELHomepageCliente extends javax.swing.JPanel {
      */
     //@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents() {
+    private void initComponents(Cliente cliente) {
 
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
+        //br ce la ha:      this.cliente= cliente;
 
         setPreferredSize(new java.awt.Dimension(400, 300));
         setBackground(new java.awt.Color(243, 226, 243));
@@ -32,6 +35,13 @@ public class PANELHomepageCliente extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Benvenuto cliente! Scegli l'operazione che vuoi svolgere:");
+
+        jButton1.setText("Logout");
+        /*jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });*/
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -46,6 +56,10 @@ public class PANELHomepageCliente extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 107, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -56,14 +70,17 @@ public class PANELHomepageCliente extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(31, 31, 31))
         );
-    }// </editor-fold>                        
+    }// </editor-fold>                              
 
 
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    // Variables declaration - do not modify   
+    javax.swing.JButton jButton1;                  
+    javax.swing.JButton jButton3;
+    javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration                   
 }

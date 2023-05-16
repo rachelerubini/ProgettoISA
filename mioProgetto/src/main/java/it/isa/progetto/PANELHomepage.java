@@ -1,5 +1,6 @@
 package it.isa.progetto;
 
+
 public class PANELHomepage extends javax.swing.JPanel {
 
     /**
@@ -120,14 +121,14 @@ public class PANELHomepage extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton7;
+    javax.swing.JButton jButton1;
+    javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    javax.swing.JTextField jTextField1;
+    javax.swing.JTextField jTextField2;
     // End of variables declaration                   
 }
 

@@ -21,8 +21,8 @@ public class PANELRecensioni extends javax.swing.JPanel {
     /**
      * Creates new form PANELRecensioni
      */
-    public PANELRecensioni(List<Recensione> recensioni) {
-        initComponents(recensioni);
+    public PANELRecensioni(Cliente cliente, List<Recensione> recensioni) {
+        initComponents(cliente, recensioni);
     }
 
     /**
@@ -32,7 +32,7 @@ public class PANELRecensioni extends javax.swing.JPanel {
      */
     //@SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-    private void initComponents(List<Recensione> recensioni) {
+    private void initComponents(Cliente cliente, List<Recensione> recensioni) {
 
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -40,10 +40,11 @@ public class PANELRecensioni extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         pannello=new TestPane();
 
+        //brr:   this.cliente= cliente;
+
         setPreferredSize(new java.awt.Dimension(400, 300));
         setBackground(new java.awt.Color(243, 226, 243));
     
-
         jLabel1.setText("Recensioni:");
 
         jButton1.setText("Home");
@@ -104,7 +105,7 @@ public class PANELRecensioni extends javax.swing.JPanel {
 
         JPanel panel = new JPanel();
         if(recensioni.get(i).isDELETED().equals("N")){
-        JButton button = new JButton(makeButtonText(recensioni.get(i)));
+        JButton button = new JButton(makeButtonText(recensioni.get(i),cliente));
         button.setName(Integer.toString(recensioni.get(i).getID_R()));
         panel.add(button);
 
@@ -130,9 +131,8 @@ public void actionPerformed(ActionEvent e ) {
     df.beginTransaction();
     RecensioneDAO dao= df.getRecensioneDAO();
     Recensione rec= dao.findRecensioneByID(Integer.parseInt(((JButton)e.getSource()).getName()));
-    //if(rec.getCliente().getID_CL() ==  // ID cliente loggato)
-    //BISOGNA IN QUALCHE MODO PASSARE ID DEL CLIENTE LOGGATO E PUO ELIMINARE SOLO IL CLIENTE LOGGATO CHE HA SCRITTO QUELLA RECENSIONE SE NO MOSTRA TIPO 'RECENSIONE NON TUA'
-    dao.delete(rec);
+    if(rec.getCliente().getID_CL() ==  cliente.getID_CL()){
+    dao.delete(rec);}
     df.commitTransaction();
     df.closeTransaction();
         
@@ -173,11 +173,12 @@ public void actionPerformed(ActionEvent e ) {
 
 
     // Variables declaration - do not modify                     
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    javax.swing.JButton jButton1;
+    javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private TestPane pannello;
+    Cliente cliente;
     // End of variables declaration                   
 }
 

@@ -5,8 +5,8 @@ public class PANELHomepageAmministratore extends javax.swing.JPanel {
         /**
          * Creates new form PanelHomepage
          */
-        public PANELHomepageAmministratore() {
-            initComponents();
+        public PANELHomepageAmministratore(Amministratore amministratore) {
+            initComponents(amministratore);
         }
     
         /**
@@ -16,11 +16,12 @@ public class PANELHomepageAmministratore extends javax.swing.JPanel {
          */
         //@SuppressWarnings("unchecked")
         // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
-        private void initComponents() {
+        private void initComponents(Amministratore amministratore) {
     
             jButton5 = new javax.swing.JButton();
             jButton6 = new javax.swing.JButton();
             jLabel1 = new javax.swing.JLabel();
+            jButton1 = new javax.swing.JButton();
 
             setPreferredSize(new java.awt.Dimension(400, 300));
              setBackground(new java.awt.Color(243, 226, 243));
@@ -29,9 +30,12 @@ public class PANELHomepageAmministratore extends javax.swing.JPanel {
             jButton5.setText("CLIENTI");
     
             jButton6.setText("CORSI");
+
     
             jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
             jLabel1.setText("Benvenuto amministratore! Scegli l'operazione che vuoi svolgere:");
+
+            jButton1.setText("Logout");
     
             javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
             this.setLayout(layout);
@@ -47,24 +51,30 @@ public class PANELHomepageAmministratore extends javax.swing.JPanel {
                     .addContainerGap(78, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap())
-            );
-            layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(29, 29, 29)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(56, 56, 56)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(167, Short.MAX_VALUE))
-            );
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(28, 28, 28))            
+                    );
+                    layout.setVerticalGroup(
+                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(29, 29, 29)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(56, 56, 56)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                            .addComponent(jButton1)
+                            .addGap(27, 27, 27))
+                    );
         }// </editor-fold>                        
     
     
-        // Variables declaration - do not modify                     
-        private javax.swing.JButton jButton5;
-        private javax.swing.JButton jButton6;
+        // Variables declaration - do not modify  
+        javax.swing.JButton jButton1;                   
+        javax.swing.JButton jButton5;
+        javax.swing.JButton jButton6;
         private javax.swing.JLabel jLabel1;
         // End of variables declaration                   
     }
