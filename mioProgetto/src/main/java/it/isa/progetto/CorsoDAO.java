@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CorsoDAO {
 
-    Connection conn;
+    private static Connection conn;
 
     public CorsoDAO(Connection conn) {
         this.conn = conn;
@@ -107,9 +107,41 @@ public class CorsoDAO {
     
       }
 
+      public static Corso findByNomeCorso(String NOME) {
+
+        PreparedStatement ps;
+        Corso corso = null;
+
+        try {
+
+            String sql
+                    = " SELECT * "
+                    + "   FROM corso "
+                    + " WHERE "
+                    + "   NOME = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, NOME);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                corso = read(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return corso;
+
+    }
+
     
 
-      Corso read(ResultSet rs) {
+      static Corso read(ResultSet rs) {
         Corso corso = new Corso();
 
 

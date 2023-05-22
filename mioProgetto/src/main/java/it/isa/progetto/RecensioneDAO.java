@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecensioneDAO {
+public class RecensioneDAO{
     Connection conn;
 
-    public RecensioneDAO(Connection conn) {
+    public RecensioneDAO(Connection conn, Cliente cliente) {
         this.conn = conn;
     }
 
@@ -144,7 +144,7 @@ public class RecensioneDAO {
 
     }
 
-    public List<Recensione> findRecensioni() {
+    public List<Recensione> findAllRecensioni() {
 
         PreparedStatement ps;
         Recensione oggetto;

@@ -65,7 +65,7 @@ public class Cliente {
   }
 
   public String getMAIL() {
-    return MAIL;
+    return this.MAIL;
   }
 
   public void setMAIL(String MAIL) {

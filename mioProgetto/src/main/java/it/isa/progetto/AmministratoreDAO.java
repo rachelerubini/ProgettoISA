@@ -9,13 +9,13 @@ import java.util.List;
 
 public class AmministratoreDAO {
     
-    Connection conn;
+    private static Connection conn;
 
     public AmministratoreDAO(Connection conn) {
     this.conn = conn;
   }
 
-  public Amministratore findByMAILAmministratore(String MAIL) {
+  public static Amministratore findByMAILAmministratore(String MAIL) {
 
     PreparedStatement ps;
     Amministratore amministratore = null;
@@ -46,7 +46,7 @@ public class AmministratoreDAO {
 
 }
 
-Amministratore read(ResultSet rs) {
+static Amministratore read(ResultSet rs) {
   Amministratore amministratore = new Amministratore();
 
   try {

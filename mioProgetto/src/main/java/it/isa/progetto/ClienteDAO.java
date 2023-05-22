@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ClienteDAO {
 
-  Connection conn;
+  private static Connection conn;
 
   public ClienteDAO(Connection conn) {
     this.conn = conn;
@@ -124,7 +124,7 @@ public class ClienteDAO {
   }
 
   //Trova il cliente (tutti i campi) a partire dalla mail, lo usiamo nel login
-  public Cliente findByMAILCliente(String MAIL) {
+  public static Cliente findByMAILCliente(String MAIL) {
 
     PreparedStatement ps;
     Cliente cliente = null;
@@ -226,7 +226,7 @@ public class ClienteDAO {
 
 
 
-  Cliente read(ResultSet rs) {
+  static Cliente read(ResultSet rs) {
     Cliente cliente = new Cliente();
 
     try {
@@ -258,11 +258,7 @@ public class ClienteDAO {
     } catch (SQLException sqle) {
     }
     try {
-<<<<<<< HEAD
       cliente.setDELETED(rs.getString("DELETED"));
-=======
-      cliente.setDELETED(rs.get("DELETED"));
->>>>>>> 24c6238ea03c4352415113fbe126d16a75d3bf74
     } catch (SQLException sqle) {
     }
     return cliente;

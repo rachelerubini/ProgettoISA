@@ -139,7 +139,7 @@ public void actionPerformed(ActionEvent e ) {
     }
 
   //aggiunto da noi per il for:  per il i-esimo cliente con delted = N , creo il bottone per eliminarlo
-  public String makeButtonText(Recensione recensione)
+  public String makeButtonText(Recensione recensione, Cliente cliente)
   {
      
       return ("CORSO: "+recensione.getCorso()+"\t VOTO: "+recensione.getVOTO()+"\t CLIENTE: "+recensione.getCliente()+"\t DATA: "+recensione.getDATA());

@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 
+
 public class Frame extends JFrame {
 
     private JPanel container = new JPanel();
@@ -107,6 +108,7 @@ public class Frame extends JFrame {
             
         });
 
+
         //NOTA: il login di brina è diverso ma non lo capiamo e forse non va bene per il nostro
         //login posso andare se sono cliente in 2 se sono amministratore nella 3
         hp.jButton1.addActionListener(new ActionListener(){
@@ -116,9 +118,8 @@ public class Frame extends JFrame {
             {
 
                     // le due funzioni finByMAIL sono da implementare nei dao, gli passo la mil e mi restituiscono l'utente con quella mail, se non c'è null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    Cliente cliente = ClienteDAO.findByMAILCliente(hp.jTextField2.getMAIL());
-                    Amministratore amministratore = AmministratoreDAO.findByMAILAmministratore(hp.jTextField1.getMAIL());
-
+                    Cliente cliente = ClienteDAO.findByMAILCliente(String.valueOf(hp.jTextField2));
+                    Amministratore amministratore = AmministratoreDAO.findByMAILAmministratore(String.valueOf(hp.jTextField1));
 
                     if (cliente == null && amministratore==null)
                     {
@@ -127,7 +128,7 @@ public class Frame extends JFrame {
                     }
                     else if (cliente != null && amministratore==null)
                     {
-                        if (!cliente.getPASSWORD().equals(hp.jTextField2.getPASSWORD()))
+                        if (!cliente.getPASSWORD().equals(String.valueOf(hp.jTextField2)))
                         {
                             JOptionPane.showMessageDialog(hp, "Password errata!");
                             cl.show(container, "1");
@@ -153,7 +154,7 @@ public class Frame extends JFrame {
                     }
                     else 
                     {
-                        if (!amministratore.getPASSWORD().equals(hp.jTextField2.getPASSWORD()))
+                        if (!amministratore.getPASSWORD().equals(String.valueOf(hp.jTextField2)))
                         {
                             JOptionPane.showMessageDialog(hp, "Password errata!");
                             cl.show(container, "1");
@@ -303,7 +304,7 @@ public class Frame extends JFrame {
                 DAOFactory df = new DAOFactory();
                 df.beginTransaction();
                 ClienteDAO dao = df.getClienteDAO();
-                dao.create(ip.jTextField1.getSSN(),ip.jTextField2.getNOME(),ip.jTextField3.getCOGNOME(), ip.jTextField4.getMAIL(), ip.jTextField5.getPASSWORD(), ip.jTextField6.getNASCITA());
+                dao.create(String.valueOf(ip.jTextField1),String.valueOf(ip.jTextField2),String.valueOf(ip.jTextField3), String.valueOf(ip.jTextField4), String.valueOf(ip.jTextField5), String.valueOf(ip.jTextField6));
                 df.commitTransaction();
                 df.closeTransaction();
                 JOptionPane.showMessageDialog(ip, "Registrazione avvenuta con successo!");
@@ -324,7 +325,7 @@ public class Frame extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{ nrp.jTextField3.getCorso();} catch(MissingObjectException ex)
+                try{ String.valueOf(nrp.jTextField3);} catch(MissingObjectException ex)
                 {     i=1;
                     JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste!");
                 }
@@ -333,7 +334,13 @@ public class Frame extends JFrame {
                 DAOFactory df = new DAOFactory();
                 df.beginTransaction();
                 RecensioneDAO dao = df.getRecensioneDAO();
-                dao.create(nrp.jTextField1.getVOTO(), nrp.jTextField2.getDATA(),nrp.jTextField3.getCorso());
+                Corso corso = CorsoDAO.findByNomeCorso(String.valueOf(nrp.jTextField3));
+                if (corso == null)
+                    {
+                        JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste");
+                        cl.show(container, "7");  //rimango nella pagina di creazione recensione 
+                    }
+                dao.create(Integer.valueOf(String.valueOf(nrp.jTextField1)), String.valueOf(nrp.jTextField2), corso , cliente  );  //MA IL CLIENTE CHE NON MI DA ERRORI è IL CLINTE LOGGATO? NON SI CAPISCE!!!!1
                 df.commitTransaction();
                 df.closeTransaction();
                 JOptionPane.showMessageDialog(nrp, "Creazione recensione avvenuta con successo!");
@@ -355,7 +362,7 @@ public class Frame extends JFrame {
                 DAOFactory df = new DAOFactory();
                 df.beginTransaction();
                 CorsoDAO dao = df.getCorsoDAO();
-                dao.registerCorso( ncp.jTextField1.getNOME(), ncp.jTextField2.getTIPO(), ncp.jTextField3.getLIVELLO());
+                dao.create( String.valueOf(ncp.jTextField1), String.valueOf(ncp.jTextField2), String.valueOf(ncp.jTextField3));
                 df.commitTransaction();
                 df.closeTransaction();
                 JOptionPane.showMessageDialog(ncp, "Creazione corso avvenuta con successo!");
