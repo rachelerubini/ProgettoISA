@@ -24,8 +24,21 @@ public class Frame extends JFrame {
     private PANELIscrizione ip = new PANELIscrizione();
     private PANELCorsiClienti ccp = new PANELCorsiClienti();
     private PANELNuovaRecenesione nrp = new PANELNuovaRecensione();
-    private PANELCorsiAmministratore cap = new PANELCorsiAmministratore();
     private PANELNuovoCorso ncp = new PANELNuovoCorso();
+
+
+    public List<Corso> findAllCorsi() 
+    {
+    DAOFactory df= new DAOFactory();
+    List<Corso> corsi = new ArrayList<Corso>();
+    df.beginTransaction();
+    CorsoDAO dao= df.getCorsoDAO();
+    corsi  = dao.findAllCorsi();
+    df.commitTransaction();
+    df.closeTransaction();
+    return corsi;
+}
+private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi());
 
     public List<Recensione> findAllRecensioni() 
     {
