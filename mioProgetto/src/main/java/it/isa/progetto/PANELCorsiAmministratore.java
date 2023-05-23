@@ -8,6 +8,8 @@ import java.lang.Integer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import java.util.List;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -34,7 +36,7 @@ public class PANELCorsiAmministratore extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();ù
+        jPanel1 = new javax.swing.JPanel();
         pannello=new TestPane();
 
         setBackground(new java.awt.Color(243, 226, 243));
@@ -121,7 +123,7 @@ public class PANELCorsiAmministratore extends javax.swing.JPanel {
         DAOFactory df= new DAOFactory();
         df.beginTransaction();
         CorsoDAO dao= df.getCorsoDAO();
-        Corso cr= dao.findCorsoByID(Integer.parseInt(((JButton)e.getSource()).getName()));
+        Corso cr= dao.findCorsoByID_CO(Integer.parseInt(((JButton)e.getSource()).getName()));
         dao.delete(cr);
         df.commitTransaction();
         df.closeTransaction();

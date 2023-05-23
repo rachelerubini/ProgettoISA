@@ -107,6 +107,69 @@ public class CorsoDAO {
     
       }
 
+      public List<Corso> findAllCorsi() {
+
+        PreparedStatement ps;
+        Corso corso;
+        ArrayList<Corso> corsi = new ArrayList<Corso>();
+
+        try {
+
+            String sql
+                    = " SELECT * "
+                    + " FROM corso ";
+
+            ps = conn.prepareStatement(sql);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            while (resultSet.next()) {
+                corso = read(resultSet);
+                corsi.add(corso);
+            }
+
+            resultSet.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return corsi;
+    }
+
+    public Corso findCorsoByID_CO(int ID_CO) {
+
+        PreparedStatement ps;
+        Corso corso = null;
+
+        try {
+
+            String sql
+                    = " SELECT * "
+                    + "   FROM corso "
+                    + " WHERE "
+                    + "   ID_CO = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ID_CO);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                corso = read(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return corso;
+
+    }
+
       public static Corso findByNomeCorso(String NOME) {
 
         PreparedStatement ps;
