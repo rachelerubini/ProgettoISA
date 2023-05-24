@@ -38,6 +38,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         pannello=new TestPane();
+        pannello1=new TestPane();
 
         //brr:   this.cliente= cliente;
 
@@ -68,12 +69,12 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             //.addGap(0, 249, Short.MAX_VALUE)
-            .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pannello1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
            // .addGap(0, 0, Short.MAX_VALUE)
-           .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+           .addComponent(pannello1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
            );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -120,7 +121,29 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
     
             JPanel panel = new JPanel();
             if(corsi.get(i).isDELETED().equals("N")){
-            JButton button = new JButton(makeButtonText(corsi.get(i),cliente));
+            JButton button = new JButton(makeButtonText(corsi.get(i)));
+            button.setName(Integer.toString(corsi.get(i).getID_CO()));
+            panel.add(button);
+    
+            // le prossime righe servono perchè quando clicco il bottone voglio che si elimini quel cliente
+            button.addActionListener((ActionListener) this);
+        
+            //panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));       serve?
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridwidth = GridBagConstraints.REMAINDER;
+            gbc.weightx = 1;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            pannello.mainList.add(panel, gbc, 0);      
+            }
+        }
+
+        //i corsi a cui il cliente è iscritto
+        for(int i=0; i<corsi.size(); i++)
+        {
+    
+            JPanel panel = new JPanel();
+            if((corsi.get(i).isDELETED().equals("N"))&&(cliente iscritto a quel corso)){
+            JButton button = new JButton(makeButtonText(corsi.get(i)));
             button.setName(Integer.toString(corsi.get(i).getID_CO()));
             panel.add(button);
     
@@ -141,22 +164,47 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
     
     }// </editor-fold>                           
     
-    //tutti i corsi
+
+    
+    //tutti i corsi:
     public void actionPerformed(ActionEvent e ) {
         DAOFactory df= new DAOFactory();
         df.beginTransaction();
         CorsoDAO dao= df.getCorsoDAO();
        int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
-        if(dao.findCorsoCliente( ID_corso,  cliente.getID_CL())){
+        if(dao.findCorsoCliente( ID_corso,  cliente.getID_CL())==1){               //da controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         } //se il cliente è gia iscritto a quel corso non faccio nulla 
-        else {dao.createIscrizione(ID_corso,  cliente.getID_CL());}  
+        else {
+
+            try{dao.createIscrizione(dao.findCorsoByID_CO(ID_corso), cliente);}catch(DuplicatedObjectException ex)
+            {
+              //showMessageDialog("Sei già iscritto!");
+            }
+        
+        } //da implementareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee              
         //se no lo iscrivo ovvero creo nuova riga di iscrizione
         df.commitTransaction();
         df.closeTransaction();
             
         }
+
+
+        // va fatto un action Permormed diverso per il secondo pannello? si puo? come????????????????????????????????????
+        public void actionPerformed1(ActionEvent e ) {
+            DAOFactory df= new DAOFactory();
+            df.beginTransaction();
+            CorsoDAO dao= df.getCorsoDAO();
+           int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
+           //disiscrivi se clicca sul bottone
+           dao.disiscrivi(ID_corso,  cliente.getID_CL());   //da controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+            df.commitTransaction();
+            df.closeTransaction();
+                
+            }
     
-      //aggiunto da noi per il for:  per il i-esimo cliente con delted = N , creo il bottone per eliminarlo
+
+
+      //cosa mostro nel bottone
       public String makeButtonText(Corso corsi)
       {
          
@@ -198,6 +246,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private TestPane pannello;
+    private TestPane pannello1;
     Cliente cliente;
     // End of variables declaration                   
 }

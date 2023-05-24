@@ -1,11 +1,11 @@
 package it.isa.progetto;
 
-public class PANELNuovaRecenesione extends javax.swing.JPanel {
+public class PANELNuovaRecensione extends javax.swing.JPanel {
 
     /**
      * Creates new form PANELNuovaRecenesione
      */
-    public PANELNuovaRecenesione() {
+    public PANELNuovaRecensione() {
         initComponents();
     }
 

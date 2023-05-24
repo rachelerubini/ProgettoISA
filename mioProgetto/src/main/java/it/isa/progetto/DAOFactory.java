@@ -61,11 +61,14 @@ public class DAOFactory {
     return new ClienteDAO(connection);
   }
 
+  private Cliente cliente= new Cliente();
   public RecensioneDAO getRecensioneDAO() {
-    return new RecensioneDAO(connection);
+    return new RecensioneDAO(connection, cliente);
   }
 
   public CorsoDAO getCorsoDAO() {
     return new CorsoDAO(connection);
   }
+
+  
 }

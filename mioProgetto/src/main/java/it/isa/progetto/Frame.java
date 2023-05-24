@@ -8,7 +8,9 @@ import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+//import java.io.File;
+
+
 
 
 
@@ -22,11 +24,10 @@ public class Frame extends JFrame {
     private Amministratore amministratore= new Amministratore();
     private PANELHomepageAmministratore hap = new PANELHomepageAmministratore(amministratore);
     private PANELIscrizione ip = new PANELIscrizione();
-    private PANELCorsiClienti ccp = new PANELCorsiClienti();
-    private PANELNuovaRecenesione nrp = new PANELNuovaRecensione();
+    private PANELNuovaRecensione nrp = new PANELNuovaRecensione();
     private PANELNuovoCorso ncp = new PANELNuovoCorso();
 
-
+   
     public List<Corso> findAllCorsi() 
     {
     DAOFactory df= new DAOFactory();
@@ -38,6 +39,9 @@ public class Frame extends JFrame {
     df.closeTransaction();
     return corsi;
 }
+
+private PANELCorsiClienti ccp = new PANELCorsiClienti(cliente,findAllCorsi());
+
 private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi());
 
     public List<Recensione> findAllRecensioni() 
@@ -52,6 +56,7 @@ private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi
     return recensioni;
 }
 
+    
     private PANELRecensioni rp = new PANELRecensioni(cliente, findAllRecensioni());
    
     public List<Cliente> findAllClienti() 
@@ -65,7 +70,7 @@ private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi
     df.closeTransaction();
     return clienti;
 }
-    private PANELClientiAmministratore clap = new PANELClientiAmministratore(findAllClienti());  //da implementare findClienti!!!!!!!!
+    private PANELClientiAmministratore clap = new PANELClientiAmministratore(findAllClienti());  
   
 
 
@@ -151,7 +156,7 @@ private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi
                             JOptionPane.showMessageDialog(hp, "Login avvenuto con successo!");
 
                             hcp= new PANELHomepageCliente(cliente);
-
+                            ccp = new PANELCorsiClienti(cliente,findAllCorsi());
                             rp= new PANELRecensioni(cliente,findAllRecensioni());
                             //logout
                             hcp.jButton1.addActionListener(new ActionListener() {
@@ -334,15 +339,16 @@ private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi
         //dalla pagina nuova recensione vado nella pagina recensioni
         //ATTENZIONE,non siamo sicure vada bene il controllo per vedere se il corso esiste!!!
         nrp.jButton1.addActionListener(new ActionListener(){
-            int i=0;
+           // int i=0;
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                try{ String.valueOf(nrp.jTextField3);} catch(MissingObjectException ex)
+              /*   try{ String.valueOf(nrp.jTextField3); } catch(MissingObjectException ex)  //non serve abbiamo controllato sotto??????!!!!!!!!!!!!!
                 {     i=1;
                     JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste!");
-                }
-                if(i==0){
+                }*/
+                try{
+                //if(i==0){
 
                 DAOFactory df = new DAOFactory();
                 df.beginTransaction();
@@ -358,8 +364,13 @@ private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi
                 df.closeTransaction();
                 JOptionPane.showMessageDialog(nrp, "Creazione recensione avvenuta con successo!");
                 cl.show(container, "6");
-                }
-                
+               // }
+            }
+            catch(DuplicatedObjectException ex)
+            {
+                JOptionPane.showMessageDialog(ncp, "Recensione già scritta!");
+            }
+           
             }
             
         });
