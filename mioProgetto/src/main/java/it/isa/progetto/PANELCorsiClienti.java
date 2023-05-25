@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -126,7 +126,31 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
             panel.add(button);
     
             // le prossime righe servono perchè quando clicco il bottone voglio che si elimini quel cliente
-            button.addActionListener((ActionListener) this);
+            button.addActionListener(new ActionListener(){
+                //tutti i corsi:
+        @Override
+        public void actionPerformed(ActionEvent e ) {
+        DAOFactory df= new DAOFactory();
+        df.beginTransaction();
+        IscrizioneDAO dao= df.getIscrizioneDAO();
+        CorsoDAO daoc= df.getCorsoDAO();
+       int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
+        if(dao.findCorsoCliente( ID_corso,  cliente.getID_CL())==1){               
+        } //se il cliente è gia iscritto a quel corso non faccio nulla 
+        else {
+
+            try{dao.createIscrizione(daoc.findCorsoByID_CO(ID_corso), cliente);}catch(DuplicatedObjectException ex)
+            {
+              //showMessageDialog("Sei già iscritto!");
+            }
+        
+        }             
+        //se no lo iscrivo ovvero creo nuova riga di iscrizione
+        df.commitTransaction();
+        df.closeTransaction();
+            
+        }
+            });
         
             //panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));       serve?
             GridBagConstraints gbc = new GridBagConstraints();
@@ -142,7 +166,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
         {
             DAOFactory df= new DAOFactory();
             df.beginTransaction();
-            CorsoDAO dao= df.getCorsoDAO();
+            IscrizioneDAO dao= df.getIscrizioneDAO();
             JPanel panel = new JPanel();
             if((corsi.get(i).isDELETED().equals("N"))&&(dao.findCorsoCliente( corsi.get(i).getID_CO(),  cliente.getID_CL())==1)){
             JButton button = new JButton(makeButtonText(corsi.get(i)));
@@ -150,7 +174,22 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
             panel.add(button);
     
             // le prossime righe servono perchè quando clicco il bottone voglio che si elimini quel cliente
-            button.addActionListener((ActionListener) this);
+            button.addActionListener(new ActionListener(){
+
+             // va fatto un action Permormed diverso per il secondo pannello? si puo? come????????????????????????????????????
+            @Override
+            public void actionPerformed(ActionEvent e ) {
+            DAOFactory df= new DAOFactory();
+            df.beginTransaction();
+            IscrizioneDAO dao= df.getIscrizioneDAO();
+           int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
+           //disiscrivi se clicca sul bottone
+           dao.disiscrivi(ID_corso,  cliente.getID_CL());   
+            df.commitTransaction();
+            df.closeTransaction();
+                
+            }
+            });
         
             //panel.setBorder(new MatteBorder(0, 0, 1, 0, Color.GRAY));       serve?
             GridBagConstraints gbc = new GridBagConstraints();
@@ -169,43 +208,6 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
     }// </editor-fold>                           
     
 
-    
-    //tutti i corsi:
-    public void actionPerformed(ActionEvent e ) {
-        DAOFactory df= new DAOFactory();
-        df.beginTransaction();
-        CorsoDAO dao= df.getCorsoDAO();
-       int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
-        if(dao.findCorsoCliente( ID_corso,  cliente.getID_CL())==1){               //  findCorsoCliente da controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
-        } //se il cliente è gia iscritto a quel corso non faccio nulla 
-        else {
-
-            try{dao.createIscrizione(dao.findCorsoByID_CO(ID_corso), cliente);}catch(DuplicatedObjectException ex)
-            {
-              //showMessageDialog("Sei già iscritto!");
-            }
-        
-        } //dcreateIscrizione a controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee              
-        //se no lo iscrivo ovvero creo nuova riga di iscrizione
-        df.commitTransaction();
-        df.closeTransaction();
-            
-        }
-
-
-        // va fatto un action Permormed diverso per il secondo pannello? si puo? come????????????????????????????????????
-        public void actionPerformed1(ActionEvent e ) {
-            DAOFactory df= new DAOFactory();
-            df.beginTransaction();
-            CorsoDAO dao= df.getCorsoDAO();
-           int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
-           //disiscrivi se clicca sul bottone
-           dao.disiscrivi(ID_corso,  cliente.getID_CL());   
-            df.commitTransaction();
-            df.closeTransaction();
-                
-            }
-    
 
 
       //cosa mostro nel bottone

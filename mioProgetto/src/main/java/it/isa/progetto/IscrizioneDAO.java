@@ -83,10 +83,9 @@ public class IscrizioneDAO {
      }
 
 
-      //da controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+      
       //funzione che mi crea una nuova iscrizione
       public Iscrizione createIscrizione(
-        //int ID_CO,
         //boolean DELETED,
         Corso corso,
         Cliente cliente) throws DuplicatedObjectException {
@@ -99,7 +98,7 @@ public class IscrizioneDAO {
     try {
 
         String sql
-                = " SELECT ID_CO "
+                = " SELECT ID_CO, ID_CL "
                 + " FROM iscrizione "
                 + " WHERE "
                 + " ID_CO=?"
