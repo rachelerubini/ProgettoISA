@@ -343,12 +343,9 @@ private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi
 
             @Override
             public void actionPerformed(ActionEvent e) {
-              /*   try{ String.valueOf(nrp.jTextField3); } catch(MissingObjectException ex)  //non serve abbiamo controllato sotto??????!!!!!!!!!!!!!
-                {     i=1;
-                    JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste!");
-                }*/
+              
                 try{
-                //if(i==0){
+                
 
                 DAOFactory df = new DAOFactory();
                 df.beginTransaction();
@@ -364,7 +361,7 @@ private PANELCorsiAmministratore cap = new PANELCorsiAmministratore(findAllCorsi
                 df.closeTransaction();
                 JOptionPane.showMessageDialog(nrp, "Creazione recensione avvenuta con successo!");
                 cl.show(container, "6");
-               // }
+               
             }
             catch(DuplicatedObjectException ex)
             {

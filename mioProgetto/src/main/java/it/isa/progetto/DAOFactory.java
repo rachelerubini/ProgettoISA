@@ -70,5 +70,9 @@ public class DAOFactory {
     return new CorsoDAO(connection);
   }
 
+  public IscrizioneDAO getIscrizioneDAO() {
+    return new IscrizioneDAO(connection);
+  }
+
   
 }

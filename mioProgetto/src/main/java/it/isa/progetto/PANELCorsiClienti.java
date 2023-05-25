@@ -140,9 +140,11 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
         //i corsi a cui il cliente è iscritto
         for(int i=0; i<corsi.size(); i++)
         {
-    
+            DAOFactory df= new DAOFactory();
+            df.beginTransaction();
+            CorsoDAO dao= df.getCorsoDAO();
             JPanel panel = new JPanel();
-            if((corsi.get(i).isDELETED().equals("N"))&&(cliente iscritto a quel corso)){
+            if((corsi.get(i).isDELETED().equals("N"))&&(dao.findCorsoCliente( corsi.get(i).getID_CO(),  cliente.getID_CL())==1)){
             JButton button = new JButton(makeButtonText(corsi.get(i)));
             button.setName(Integer.toString(corsi.get(i).getID_CO()));
             panel.add(button);
@@ -157,6 +159,8 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
             gbc.fill = GridBagConstraints.HORIZONTAL;
             pannello.mainList.add(panel, gbc, 0);      
             }
+        df.commitTransaction();
+        df.closeTransaction();
         }
     
     validate();
@@ -172,7 +176,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
         df.beginTransaction();
         CorsoDAO dao= df.getCorsoDAO();
        int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
-        if(dao.findCorsoCliente( ID_corso,  cliente.getID_CL())==1){               //da controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+        if(dao.findCorsoCliente( ID_corso,  cliente.getID_CL())==1){               //  findCorsoCliente da controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
         } //se il cliente è gia iscritto a quel corso non faccio nulla 
         else {
 
@@ -181,7 +185,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
               //showMessageDialog("Sei già iscritto!");
             }
         
-        } //da implementareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee              
+        } //dcreateIscrizione a controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee              
         //se no lo iscrivo ovvero creo nuova riga di iscrizione
         df.commitTransaction();
         df.closeTransaction();
@@ -196,7 +200,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel {
             CorsoDAO dao= df.getCorsoDAO();
            int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
            //disiscrivi se clicca sul bottone
-           dao.disiscrivi(ID_corso,  cliente.getID_CL());   //da controllareeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+           dao.disiscrivi(ID_corso,  cliente.getID_CL());   
             df.commitTransaction();
             df.closeTransaction();
                 
