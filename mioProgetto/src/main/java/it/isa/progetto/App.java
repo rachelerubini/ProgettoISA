@@ -20,8 +20,8 @@ public class App
 
      public static Frame showFrame()
         {
-            Frame firstFrame = new Frame();
-            return firstFrame;
+            Frame Frame = new Frame();
+            return Frame;
         }
    
  }
