@@ -12,10 +12,6 @@ public class App
         
         App.showFrame();
         
-        
-        
-
-        
      }
 
      public static Frame showFrame()

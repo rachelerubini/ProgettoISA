@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +12,7 @@ public class CorsoDAO {
 
     private static Connection conn;
 
-    public CorsoDAO(Connection conn) {
+    /*public*/ CorsoDAO(Connection conn) {
         this.conn = conn;
     }
 
@@ -110,20 +111,26 @@ public class CorsoDAO {
 
 
 
-      public List<Corso> findAllCorsi() {
+      public List<Corso> findAllCorsi(){
 
         PreparedStatement ps;
+        //Statement st;
         Corso corso;
         ArrayList<Corso> corsi = new ArrayList<Corso>();
-
+        String query = "SELECT * FROM corso";
         try {
 
-            String sql
+            /*String sql
                     = " SELECT * "
-                    + " FROM corso ";
+                    + " FROM corso ";*/
 
-            ps = conn.prepareStatement(sql);
+                    //st= conn.createStatement();
+                    //ResultSet resultSet=st.executeQuery(sql);
 
+                    //ps = conn.prepareStatement(sql);
+
+            ps = MyConnection.getConnection().prepareStatement(query);
+                    
             ResultSet resultSet = ps.executeQuery();
 
             while (resultSet.next()) {
@@ -131,11 +138,13 @@ public class CorsoDAO {
                 corsi.add(corso);
             }
 
-            resultSet.close();
-            ps.close();
+            //resultSet.close();
+            //ps.close();
+            //st.close();
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch(SQLException e)
+        {
+            System.out.println(e.getMessage());        
         }
 
         return corsi;

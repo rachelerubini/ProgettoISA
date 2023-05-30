@@ -16,10 +16,13 @@ public class DAOFactory {
       Class.forName(Configuration.DATABASE_DRIVER);
       this.connection = DriverManager.getConnection(Configuration.DATABASE_URL);
       this.connection.setAutoCommit(false);
+
+      System.out.println("connesso");
+
     }
     catch(Exception ex)
     {
-      System.out.println(ex.getMessage());
+      System.out.println("non connesso");
     }
 
   }

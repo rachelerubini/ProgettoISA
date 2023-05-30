@@ -27,19 +27,7 @@
 </dependency>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <dependency>
+<dependency>
       <groupId>org.jacoco</groupId>
       <artifactId>jacoco-maven-plugin</artifactId>
       <version>0.8.8</version>
@@ -85,7 +73,7 @@
 <dependency>
   <groupId>mysql</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>8.0.31</version>
+  <version>8.0.33</version>
 </dependency>
 
 <dependency>
