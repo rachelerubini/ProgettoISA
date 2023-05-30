@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.*;
 
 public class CorsoDAO {
 
@@ -113,11 +114,11 @@ public class CorsoDAO {
 
       public List<Corso> findAllCorsi(){
 
-        PreparedStatement ps;
+        //PreparedStatement ps;
         //Statement st;
         Corso corso;
         ArrayList<Corso> corsi = new ArrayList<Corso>();
-        String query = "SELECT * FROM corso";
+        
         try {
 
             /*String sql
@@ -129,7 +130,10 @@ public class CorsoDAO {
 
                     //ps = conn.prepareStatement(sql);
 
-            ps = MyConnection.getConnection().prepareStatement(query);
+           //Connection c = MyConnection.getConnection();
+           String query = "SELECT * FROM corso";
+           //PreparedStatement ps= c.prepareStatement(query);
+           PreparedStatement ps = conn.prepareStatement(query);
                     
             ResultSet resultSet = ps.executeQuery();
 
