@@ -114,11 +114,12 @@ public class CorsoDAO {
 
       public List<Corso> findAllCorsi(){
 
-        //PreparedStatement ps;
+        PreparedStatement ps;
         //Statement st;
         Corso corso;
         ArrayList<Corso> corsi = new ArrayList<Corso>();
-        
+        String query = "SELECT * FROM corso";
+
         try {
 
             /*String sql
@@ -130,10 +131,10 @@ public class CorsoDAO {
 
                     //ps = conn.prepareStatement(sql);
 
-           //Connection c = MyConnection.getConnection();
-           String query = "SELECT * FROM corso";
+           ps = MyConnection.getConnection().prepareStatement(query);
+           //String query = "SELECT * FROM corso";
            //PreparedStatement ps= c.prepareStatement(query);
-           PreparedStatement ps = conn.prepareStatement(query);
+           //PreparedStatement ps = conn.prepareStatement(sql);
                     
             ResultSet resultSet = ps.executeQuery();
 
