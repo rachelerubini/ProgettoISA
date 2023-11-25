@@ -112,7 +112,7 @@ public class IscrizioneDAO
         iscrizione.setCliente(cliente);
 
         try 
-        {
+        { //qua modifichiamo 
             //probabilmente il blocco commentato sotto si puuo togliere perche si controllava di non iscriversi ad un corso a cuiiii si era già iscrittta ma ora non abbiamoo neanchee piu il bottone per farlo:
             /*
             String sql
