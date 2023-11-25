@@ -110,11 +110,10 @@ public class IscrizioneDAO
         Iscrizione iscrizione = new Iscrizione();
         iscrizione.setCorso(corso);
         iscrizione.setCliente(cliente);
-
         try 
         { 
-            //probabilmente il blocco commentato sotto si puuo togliere perche si controllava di non iscriversi ad un corso a cuiiii si era già iscrittta ma ora non abbiamoo neanchee piu il bottone per farlo:
-            /*
+        
+            
             String sql
                     = " SELECT ID_CO, ID_CL "
                     + " FROM iscrizione "
@@ -123,11 +122,11 @@ public class IscrizioneDAO
                     + " AND "
                     + " ID_CL=?"
                     + " AND "
-                    + " DELETED = 'N' ";
+                    + " DELETED = 'Y' ";
 
             ps = conn.prepareStatement(sql);
             int i = 1;
-            ps.setInt(i++, iscrizione.getCorso().getID_CO());
+            ps.setInt(i, iscrizione.getCorso().getID_CO());
             ps.setInt(i++, iscrizione.getCliente().getID_CL());
 
 
@@ -139,12 +138,39 @@ public class IscrizioneDAO
 
             if (exist)
             {
-                throw new DuplicatedObjectException("Tentativo di iscrizione ad un corso a cui sei già iscritto");
+                //se esiste già dobbiamo modificare il camppo delited da N a Y così torna l'iscrizione per quel cliente a quel corso
+                try 
+                {
+            
+                    sql
+                        = " UPDATE iscrizione "
+                        + " SET DELETED='N' "
+                        + " WHERE "
+                        + " ID_CO=?"
+                        + " AND "
+                        + " ID_CL=?";
+            
+                        
+
+                ps = conn.prepareStatement(sql);
+                int j = 1;
+                ps.setInt(j, iscrizione.getCorso().getID_CO());
+                ps.setInt(j++, iscrizione.getCliente().getID_CL());
+                ps.executeUpdate();
+                
+            
+                } 
+                catch (SQLException e) 
+                {  
+                throw new RuntimeException(e);
+                }
             }
-            */
+            
+            else
+            {
+            try{    
 
-
-            String sql
+              sql
                     = " INSERT INTO iscrizione "
                     + "   ( DELETED,"
                     + "     ID_CO,"
@@ -160,12 +186,18 @@ public class IscrizioneDAO
 
             ps.executeUpdate();
             
-        } 
+              } 
         catch (SQLException e) 
         {  
             throw new RuntimeException(e);
         }
-            
+
+            }    
+        }
+        catch (SQLException e) 
+        {  
+            throw new RuntimeException(e);
+        }
         return iscrizione;
 
     }
