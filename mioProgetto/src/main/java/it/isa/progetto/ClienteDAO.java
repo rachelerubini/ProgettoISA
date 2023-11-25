@@ -8,14 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ClienteDAO {
+public class ClienteDAO 
+{
 
   private static Connection conn;
+   
 
-  public ClienteDAO(Connection conn) {
+  public ClienteDAO(Connection conn) 
+  {
     this.conn = conn;
   }
-  
+
+
+
+  //creazione di un nuovo cliente
   public Cliente create(
           //int ID_CL,
           String SSN,
@@ -25,8 +31,10 @@ public class ClienteDAO {
           String PASSWORD,
           String NASCITA
           //boolean DELETED,
-          ) throws DuplicatedObjectException {
-
+          ) throws DuplicatedObjectException
+  {
+  
+    
     PreparedStatement ps;
     Cliente cliente = new Cliente();
     cliente.setSSN(SSN);
@@ -37,7 +45,8 @@ public class ClienteDAO {
     cliente.setNASCITA(NASCITA);
 
 
-    try {
+    try 
+    {
 
       String sql
               = " SELECT ID_CL "
@@ -45,7 +54,7 @@ public class ClienteDAO {
               + " WHERE "
               + " ( SSN = ? OR"
               + " MAIL = ? ) AND"
-      + " DELETED ='N' ";
+              + " DELETED ='N' ";
 
 
       ps = conn.prepareStatement(sql);
@@ -59,11 +68,11 @@ public class ClienteDAO {
       exist = resultSet.next();
       resultSet.close();
 
-      if (exist) {
+      if (exist) 
+      {
         throw new DuplicatedObjectException("ClienteDAO.create: Tentativo di inserimento di un cliente già esistente.");
       }
-
-
+    
       sql
               = " INSERT INTO cliente "
               + "   ( ID_CL,"
@@ -73,8 +82,7 @@ public class ClienteDAO {
               + "     MAIL,"
               + "     PASSWORD,"
               + "     NASCITA,"
-              + "     DELETED,"
-              + "   ) "
+              + "     DELETED )"
               + " VALUES (NULL,?,?,?,?,?,?,'N')";
 
       ps = conn.prepareStatement(sql);
@@ -85,13 +93,14 @@ public class ClienteDAO {
       ps.setString(i++, cliente.getMAIL());
       ps.setString(i++, cliente.getPASSWORD());
       ps.setString(i++, cliente.getNASCITA());
-
       ps.executeUpdate();
 
-    } catch (SQLException e) {
+    } 
+    catch (SQLException e) 
+    {  
       throw new RuntimeException(e);
     }
-
+    
     return cliente;
 
   }
@@ -99,12 +108,14 @@ public class ClienteDAO {
 
 
 
-
-  public void delete (Cliente cliente) {
+  //elimino un cliente
+  public void delete (Cliente cliente) 
+  {
 
     PreparedStatement ps;
-
-    try {
+     
+    try 
+    {
 
       String sql
               = " UPDATE cliente "
@@ -117,20 +128,26 @@ public class ClienteDAO {
       ps.executeUpdate();
       ps.close();
 
-    } catch (SQLException e) {
+    } 
+    catch (SQLException e) 
+    {
       throw new RuntimeException(e);
     }
-
+  
   }
 
+
+
+
   //Trova il cliente (tutti i campi) a partire dalla mail, lo usiamo nel login
-  public static Cliente findByMAILCliente(String MAIL) {
+  public static Cliente findByMAILCliente(String MAIL) 
+  {
 
     PreparedStatement ps;
     Cliente cliente = null;
-
-    try {
-
+  
+    try 
+    {
       String sql
               = " SELECT * "
               + "   FROM cliente "
@@ -142,62 +159,76 @@ public class ClienteDAO {
       ps.setString(1, MAIL);
 
       ResultSet resultSet = ps.executeQuery();
+      
       if(resultSet.next()) 
       {
-          cliente = read(resultSet);
+        cliente = read(resultSet);
       }
+
       resultSet.close();
       ps.close();
-
-    } catch (SQLException e) {
+    
+    } 
+    catch (SQLException e) 
+    {
       throw new RuntimeException(e);
     }
 
     return cliente;
-
+    
   }
 
-  public Cliente findClienteByID(int ID_CL) {
+
+
+  //funzione che restituisce il cliente a partire dal suo ID
+  public Cliente findClienteByID(int ID_CL) 
+  {
         
     PreparedStatement ps;
     Cliente cliente = null;
-
-    try {
-
-        String sql
+    
+    try 
+    {
+      String sql
                 = " SELECT * "
                 + "   FROM cliente "
                 + " WHERE "
                 + "   ID_CL = ?";
 
-        ps = conn.prepareStatement(sql);
-        ps.setInt(1, ID_CL);
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, ID_CL);
 
-        ResultSet resultSet = ps.executeQuery();
+      ResultSet resultSet = ps.executeQuery();
 
-        if (resultSet.next()) {
-            cliente = read(resultSet);
-        }
-        resultSet.close();
-        ps.close();
+      if (resultSet.next()) 
+      {
+        cliente = read(resultSet);
+      }
+        
+      resultSet.close();
+      ps.close();
 
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
+    } 
+    catch (SQLException e) 
+    {
+      throw new RuntimeException(e);
     }
-
+  
     return cliente;
-
-}
-
+  }
 
 
-  public List<Cliente> findAllClienti() {
 
+  //funzione che mi restituisce tutti i clienti del db
+  public List<Cliente> findAllClienti() 
+  {
+  
     PreparedStatement ps;
     Cliente EL;
     ArrayList<Cliente> TOT = new ArrayList<Cliente>();
 
-    try {
+    try 
+    {
 
       String sql
               = " SELECT * "
@@ -209,7 +240,8 @@ public class ClienteDAO {
 
       ResultSet resultSet = ps.executeQuery();
 
-      while (resultSet.next()) {
+      while (resultSet.next()) 
+      {
         EL = read(resultSet);
         TOT.add(EL);
       }
@@ -217,50 +249,70 @@ public class ClienteDAO {
       resultSet.close();
       ps.close();
 
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
     }
 
+    catch (SQLException e) 
+    {
+      throw new RuntimeException(e);
+    }
+  
     return TOT;
   }
 
 
 
-  static Cliente read(ResultSet rs) {
+  static Cliente read(ResultSet rs) 
+  {
     Cliente cliente = new Cliente();
 
-    try {
+    try 
+    {
       cliente.setID_CL(rs.getInt("ID_CL"));
-    } catch (SQLException sqle) {
-    }
-    try {
+    } 
+    catch (SQLException sqle) {}
+    
+    try 
+    {
       cliente.setSSN(rs.getString("SSN"));
-    } catch (SQLException sqle) {
-    }
-    try {
+    } 
+    catch (SQLException sqle) {}
+
+    try 
+    {
       cliente.setNOME(rs.getString("NOME"));
-    } catch (SQLException sqle) {
-    }
-    try {
+    } 
+    catch (SQLException sqle) {}
+
+    try 
+    {
       cliente.setCOGNOME(rs.getString("COGNOME"));
-    } catch (SQLException sqle) {
-    }
-    try {
+    } 
+    catch (SQLException sqle) {}
+
+    try 
+    {
       cliente.setMAIL(rs.getString("MAIL"));
-    } catch (SQLException sqle) {
-    }
-    try {
+    } 
+    catch (SQLException sqle) {}
+
+    try 
+    {
       cliente.setPASSWORD(rs.getString("PASSWORD"));
-    } catch (SQLException sqle) {
-    }
-    try {
+    } 
+    catch (SQLException sqle) {}
+
+    try 
+    {
       cliente.setNASCITA(rs.getString("NASCITA"));
-    } catch (SQLException sqle) {
-    }
-    try {
+    } 
+    catch (SQLException sqle) {}
+
+    try 
+    {
       cliente.setDELETED(rs.getString("DELETED"));
-    } catch (SQLException sqle) {
-    }
+    } 
+    catch (SQLException sqle) {}
+    
     return cliente;
   }
 

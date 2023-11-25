@@ -7,21 +7,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecensioneDAO{
+public class RecensioneDAO
+{
     Connection conn;
-
-    public RecensioneDAO(Connection conn, Cliente cliente) {
+ 
+    public RecensioneDAO(Connection conn, Cliente cliente) 
+    {
         this.conn = conn;
     }
 
+    //creo una nuova recensione
     public Recensione create(
             //int ID_R,
             int VOTO,
             String DATA,
             //boolean DELETED,
             Corso corso,
-            Cliente cliente) throws DuplicatedObjectException {
-
+            Cliente cliente) throws DuplicatedObjectException 
+    {
+                
         PreparedStatement ps;
         Recensione recensione = new Recensione();
         recensione.setVOTO(VOTO);
@@ -29,7 +33,8 @@ public class RecensioneDAO{
         recensione.setCorso(corso);
         recensione.setCliente(cliente);
 
-        try {
+        try 
+        {
 
             String sql
                     = " SELECT ID_R "
@@ -53,7 +58,8 @@ public class RecensioneDAO{
             exist = resultSet.next();
             resultSet.close();
 
-            if (exist) {
+            if (exist) 
+            {
                 throw new DuplicatedObjectException("RecensioneDAO.create: Tentativo di inserimento di un recensione già esistente.");
             }
 
@@ -73,27 +79,31 @@ public class RecensioneDAO{
             int j = 1;
             ps.setInt(j++, recensione.getVOTO());
             ps.setString(j++, recensione.getDATA());
-            //i++;
+            //j++;
             ps.setInt(j++, recensione.getCorso().getID_CO());
             ps.setInt(j++, recensione.getCliente().getID_CL());
 
             ps.executeUpdate();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {   
             throw new RuntimeException(e);
         }
-
+        
         return recensione;
 
     }
 
-
-    public Recensione findRecensioneByID(int ID_R) {
+    //funzione che restituisce una recensione a partire dal suo ID
+    public Recensione findRecensioneByID(int ID_R) 
+    {
         
         PreparedStatement ps;
         Recensione recensione = null;
 
-        try {
+        try 
+        {
 
             String sql
                     = " SELECT * "
@@ -106,26 +116,32 @@ public class RecensioneDAO{
 
             ResultSet resultSet = ps.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSet.next()) 
+            {
                 recensione = read(resultSet);
             }
             resultSet.close();
             ps.close();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {   
             throw new RuntimeException(e);
         }
-
+        
         return recensione;
 
     }
 
 
-    public void delete(Recensione recensione) {
-
+    //elimino una recensione
+    public void delete(Recensione recensione) 
+    {
+         
         PreparedStatement ps;
 
-        try {
+        try 
+        {
 
             String sql
                     = " UPDATE recensione "
@@ -138,20 +154,24 @@ public class RecensioneDAO{
             ps.executeUpdate();
             ps.close();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {    
             throw new RuntimeException(e);
         }
-
+        
     }
 
-    public List<Recensione> findAllRecensioni() {
 
+    //funzione che restituisce tutte le mie recensioni
+    public List<Recensione> findAllRecensioni() 
+    {
         PreparedStatement ps;
         Recensione oggetto;
         ArrayList<Recensione> lista = new ArrayList<Recensione>();
 
-        try {
-
+        try 
+        {
             String sql
                     = " SELECT *"
                     + " FROM recensione"
@@ -162,7 +182,8 @@ public class RecensioneDAO{
 
             ResultSet resultSet = ps.executeQuery();
 
-            while (resultSet.next()) {
+            while (resultSet.next()) 
+            {
                 oggetto = read(resultSet);
                 lista.add(oggetto);
             }
@@ -170,48 +191,63 @@ public class RecensioneDAO{
             resultSet.close();
             ps.close();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {    
             throw new RuntimeException(e);
         }
-
+    
         return lista;
     }
 
-    Recensione read(ResultSet rs) {
+
+
+
+    Recensione read(ResultSet rs) 
+    {
         Recensione recensione = new Recensione();
         Corso corso = new Corso();
         Cliente cliente = new Cliente();
 
-
         recensione.setCorso(corso);
         recensione.setCliente(cliente);
 
-
-
-        try {
+        try 
+        {
             recensione.getCorso().setID_CO(rs.getInt("ID_COR"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             recensione.getCliente().setID_CL(rs.getInt("ID_CLR"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             recensione.setID_R(rs.getInt("ID_R"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             recensione.setVOTO(rs.getInt("VOTO"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             recensione.setDATA(rs.getString("DATA"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             recensione.setDELETED(rs.getString("DELETED"));
-        } catch (SQLException sqle) {
-        }
+        } 
+        catch (SQLException sqle) {}
+        
         return recensione;
     }
 }

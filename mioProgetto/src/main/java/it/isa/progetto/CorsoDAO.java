@@ -9,27 +9,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.sql.*;
 
-public class CorsoDAO {
+
+
+public class CorsoDAO 
+{
 
     private static Connection conn;
-
-    /*public*/ CorsoDAO(Connection conn) {
+    /*public*/ CorsoDAO(Connection conn) 
+    {
         this.conn = conn;
     }
 
+
+
+    //creo un corso
     public Corso create(
             //int ID_CO,
             String NOME,
             String TIPO,
-            String LIVELLO) throws DuplicatedObjectException {
-
+            String LIVELLO) throws DuplicatedObjectException 
+    {
+     
         PreparedStatement ps;
         Corso corso = new Corso();
         corso.setNOME(NOME);
         corso.setTIPO(TIPO);
         corso.setLIVELLO(LIVELLO);
 
-        try {
+        try 
+        {
 
             String sql
                     = " SELECT ID_CO "
@@ -55,18 +63,18 @@ public class CorsoDAO {
 
             if (exist)
             {
-                    throw new DuplicatedObjectException("CorsoDAO.create: Tentativo di inserimento di un corso già esistente.");
-                }
+                throw new DuplicatedObjectException("CorsoDAO.create: Tentativo di inserimento di un corso già esistente.");
+            }
 
 
 
-      sql
+            sql
                     = " INSERT INTO corso "
                     + "   ( ID_CO,"
                     + "     NOME,"
                     + "     TIPO,"
                     + "     LIVELLO,"
-                    + "     DELETED," 
+                    + "     DELETED" 
                     + ")"
                     + " VALUES (NULL,?,?,?,'N')";
 
@@ -78,67 +86,84 @@ public class CorsoDAO {
 
             ps.executeUpdate();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             throw new RuntimeException(e);
         }
-
+        
         return corso;
 
     }
 
-    public void delete (Corso corso) {
 
+
+
+    //elimino un corso
+    public void delete (Corso corso) 
+    {
         PreparedStatement ps;
     
-        try {
+        try 
+        {
     
-          String sql
+            String sql
                   = " UPDATE corso "
                   + " SET DELETED='Y' "
                   + " WHERE "
                   + " ID_CO=?";
     
-          ps = conn.prepareStatement(sql);
-          ps.setInt(1, corso.getID_CO());
-          ps.executeUpdate();
-          ps.close();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, corso.getID_CO());
+            ps.executeUpdate();
+            ps.close();
     
-        } catch (SQLException e) {
-          throw new RuntimeException(e);
+        } 
+        catch (SQLException e) 
+        {
+            throw new RuntimeException(e);
         }
-    
-      }
+       
+    }
 
 
 
 
-      public List<Corso> findAllCorsi(){
 
+    //funzione che mi restituisce la lista di corsi
+    public List<Corso> findAllCorsi()
+    {
         PreparedStatement ps;
         //Statement st;
         Corso corso;
         ArrayList<Corso> corsi = new ArrayList<Corso>();
+        
         String query = "SELECT * FROM corso";
 
-        try {
+        try 
+        {
 
-            /*String sql
+            /*
+            String sql
                     = " SELECT * "
-                    + " FROM corso ";*/
+                    + " FROM corso ";
+            */
 
-                    //st= conn.createStatement();
-                    //ResultSet resultSet=st.executeQuery(sql);
+            
+            //st= conn.createStatement();
+            //ResultSet resultSet=st.executeQuery(sql);
 
-                    //ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(query);
 
-           ps = MyConnection.getConnection().prepareStatement(query);
-           //String query = "SELECT * FROM corso";
-           //PreparedStatement ps= c.prepareStatement(query);
-           //PreparedStatement ps = conn.prepareStatement(sql);
+            // ps = MyConnection.getConnection().prepareStatement(query);
+            //String query = "SELECT * FROM corso";
+            //PreparedStatement ps= c.prepareStatement(query);
+            //PreparedStatement ps = conn.prepareStatement(sql);
                     
             ResultSet resultSet = ps.executeQuery();
 
-            while (resultSet.next()) {
+            while (resultSet.next()) 
+            {
                 corso = read(resultSet);
                 corsi.add(corso);
             }
@@ -147,20 +172,27 @@ public class CorsoDAO {
             //ps.close();
             //st.close();
 
-        } catch(SQLException e)
-        {
+        } 
+        catch(SQLException e)
+        {   
             System.out.println(e.getMessage());        
         }
-
+    
         return corsi;
     }
 
-    public Corso findCorsoByID_CO(int ID_CO) {
 
+
+
+    //funzione che mi restituisce un corso a partire dal suo ID
+    public Corso findCorsoByID_CO(int ID_CO) 
+    {
+        
         PreparedStatement ps;
         Corso corso = null;
 
-        try {
+        try 
+        {
 
             String sql
                     = " SELECT * "
@@ -173,26 +205,36 @@ public class CorsoDAO {
 
             ResultSet resultSet = ps.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSet.next()) 
+            {
                 corso = read(resultSet);
             }
             resultSet.close();
             ps.close();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             throw new RuntimeException(e);
         }
-
+        
         return corso;
 
     }
 
-      public static Corso findByNomeCorso(String NOME) {
+    
+    
+    
+    
+    //funzione che mi restituisce un corso a prtire dal suo nome
+    public static Corso findByNomeCorso(String NOME) 
+    {
 
         PreparedStatement ps;
         Corso corso = null;
-
-        try {
+        
+        try 
+        {
 
             String sql
                     = " SELECT * "
@@ -205,46 +247,59 @@ public class CorsoDAO {
 
             ResultSet resultSet = ps.executeQuery();
 
-            if (resultSet.next()) {
+            if (resultSet.next()) 
+            {
                 corso = read(resultSet);
             }
             resultSet.close();
             ps.close();
 
-        } catch (SQLException e) {
+        } 
+        catch (SQLException e) 
+        {
             throw new RuntimeException(e);
         }
-
+        
         return corso;
 
     }
 
     
 
-      static Corso read(ResultSet rs) {
+    static Corso read(ResultSet rs) 
+    {
         Corso corso = new Corso();
 
 
-        try {
+        try 
+        {
             corso.setID_CO(rs.getInt("ID_CO"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             corso.setNOME(rs.getString("NOME"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+        
+        try 
+        {
             corso.setTIPO(rs.getString("TIPO"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             corso.setLIVELLO(rs.getString("LIVELLO"));
-        } catch (SQLException sqle) {
-        }
-        try {
+        } 
+        catch (SQLException sqle) {}
+
+        try 
+        {
             corso.setDELETED(rs.getString("DELETED"));
-          } catch (SQLException sqle) {
-          }
+        } 
+        catch (SQLException sqle) {}
 
         return corso;
     }

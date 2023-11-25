@@ -1,5 +1,4 @@
 package it.isa.progetto;
-/*package model.mo;*/
 
 public class Recensione {
 
@@ -13,51 +12,63 @@ public class Recensione {
     private Cliente cliente;
 
 
-    public Corso getCorso() {
+    public Corso getCorso() 
+    {
         return corso;
     }
 
-    public void setCorso(Corso corso) {
+    public void setCorso(Corso corso) 
+    {
         this.corso = corso;
     }
 
-    public Cliente getCliente() {
+    public Cliente getCliente() 
+    {
         return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(Cliente cliente) 
+    {
         this.cliente = cliente;
     }
 
-    public int getID_R() {
+    public int getID_R() 
+    {
         return ID_R;
     }
 
-    public void setID_R(int ID_R) {
+    public void setID_R(int ID_R) 
+    {
         this.ID_R = ID_R;
     }
 
-    public int getVOTO() {
+    public int getVOTO() 
+    {
         return VOTO;
     }
 
-    public void setVOTO(int VOTO) {
+    public void setVOTO(int VOTO) 
+    {
         this.VOTO = VOTO;
     }
 
-    public String getDATA() {
+    public String getDATA() 
+    {
         return DATA;
     }
 
-    public void setDATA(String DATA) {
+    public void setDATA(String DATA) 
+    {
         this.DATA = DATA;
     }
 
-    public String isDELETED() {
+    public String isDELETED() 
+    {
         return DELETED;
     }
 
-    public void setDELETED(String DELETED) {
+    public void setDELETED(String DELETED) 
+    {
         this.DELETED = DELETED;
     }
 

@@ -1,7 +1,7 @@
 package it.isa.progetto;
 
-public class DuplicatedObjectException extends Exception{
-
+public class DuplicatedObjectException extends Exception
+{
     DuplicatedObjectException(String message)
     {
         super(message);
