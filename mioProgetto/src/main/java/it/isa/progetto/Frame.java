@@ -241,7 +241,9 @@ public class Frame extends JFrame
 
                             @Override
                             public void actionPerformed(ActionEvent e) 
-                            {
+                            {   
+                                hp.jTextField1.setText("");
+                                hp.jTextField2.setText("");
                                 cl.show(container, "1");
                 
                             }
@@ -370,6 +372,8 @@ public class Frame extends JFrame
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                hp.jTextField1.setText("");
+                hp.jTextField2.setText("");
                 cl.show(container, "1");
             }  
         }); 
