@@ -126,7 +126,7 @@ public class IscrizioneDAO
 
             ps = conn.prepareStatement(sql);
             int i = 1;
-            ps.setInt(i, iscrizione.getCorso().getID_CO());
+            ps.setInt(i++, iscrizione.getCorso().getID_CO());
             ps.setInt(i++, iscrizione.getCliente().getID_CL());
 
 
@@ -154,7 +154,7 @@ public class IscrizioneDAO
 
                 ps = conn.prepareStatement(sql);
                 int j = 1;
-                ps.setInt(j, iscrizione.getCorso().getID_CO());
+                ps.setInt(j++, iscrizione.getCorso().getID_CO());
                 ps.setInt(j++, iscrizione.getCliente().getID_CL());
                 ps.executeUpdate();
                 
