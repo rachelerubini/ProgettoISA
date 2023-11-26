@@ -21,17 +21,22 @@ public class DAOFactoryTest {
         IscrizioneDAO is = dao.getIscrizioneDAO();
         try{
         Cliente cliente = cl.findClienteByID(1);
-        //DA FARE FINDBYID per Amministratore
-        Amministratore amministratore = am.findById(111);
-        Corso corso = co.findCorsoByID_CO(111);
-        Recensione recensione = rc.findRecensioneByID(111);
-        //DA FARE FINDBYID per Iscrizione
-        Iscrizione iscrizione = is.findById(111);
+        Amministratore amministratore = am.findAmministratoreByID(1);
+        Corso corso = co.findCorsoByID_CO(1);
+        Recensione recensione = rc.findRecensioneByID(1);
+        Iscrizione iscrizione = is.findCorsoCliente(2,1);
 
         dao.commitTransaction();
         dao.closeTransaction();
-        assertEquals(brano.getId(), 1);
-        assertEquals(utente.getId(), 111);
+        assertEquals(cliente.getID_CL(), 1);
+        assertEquals(corso.getID_CO(), 1);
+
+        //non siamo sicure che l'iscrizione si possa gestire cosi avendo due id
+        assertEquals(iscrizione.getCorso(), 2);
+        assertEquals(iscrizione.getCliente(), 1);
+        
+        assertEquals(recensione.getID_R(), 1);
+        assertEquals(amministratore.getID_A(), 1);
         }
         catch(Exception ex)
         {
@@ -39,6 +44,8 @@ public class DAOFactoryTest {
         }
     }
 
+
+//SSIAMO ARRIVATE QUI CONN LE MODIFICHE
     @Test
     public void rollbackTransactionTest()
     {

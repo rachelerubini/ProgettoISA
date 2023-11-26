@@ -55,6 +55,45 @@ public class AmministratoreDAO
 
   }
 
+
+  //funzione che restituisce l'amminiistratore a partire dal suo ID
+  public Amministratore findAmministratoreByID(int ID_A) 
+  {
+        
+    PreparedStatement ps;
+    Amministratore amministratore = null;
+    
+    try 
+    {
+      String sql
+                = " SELECT * "
+                + "   FROM amministratore "
+                + " WHERE "
+                + "   ID_A = ?";
+
+      ps = conn.prepareStatement(sql);
+      ps.setInt(1, ID_A);
+
+      ResultSet resultSet = ps.executeQuery();
+
+      if (resultSet.next()) 
+      {
+        amministratore = read(resultSet);
+      }
+        
+      resultSet.close();
+      ps.close();
+
+    } 
+    catch (SQLException e) 
+    {
+      throw new RuntimeException(e);
+    }
+  
+    return amministratore;
+  }
+
+
   static Amministratore read(ResultSet rs) 
   {
     Amministratore amministratore = new Amministratore();
