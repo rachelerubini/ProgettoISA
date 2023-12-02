@@ -7,6 +7,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
+
+//FACCIAMOCI SPIEGARE TUTTI I BLOCCHEETTI COSA FANNO A CCOSA SERVONO !!!!!!!!!!!!
+
+
 public class DAOFactoryTest {
 
     @Test
@@ -45,13 +49,13 @@ public class DAOFactoryTest {
     }
 
 
-//SSIAMO ARRIVATE QUI CONN LE MODIFICHE
+//per chi va fatta? solo utente o anche altri? iscrrizione tipo?
     @Test
     public void rollbackTransactionTest()
     {
        DAOFactory dao = new DAOFactory();
        dao.beginTransaction();
-       UtenteDAO ud = dao.getUtenteDAO();
+       ClienteDAO ud = dao.getClienteDAO();
        try{
        ud.create("prova", "prova");
        dao.rollbackTransaction();
@@ -62,7 +66,7 @@ public class DAOFactoryTest {
        assertThrows(MissingObjectException.class, () -> {
         DAOFactory daoo = new DAOFactory();
         daoo.beginTransaction();
-        UtenteDAO udd = daoo.getUtenteDAO();
+        ClienteDAO udd = daoo.getClienteDAO();
         udd.findByUsername("prova");
     });
        }
