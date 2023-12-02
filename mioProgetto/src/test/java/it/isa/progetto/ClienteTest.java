@@ -1,3 +1,4 @@
+
 package it.isa.progetto;
 
 import org.junit.Test;
@@ -7,6 +8,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+
+
+//Tuttti i test sembrano funzionare correttamente
 
 
 //TESTIAMO CLIENTE.JAVA QUINDI TUTTI I SET E GET DEI SUOI CAMPI
@@ -26,7 +30,7 @@ public class ClienteTest {
         cliente.setID_CL(id);
 
         //then
-        final Field field = cliente.getClass().getDeclaredField("id");
+        final Field field = cliente.getClass().getDeclaredField("ID_CL");
         field.setAccessible(true);
         assertEquals("Fields didn't match", field.get(cliente), id);
 
@@ -37,7 +41,7 @@ public class ClienteTest {
         //given
         final Cliente cliente = new Cliente();
         final int id=10;
-        final Field field = cliente.getClass().getDeclaredField("id");
+        final Field field = cliente.getClass().getDeclaredField("ID_CL");
         field.setAccessible(true);
         field.set(cliente, id);
 
@@ -48,7 +52,7 @@ public class ClienteTest {
         assertEquals("field wasn't retrieved properly", result, id);
     }
 
-//proossimi test per tutti i campi dii cliente?
+
 
 
     @Test
@@ -57,7 +61,7 @@ public class ClienteTest {
         final Cliente cliente = new Cliente();
 
         //when
-        cliente.setCliente("testsetSSN");
+        cliente.setSSN("testsetSSN");
 
         //then
         final Field field = cliente.getClass().getDeclaredField("SSN");
@@ -78,7 +82,7 @@ public class ClienteTest {
         final String result = cliente.getSSN();
 
         //then
-        assertEquals("field wasn't retrieved properly", result, "testgetSNN");
+        assertEquals("field wasn't retrieved properly", result, "testgetSSN");
     }
 
     @Test
@@ -264,107 +268,10 @@ public class ClienteTest {
         assertEquals("field wasn't retrieved properly", result, "testisDELETED");
     }
 
+//Non testiamo get e set recensioni perchè non li abbiamo mai utilizzati
+     
 
-
-//COME VA FATTO GET E SET RECENSIONI?
-
-
-
-
-
-//NOI NON  ABBIAAAAAMO GLI HASHMAPP QUINDI IL PROSSIMO BLOCCO È COMMENTATO E ABBIAAMO FATTO I TEST PER TUTTI I CAMPI COME QUELLI SOPRA
-
-//   DOVEVAMMMMO STARE ATTENTE A QUAAAALCOSA? COME I CAMPI ESTERNI? SE SI COME VA FATTO?
-
-/*
-    @Test
-    public void testSetHaAscoltato() throws NoSuchFieldException, IllegalAccessException {
-        //given
-        final Utente utente = new Utente();
-        Brano brano = new Brano();
-        Integer integer = new Integer(6);
-        HashMap<Brano, Integer> mappa = new HashMap<Brano, Integer>();
-        HashMap<Brano, Integer> mappa2 = new HashMap<Brano, Integer>();
-        mappa.put(brano, integer);
-        mappa2.put(brano, integer);
-
-
-
-
-        //when
-        utente.setHaAscoltato(mappa);
-
-        //then
-        final Field field = utente.getClass().getDeclaredField("haAscoltato");
-        field.setAccessible(true);
-        assertEquals("Fields didn't match", field.get(utente), mappa2);
-
-    }
-
-    @Test
-    public void testGetHaAscoltato() throws NoSuchFieldException, IllegalAccessException {
-        //given
-        final Utente utente = new Utente();
-        Brano brano = new Brano();
-        Integer integer = new Integer(6);
-        HashMap<Brano, Integer> mappa = new HashMap<Brano, Integer>();
-        HashMap<Brano, Integer> mappa2 = new HashMap<Brano, Integer>();
-        mappa.put(brano, integer);
-        mappa2.put(brano, integer);
-        final Field field = utente.getClass().getDeclaredField("haAscoltato");
-        field.setAccessible(true);
-        field.set(utente, mappa);
-
-        //when
-        final HashMap<Brano, Integer> result = utente.getHaAscoltato();
-
-        //then
-        assertEquals("field wasn't retrieved properly", result, mappa2);
-    }
-
-    @Test
-    public void testSetHaAscoltato2() throws NoSuchFieldException, IllegalAccessException {
-        //given
-        final Utente utente = new Utente();
-        Brano brano = new Brano();
-        Integer ascolti = new Integer(6);
-        
-        HashMap<Brano, Integer> mappa2 = new HashMap<Brano, Integer>();
-        mappa2.put(brano, ascolti);
-
-
-
-
-        //when
-        utente.setHaAscoltato(brano, ascolti);
-
-        //then
-        final Field field = utente.getClass().getDeclaredField("haAscoltato");
-        field.setAccessible(true);
-        assertEquals("Fields didn't match", field.get(utente), mappa2);
-
-    }
-
-    @Test
-    public void testGetHaAscoltato2() throws NoSuchFieldException, IllegalAccessException {
-        //given
-        final Utente utente = new Utente();
-        Brano brano = new Brano();
-        Integer integer = new Integer(6);
-        HashMap<Brano, Integer> mappa = new HashMap<Brano, Integer>();
-        
-        mappa.put(brano, integer);
-        
-        final Field field = utente.getClass().getDeclaredField("haAscoltato");
-        field.setAccessible(true);
-        field.set(utente, mappa);
-
-        //when
-        final Integer result = utente.getHaAscoltato(brano);
-
-        //then
-        assertEquals("field wasn't retrieved properly", result, integer);
-    }
-   */ 
-    
 }
+
+
+

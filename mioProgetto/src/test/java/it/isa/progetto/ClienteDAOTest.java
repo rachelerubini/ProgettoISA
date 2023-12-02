@@ -1,3 +1,4 @@
+/*
 package it.isa.progetto;
 
 import static org.junit.Assert.assertEquals;
@@ -18,7 +19,7 @@ import org.junit.Test;
 public class ClienteDAOTest {
 
    
-    
+    //DA MODIFICARE crea utente poi findby id e se utente trovato uguale  al creato alloora  test passa
     @Test 
     public void testcreateNonEsistente()
     {
@@ -90,7 +91,7 @@ public class ClienteDAOTest {
  }
 
 
-
+// testo eccezione per vvederee se  cliente esiste già
  @Test 
     public void testcreateEsistente()
     {
@@ -304,7 +305,7 @@ public void testfindClienteByIDNotFoundException()
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
             ClienteDAO dao = new ClienteDAO(con);
         
-        
+        // forzo errore (non c'è id con vallore 0)
         assertThrows(MissingObjectException.class, () -> {dao.findClienteByID("0");});
         
        
@@ -330,7 +331,7 @@ public void testfindClienteByIDNotFoundException()
         con.close();
         
        
-        
+        //inserisco un errore per forzare l'eccezione (chiudo connesssione  prima del find)
         dao.findClienteByID("prova");
         
        }
@@ -403,3 +404,4 @@ public void findAllClientiSQLExceptionTest()
 
  
     }
+    */

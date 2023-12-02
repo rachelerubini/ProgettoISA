@@ -149,8 +149,7 @@ public class Frame extends JFrame
                 ClienteDAO dao=df.getClienteDAO();
                 AmministratoreDAO dao2= df.getAmministratoreDAO();
             
-                    
-                // le due funzioni finByMAIL sono da implementare nei dao, gli passo la mail e mi restituiscono l'utente con quella mail, se non c'è null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
                 Cliente cliente = dao.findByMAILCliente(hp.jTextField1.getText());
                 Amministratore amministratore = dao2.findByMAILAmministratore(hp.jTextField1.getText());
 

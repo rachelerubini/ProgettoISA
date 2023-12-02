@@ -163,10 +163,11 @@ public class ClienteDAO
       if(resultSet.next()) 
       {
         cliente = read(resultSet);
+       
       }
 
-      resultSet.close();
-      ps.close();
+       resultSet.close();
+       ps.close();
     
     } 
     catch (SQLException e) 
