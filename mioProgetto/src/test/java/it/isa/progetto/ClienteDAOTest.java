@@ -23,7 +23,8 @@ import org.junit.Test;
 
 
 
-public class ClienteDAOTest {
+public class ClienteDAOTest 
+{
 
    /*
     //QUESTA NON LA FACCIAMO
@@ -98,27 +99,31 @@ public class ClienteDAOTest {
  }
 */
 
-// testo la create verificando che la duplicated controlli che io non possa creare un cliente uguale ad un altro
- @Test 
+    // testo la create verificando che la duplicated controlli che io non possa creare un cliente uguale ad un altro
+    @Test 
     public void testcreateEsistente() 
     {
         
 
-    try{
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-            ClienteDAO dao =new ClienteDAO(con);
+    try
+    {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+        ClienteDAO dao =new ClienteDAO(con);
         
-       dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
-       assertThrows(DuplicatedObjectException.class, () -> {dao.create("prova", "prova","prova","prova","prova","2012-12-12");});
-       //verifico che la create mi dia una eccezione duplicated (se ce la dà allora funziona)
+        dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
+        assertThrows(DuplicatedObjectException.class, () -> {dao.create("prova", "prova","prova","prova","prova","2012-12-12");});
+        //verifico che la create mi dia una eccezione duplicated (se ce la dà allora funziona)
 
         
 
     }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
-    catch(Exception e){  System.out.println(e.getMessage());}  
+    catch(Exception e)
+    {  
+        System.out.println(e.getMessage());
+    }  
 
-//questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal cliente prova creato sopra
+    //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal cliente prova creato sopra
     finally         
     {
         try
@@ -131,10 +136,10 @@ public class ClienteDAOTest {
             cliente1 = dao.findByMAILCliente("prova");
             dao.delete(cliente1);
         }
-       catch(Exception e)
-       {
-        System.out.println(e.getMessage());
-       }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
  }
 
@@ -142,15 +147,14 @@ public class ClienteDAOTest {
  @Test 
     public void testcreateEsistenteSQLException()
     {
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-        ClienteDAO dao =new ClienteDAO(con);
-        con.close();
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            ClienteDAO dao =new ClienteDAO(con);
+            con.close();
         
-       
-        
-        dao.create("prova", "prova","prova","prova","prova","prova");
+            dao.create("prova", "prova","prova","prova","prova","prova");
         
        }
        catch(Exception e)
@@ -184,25 +188,24 @@ public void testdeleteNotFoundException()
 }*/
 
 
-// Test che prova a generare un errore sql eliminando il clientee subito dopo aver chiuso la connessione
-@Test 
+    // Test che prova a generare un errore sql eliminando il clientee subito dopo aver chiuso la connessione
+    @Test 
     public void testdeleteSQLException()
     {
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-        ClienteDAO dao = new ClienteDAO(con);
-        con.close();
-        
-       
-        
-        dao.delete(new Cliente());
-        
-       }
-       catch(Exception e)
-       {
-        System.out.println(e.getMessage());
-       }
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            ClienteDAO dao = new ClienteDAO(con);
+            con.close();
+            
+            dao.delete(new Cliente());
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
 
 
     }
@@ -229,18 +232,19 @@ public void testfindByMAILClienteNotFoundException()
 
 }
 */
-@Test 
+
+
+    @Test 
     public void testfindByMAILClienteSQLException()
     {
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-        ClienteDAO dao = new ClienteDAO(con);
-        con.close();
-        
-       
-        
-        dao.findByMAILCliente("prova");   
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            ClienteDAO dao = new ClienteDAO(con);
+            con.close();
+            
+            dao.findByMAILCliente("prova");   
         
        }
        catch(Exception e)
@@ -282,15 +286,14 @@ public void testfindClienteByIDNotFoundException()
     @Test 
     public void testfindClienteByIDSQLException()
     {
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-        ClienteDAO dao = new ClienteDAO(con);
-        con.close();
-        
-       
-        
-        dao.findClienteByID(0);
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            ClienteDAO dao = new ClienteDAO(con);
+            con.close();
+
+            dao.findClienteByID(0);
         
        }
        catch(Exception e)
@@ -307,12 +310,13 @@ public void testfindClienteByIDNotFoundException()
     
 
    // testo il numero di elementi che la findAll restituisce (se unaa chiamata sql che conta i clienti dà lo stesso numero di clienti restituiti dalla  finAllClienti)
-  @Test
+    @Test
     public void findAllClientiTest()
     {
-        try{
+        try
+        {
             Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
 
             Statement st = con.createStatement();
 
@@ -327,8 +331,6 @@ public void testfindClienteByIDNotFoundException()
             clienti = dao.findAllClienti();
             assertEquals(clienti.size(), numero);
 
-                
-                
         }
 
         catch(Exception e)
@@ -338,10 +340,11 @@ public void testfindClienteByIDNotFoundException()
     }
 
 
-@Test
-public void findAllClientiSQLExceptionTest()
-{
-    try{
+    @Test
+    public void findAllClientiSQLExceptionTest()
+    {
+        try
+        {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
             ClienteDAO dao = new ClienteDAO(con);
@@ -354,16 +357,8 @@ public void findAllClientiSQLExceptionTest()
         {
             System.out.println(ex.getMessage());
         }
-}
-
-
-
-
-
-
-
- 
-
- 
     }
+
+ 
+}
     
