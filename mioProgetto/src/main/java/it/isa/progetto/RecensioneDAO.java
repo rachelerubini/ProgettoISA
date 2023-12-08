@@ -134,6 +134,45 @@ public class RecensioneDAO
     }
 
 
+    //funzione che restituisce una recensione a partire dal suo ID
+    public Recensione findRecensioneByDATA(String DATA) 
+    {
+        
+        PreparedStatement ps;
+        Recensione recensione = null;
+
+        try 
+        {
+
+            String sql
+                    = " SELECT * "
+                    + "   FROM recensione "
+                    + " WHERE "
+                    + "   DATA = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, DATA);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) 
+            {
+                recensione = read(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+
+        } 
+        catch (SQLException e) 
+        {   
+            throw new RuntimeException(e);
+        }
+        
+        return recensione;
+
+    }
+
+
     //elimino una recensione
     public void delete(Recensione recensione) 
     {
