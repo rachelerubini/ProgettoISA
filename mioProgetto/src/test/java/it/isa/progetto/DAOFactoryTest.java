@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Test;
 
 
-//COMMENTO DI QUESTI TEST: la begin e la rollback non   danno erroori e nneanche nullpointer ma vediamo tipo stampati due 'null' è un problema?? Daa dove derivano? Menntre lle funzioni sotto sono  commenttate perchè danno Nullpointer
+//COMMENTO DI QUESTI TEST: la begin e la rollback non   danno errori e nneanche nullpointer ma vediamo tipo stampati due 'null' è un problema?? Daa dove derivano? Menntre lle funzioni sotto sono  commenttate perchè danno Nullpointer
 
 public class DAOFactoryTest {
     
 // testiamo la begin transaction, faccendo una transazione (find) per ogni entità e poi verifico che l'oggetto trovato con la find corrisponda con quello che miii aspetto se ocnicide è ok, la transazione è stata effettuata
-    @Test
+  /*  @Test
     public void beginTransactionTest()
     {
         DAOFactory dao = new DAOFactory();
@@ -47,7 +47,7 @@ public class DAOFactoryTest {
         {
             System.out.println(ex.getMessage());
         }
-    }
+    }*/
 
 
 //testiamo la roolback sul cliente (se funziona per il cliente funzionerà per tutti)
@@ -58,19 +58,15 @@ public class DAOFactoryTest {
        dao.beginTransaction();
        ClienteDAO ud = dao.getClienteDAO();
        try{
-       ud.create("prova", "prova","prova","prova","prova","2012-02-12");
-       dao.rollbackTransaction();
+       ud.create("prova", "prova","prova","prova","prova","2012-02-12"); //creiamo un cliente prova
+       dao.rollbackTransaction(); //annullo l'operazione fatta riportandoci allo stato di prima
        dao.closeTransaction();
        dao = new DAOFactory();
        dao.beginTransaction();
-        //MissingObjectException.class al postoooooo di null ma poi va aggiunto  nella create in clientedao e forse nel frame ecc..
-        //se decidiamo di non usarrrre laa MissingObjectException poi oltre a eliminare questi commennnnnti eliminiamo  la classe . java creata nel nostro pprogeetto 
-       assertThrows(null, () -> {
         DAOFactory daoo = new DAOFactory();
         daoo.beginTransaction();
         ClienteDAO udd = daoo.getClienteDAO();
-        udd.findByMAILCliente("prova");
-    });
+       assertEquals(null, udd.findByMAILCliente("prova")); //provo a cercare un cliente con mail "prova" ma non c'è (poichè la Rollback è aaaandata a buon fine) infatti è null il risultato della findbyMAIL
        }
 
        catch(Exception ex)

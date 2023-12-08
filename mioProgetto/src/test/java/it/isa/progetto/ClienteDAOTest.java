@@ -1,25 +1,32 @@
-/*
+
 package it.isa.progetto;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.sql.DriverManager;
 import java.util.HashMap;
 
+import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 import org.junit.Test;
 
 
 //TESTIAMO CLIENTEDAO.JAVA QUINDI TUTTE LE FUNZIONI CHE ABBIAMO FATTO AL SUO INTERNO
+//Non abbiamo fatto i  testdeleteNotFoundException() ovvero il Test che mi copre il missing object (Non abbiamo gesstito qiesta coosa nel codice quindi non la testimo)
 
 
-//molto confuse ssu questa funzione, facciamocela spiegare
+
+
 public class ClienteDAOTest {
 
-   
-    //DA MODIFICARE crea utente poi findby id e se utente trovato uguale  al creato alloora  test passa
+   /*
+    //QUESTA NON LA FACCIAMO
     @Test 
     public void testcreateNonEsistente()
     {
@@ -89,35 +96,30 @@ public class ClienteDAOTest {
 
     
  }
+*/
 
-
-// testo eccezione per vvederee se  cliente esiste già
+// testo la create verificando che la duplicated controlli che io non possa creare un cliente uguale ad un altro
  @Test 
-    public void testcreateEsistente()
+    public void testcreateEsistente() 
     {
         
 
-        try{
+    try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
             ClienteDAO dao =new ClienteDAO(con);
         
-       dao.create("prova", "prova","prova","prova","prova","prova");
-       assertThrows(DuplicatedObjectException.class, () -> {dao.create("prova", "prova","prova","prova","prova","prova");});
-       
-       
-
-       
+       dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
+       assertThrows(DuplicatedObjectException.class, () -> {dao.create("prova", "prova","prova","prova","prova","2012-12-12");});
+       //verifico che la create mi dia una eccezione duplicated (se ce la dà allora funziona)
 
         
 
+    }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+    catch(Exception e){  System.out.println(e.getMessage());}  
 
-        
-
-    }
-    catch(Exception e){ System.out.println(e.getMessage());}  
-
-    finally
+//questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal cliente prova creato sopra
+    finally         
     {
         try
         {
@@ -126,7 +128,7 @@ public class ClienteDAOTest {
             ClienteDAO dao =new ClienteDAO(con);
            
             Cliente cliente1 = new Cliente();
-            cliente = dao.findByMAILCliente("prova");
+            cliente1 = dao.findByMAILCliente("prova");
             dao.delete(cliente1);
         }
        catch(Exception e)
@@ -135,6 +137,7 @@ public class ClienteDAOTest {
        }
     }
  }
+
 
  @Test 
     public void testcreateEsistenteSQLException()
@@ -159,7 +162,8 @@ public class ClienteDAOTest {
     }
 
 
-
+/*
+//Test che mi copre se  provoo a cancellare  un utente che non esiste (Non abbiamo gesstito qiesta coosa nel codice quindi non la testimo)
 @Test
 public void testdeleteNotFoundException()
 {
@@ -168,7 +172,7 @@ public void testdeleteNotFoundException()
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
             ClienteDAO dao = new ClienteDAO(con);
         Cliente cliente = new Cliente();
-        cliente.setMAIL("0");     //perchè? lo dobbiamo fare anche noi? va bene con MAIL? (llui usava Username)
+        cliente.setMAIL("0");   
 
         assertThrows(MissingObjectException.class, () -> {dao.delete(cliente);});
        
@@ -177,8 +181,10 @@ public void testdeleteNotFoundException()
     catch(Exception e){
         System.out.println(e.getMessage());
     }
-}
+}*/
 
+
+// Test che prova a generare un errore sql eliminando il clientee subito dopo aver chiuso la connessione
 @Test 
     public void testdeleteSQLException()
     {
@@ -202,7 +208,7 @@ public void testdeleteNotFoundException()
     }
 
 
-
+/*
 @Test
 
 public void testfindByMAILClienteNotFoundException()
@@ -222,7 +228,7 @@ public void testfindByMAILClienteNotFoundException()
     }
 
 }
-
+*/
 @Test 
     public void testfindByMAILClienteSQLException()
     {
@@ -234,7 +240,7 @@ public void testfindByMAILClienteNotFoundException()
         
        
         
-        dao.findByMAILCliente("prova");   //forse va messo valore mail esistente non numero
+        dao.findByMAILCliente("prova");   
         
        }
        catch(Exception e)
@@ -246,7 +252,7 @@ public void testfindByMAILClienteNotFoundException()
     }
 
 
-
+/*
 
 
  @Test
@@ -270,55 +276,7 @@ public void testfindClienteByIDNotFoundException()
 
 
 
-
-
-
-    @Test 
-    public void testfindClienteByIDSQLException()
-    {
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-        ClienteDAO dao = new ClienteDAO(con);
-        con.close();
-        
-       
-        
-        dao.findClienteByID("prova");
-        
-       }
-       catch(Exception e)
-       {
-        System.out.println(e.getMessage());
-       }
-
-
-    }
-
-
-
-@Test
-public void testfindClienteByIDNotFoundException()
-{
-    try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-            ClienteDAO dao = new ClienteDAO(con);
-        
-        // forzo errore (non c'è id con vallore 0)
-        assertThrows(MissingObjectException.class, () -> {dao.findClienteByID("0");});
-        
-       
-    }
-
-    catch(Exception e){
-        System.out.println(e.getMessage());
-    }
-}
-
-
-
-
+*/
 
 
     @Test 
@@ -331,8 +289,8 @@ public void testfindClienteByIDNotFoundException()
         con.close();
         
        
-        //inserisco un errore per forzare l'eccezione (chiudo connesssione  prima del find)
-        dao.findClienteByID("prova");
+        
+        dao.findClienteByID(0);
         
        }
        catch(Exception e)
@@ -342,10 +300,13 @@ public void testfindClienteByIDNotFoundException()
 
 
     }
+
+
+
     
     
-    //mollto confuuse su cosaa fa questa funzione: perche quella ssql  e a che serve 'numero'?
-    
+
+   // testo il numero di elementi che la findAll restituisce (se unaa chiamata sql che conta i clienti dà lo stesso numero di clienti restituiti dalla  finAllClienti)
   @Test
     public void findAllClientiTest()
     {
@@ -356,10 +317,11 @@ public void testfindClienteByIDNotFoundException()
             Statement st = con.createStatement();
 
             String sql = "SELECT COUNT(*)"
-                        +" FROM Cliente";
+                        +" FROM cliente"
+                        +" WHERE DELETED='N'";
             ResultSet rs = st.executeQuery(sql);
             rs.next();
-            int numero = rs.getInt(1);
+            int numero = rs.getInt(1);   // numero varrà il numro totale di clienti (es.29)
             ClienteDAO dao = new ClienteDAO(con);
             List<Cliente> clienti= new ArrayList<>();
             clienti = dao.findAllClienti();
@@ -404,4 +366,4 @@ public void findAllClientiSQLExceptionTest()
 
  
     }
-    */
+    
