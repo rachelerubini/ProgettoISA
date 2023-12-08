@@ -192,11 +192,11 @@ public class IscrizioneDAO
             
                         
 
-                ps = conn.prepareStatement(sql);
-                int j = 1;
-                ps.setInt(j++, iscrizione.getCorso().getID_CO());
-                ps.setInt(j++, iscrizione.getCliente().getID_CL());
-                ps.executeUpdate();
+                    ps = conn.prepareStatement(sql);
+                    int j = 1;
+                    ps.setInt(j++, iscrizione.getCorso().getID_CO());
+                    ps.setInt(j++, iscrizione.getCliente().getID_CL());
+                    ps.executeUpdate();
                 
             
                 } 
@@ -208,29 +208,31 @@ public class IscrizioneDAO
             
             else
             {
-            try{    
+                try
+                {    
 
-              sql
-                    = " INSERT INTO iscrizione "
-                    + "   ( DELETED,"
-                    + "     ID_CO,"
-                    + "     ID_CL" 
-                    + ")"
-                    + " VALUES ('N',?,?)";
+                    sql
+                            = " INSERT INTO iscrizione "
+                            + "   ( DELETED,"
+                            + "     ID_CO,"
+                            + "     ID_CL" 
+                            + ")"
+                            + " VALUES ('N',?,?)";
 
-            ps = conn.prepareStatement(sql);
-            int j = 1;
-            ps.setInt(j++, iscrizione.getCorso().getID_CO());
-            ps.setInt(j++, iscrizione.getCliente().getID_CL());
+                    ps = conn.prepareStatement(sql);
+                    int j = 1;
+                    ps.setInt(j++, iscrizione.getCorso().getID_CO());
+                    ps.setInt(j++, iscrizione.getCliente().getID_CL());
 
 
-            ps.executeUpdate();
+                    ps.executeUpdate();
             
-              } 
-        catch (SQLException e) 
-        {  
-            throw new RuntimeException(e);
-        }
+                } 
+                
+                catch (SQLException e) 
+                {  
+                    throw new RuntimeException(e);
+                }
 
             }    
         }

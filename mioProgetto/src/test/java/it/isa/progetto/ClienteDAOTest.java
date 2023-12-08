@@ -105,46 +105,46 @@ public class ClienteDAOTest
     {
         
 
-    try
-    {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-        ClienteDAO dao =new ClienteDAO(con);
-        
-        dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
-        assertThrows(DuplicatedObjectException.class, () -> {dao.create("prova", "prova","prova","prova","prova","2012-12-12");});
-        //verifico che la create mi dia una eccezione duplicated (se ce la dà allora funziona)
-
-        
-
-    }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
-    catch(Exception e)
-    {  
-        System.out.println(e.getMessage());
-    }  
-
-    //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal cliente prova creato sopra
-    finally         
-    {
         try
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
             ClienteDAO dao =new ClienteDAO(con);
-           
-            Cliente cliente1 = new Cliente();
-            cliente1 = dao.findByMAILCliente("prova");
-            dao.delete(cliente1);
-        }
+            
+            dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
+            assertThrows(DuplicatedObjectException.class, () -> {dao.create("prova", "prova","prova","prova","prova","2012-12-12");});
+            //verifico che la create mi dia una eccezione duplicated (se ce la dà allora funziona)
+
+            
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
         catch(Exception e)
-        {
+        {  
             System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal cliente prova creato sopra
+        finally         
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+                ClienteDAO dao =new ClienteDAO(con);
+            
+                Cliente cliente1 = new Cliente();
+                cliente1 = dao.findByMAILCliente("prova");
+                dao.delete(cliente1);
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
         }
     }
- }
 
 
- @Test 
+    @Test 
     public void testcreateEsistenteSQLException()
     {
         try
@@ -309,7 +309,7 @@ public void testfindClienteByIDNotFoundException()
     
     
 
-   // testo il numero di elementi che la findAll restituisce (se unaa chiamata sql che conta i clienti dà lo stesso numero di clienti restituiti dalla  finAllClienti)
+    // testo il numero di elementi che la findAll restituisce (se unaa chiamata sql che conta i clienti dà lo stesso numero di clienti restituiti dalla  finAllClienti)
     @Test
     public void findAllClientiTest()
     {
