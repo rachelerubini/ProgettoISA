@@ -98,45 +98,6 @@ public class IscrizioneDAO
     }
 
 
- //funzione che mi restituisce una iscrizione a partire dall'id ddel corso e del cliente
-    public Iscrizione findIscrizioneByCorsoCliente(int ID_CO, int ID_CL) 
-    {
-        
-        PreparedStatement ps;
-        Iscrizione iscrizione = null;
-
-        try 
-        {
-
-            String sql
-                    = " SELECT * "
-                    + "   FROM iscrizione "
-                    + " WHERE "
-                    + "   ID_CO = ?"
-                    + " AND "
-                    + "   ID_CL = ?";
-
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1, ID_CO);
-            ps.setInt(2, ID_CL);
-            ResultSet resultSet = ps.executeQuery();
-
-            if (resultSet.next()) 
-            {
-                iscrizione = read(resultSet);
-            }
-            resultSet.close();
-            ps.close();
-
-        } 
-        catch (SQLException e) 
-        {
-            throw new RuntimeException(e);
-        }
-        
-        return iscrizione;
-
-    }
 
       
     //funzione che mi crea una nuova iscrizione

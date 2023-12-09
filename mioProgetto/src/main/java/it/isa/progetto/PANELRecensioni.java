@@ -153,7 +153,7 @@ public class PANELRecensioni extends javax.swing.JPanel implements ActionListene
         RecensioneDAO dao= df.getRecensioneDAO();
         Recensione rec= dao.findRecensioneByID(Integer.parseInt(((JButton)e.getSource()).getName()));
         dao.delete(rec);
-        JOptionPane.showMessageDialog(null, "Hai eliminato la tua recensione");
+        JOptionPane.showMessageDialog(null, "Hai eliminato la tua recensione scritta in data:  "+rec.getDATA());
         df.commitTransaction();
         df.closeTransaction();
             

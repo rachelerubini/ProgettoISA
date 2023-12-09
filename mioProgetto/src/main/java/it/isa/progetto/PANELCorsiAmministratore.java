@@ -3,6 +3,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import java.lang.Integer;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -126,6 +127,7 @@ public class PANELCorsiAmministratore extends javax.swing.JPanel implements Acti
         CorsoDAO dao= df.getCorsoDAO();
         Corso cr= dao.findCorsoByID_CO(Integer.parseInt(((JButton)e.getSource()).getName()));
         dao.delete(cr);
+        JOptionPane.showMessageDialog(null, "Hai eliminato il corso:  "+cr.getNOME());
         df.commitTransaction();
         df.closeTransaction();
             

@@ -151,7 +151,8 @@ public class PANELCorsiClienti extends javax.swing.JPanel
                             
                         //try{
                         dao.createIscrizione(daoc.findCorsoByID_CO(ID_corso), cliente);
-                        JOptionPane.showMessageDialog(null, "Ti sei iscritto ad un nuovo corso");
+                        Corso corso=daoc.findCorsoByID_CO(ID_corso); 
+                        JOptionPane.showMessageDialog(null, "Ti sei iscritto al corso: "+corso.getNOME());
                         //} catch(DuplicatedObjectException ex){}
                                 
                         df.commitTransaction();
@@ -199,8 +200,10 @@ public class PANELCorsiClienti extends javax.swing.JPanel
                         int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
 
                         //disiscrivi se clicca sul bottone
-                        dao.disiscrivi(ID_corso,  cliente.getID_CL());   
-                        JOptionPane.showMessageDialog(null, "Ti sei disiscritto a questo corso");
+                        dao.disiscrivi(ID_corso,  cliente.getID_CL());  
+                        CorsoDAO daoc=df.getCorsoDAO();
+                        Corso corso=daoc.findCorsoByID_CO(ID_corso); 
+                        JOptionPane.showMessageDialog(null, "Ti sei disiscritto al corso: "+corso.getNOME());
                         df.commitTransaction();
                         df.closeTransaction();
                             

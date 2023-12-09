@@ -2,6 +2,7 @@ package it.isa.progetto;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -162,6 +163,7 @@ public class PANELClientiAmministratore extends javax.swing.JPanel implements Ac
         ClienteDAO dao= df.getClienteDAO();
         Cliente cl= dao.findClienteByID(Integer.parseInt(((JButton)e.getSource()).getName()));
         dao.delete(cl);
+        JOptionPane.showMessageDialog(null, "Hai eliminato il cliente:  "+cl.getNOME()+"  "+cl.getCOGNOME());
         df.commitTransaction();
         df.closeTransaction();
     }

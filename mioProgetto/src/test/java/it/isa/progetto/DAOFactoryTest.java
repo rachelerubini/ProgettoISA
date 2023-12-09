@@ -14,7 +14,7 @@ import org.junit.Test;
 public class DAOFactoryTest {
     
 // testiamo la begin transaction, faccendo una transazione (find) per ogni entità e poi verifico che l'oggetto trovato con la find corrisponda con quello che miii aspetto se ocnicide è ok, la transazione è stata effettuata
-  /*  @Test
+    @Test
     public void beginTransactionTest()
     {
         DAOFactory dao = new DAOFactory();
@@ -29,17 +29,12 @@ public class DAOFactoryTest {
         Amministratore amministratore = am.findAmministratoreByID(1);
         Corso corso = co.findCorsoByID_CO(1);
         Recensione recensione = rc.findRecensioneByID(1);
-        Iscrizione iscrizione = is.findIscrizioneByCorsoCliente(5,6);
-
+        int iscritto = is.findCorsoCliente(5,2);
         dao.commitTransaction();
         dao.closeTransaction();
         assertEquals(cliente.getID_CL(), 1);
         assertEquals(corso.getID_CO(), 1);
-
-        //non siamo sicure che l'iscrizione si possa gestire cosi avendo due id
-        assertEquals(iscrizione.getCorso().getID_CO(), 5);
-        assertEquals(iscrizione.getCliente().getID_CL(), 6);
-        
+        assertEquals(iscritto, 1);     
         assertEquals(recensione.getID_R(), 1);
         assertEquals(amministratore.getID_A(), 1);
         }
@@ -47,7 +42,7 @@ public class DAOFactoryTest {
         {
             System.out.println(ex.getMessage());
         }
-    }*/
+    }
 
 
 //testiamo la roolback sul cliente (se funziona per il cliente funzionerà per tutti)
