@@ -20,7 +20,7 @@ import org.junit.Test;
 //TESTIAMO CLIENTEDAO.JAVA QUINDI TUTTE LE FUNZIONI CHE ABBIAMO FATTO AL SUO INTERNO
 //Non abbiamo fatto i  testdeleteNotFoundException() ovvero il Test che mi copre il missing object (Non abbiamo gesstito qiesta coosa nel codice quindi non la testimo)
 
-
+//NNNO EXCEPTIION MA si SQL E AGGIUNGI I TEST DELLLE FUNZIONII
 
 
 public class ClienteDAOTest 

@@ -1,4 +1,4 @@
-/*package it.isa.progetto;
+package it.isa.progetto;
 import org.junit.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
@@ -46,7 +46,7 @@ public class RecensioneTest
         assertEquals("field wasn't retrieved properly", result, id);
     }
 
-
+/*
     @Test
     public void testSetVOTO() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -152,7 +152,7 @@ public class RecensioneTest
     }
 
 
-    //Non testiamo get e set di corso e cliente perchè non li abbiamo mai utilizzati
+   */
+ //Non testiamo get e set di corso e cliente perchè non li abbiamo mai utilizzati
 }
 
-*/
