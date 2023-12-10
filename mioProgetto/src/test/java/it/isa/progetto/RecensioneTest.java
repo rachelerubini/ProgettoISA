@@ -46,7 +46,7 @@ public class RecensioneTest
         assertEquals("field wasn't retrieved properly", result, id);
     }
 
-/*
+
     @Test
     public void testSetVOTO() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -118,7 +118,7 @@ public class RecensioneTest
         //then
         assertEquals("field wasn't retrieved properly", result, data);
     }
-
+/*
     @Test
     public void testSetDELETED() throws NoSuchFieldException, IllegalAccessException 
     {
