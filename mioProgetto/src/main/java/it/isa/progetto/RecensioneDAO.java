@@ -134,7 +134,7 @@ public class RecensioneDAO
     }
 
 
-    //funzione che restituisce una recensione a partire dal suo ID
+    //funzione che restituisce una recensione a partire dalla sua data
     public Recensione findRecensioneByDATA(String DATA) 
     {
         

@@ -3,7 +3,8 @@ import org.junit.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import static org.junit.Assert.assertEquals;
-
+import it.isa.progetto.Corso;
+import it.isa.progetto.Cliente;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
@@ -12,6 +13,10 @@ import java.util.HashMap;
 @TestInstance(Lifecycle.PER_CLASS)
 public class RecensioneTest 
 {
+
+    
+    
+
     @Test
     public void testSetID_R() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -87,7 +92,7 @@ public class RecensioneTest
     public void testSetDATA() throws NoSuchFieldException, IllegalAccessException 
     {
         //given
-        //NON SONO SICURA CHE VADA BENE!!!!!!
+    
         final String data="2021-03-20";
         final Recensione recensione = new Recensione();
 
@@ -106,19 +111,19 @@ public class RecensioneTest
     {
         //given
         final Recensione recensione = new Recensione();
-        //NON SONO SICURA CHE VADA BENE!!!!!!
+        
         final String data="2021-03-20";
         final Field field = recensione.getClass().getDeclaredField("DATA");
         field.setAccessible(true);
         field.set(recensione, data);
 
         //when
-        final int result = recensione.getID_R();
+        final String result = recensione.getDATA();
 
         //then
         assertEquals("field wasn't retrieved properly", result, data);
     }
-/*
+
     @Test
     public void testSetDELETED() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -152,7 +157,93 @@ public class RecensioneTest
     }
 
 
-   */
- //Non testiamo get e set di corso e cliente perchè non li abbiamo mai utilizzati
+   
+    @Test
+    public void testGetCorso() throws NoSuchFieldException, IllegalAccessException 
+    {
+        //given
+        DAOFactory df= new DAOFactory();
+        df.beginTransaction();
+        RecensioneDAO dao= df.getRecensioneDAO();
+        
+        Recensione recensione=dao.findRecensioneByID(1);
+        df.commitTransaction();
+        df.closeTransaction();
+        
+
+        //then
+        
+        assertEquals("Fields didn't match", recensione.getCorso().getID_CO(), 5);
+
+    }
+    @Test
+    public void testSetCorso() throws NoSuchFieldException, IllegalAccessException 
+    {
+        //given
+        DAOFactory df= new DAOFactory();
+        df.beginTransaction();
+        CorsoDAO dao= df.getCorsoDAO();
+        
+        Corso corso=dao.findCorsoByID_CO(1);
+        df.commitTransaction();
+        df.closeTransaction();
+        
+       
+
+        final Recensione recensione = new Recensione();
+
+        //when
+        recensione.setCorso(corso);
+
+        //then
+        
+        assertEquals("Fields didn't match", recensione.getCorso().getID_CO(), corso.getID_CO());
+
+    }
+
+     @Test
+    public void testGetCliente() throws NoSuchFieldException, IllegalAccessException 
+    {
+        //given
+        DAOFactory df= new DAOFactory();
+        df.beginTransaction();
+        RecensioneDAO dao= df.getRecensioneDAO();
+        
+        Recensione recensione=dao.findRecensioneByID(1);
+        df.commitTransaction();
+        df.closeTransaction();
+        
+
+        //then
+        
+        assertEquals("Fields didn't match", recensione.getCliente().getID_CL(), 6);
+
+    }
+    @Test
+    public void testSetCliente() throws NoSuchFieldException, IllegalAccessException 
+    {
+        //given
+        DAOFactory df= new DAOFactory();
+        df.beginTransaction();
+        ClienteDAO dao= df.getClienteDAO();
+        
+        Cliente cliente=dao.findClienteByID(1);
+        df.commitTransaction();
+        df.closeTransaction();
+        
+       
+
+        final Recensione recensione = new Recensione();
+
+        //when
+        recensione.setCliente(cliente);
+
+        //then
+        
+        assertEquals("Fields didn't match", recensione.getCliente().getID_CL(), cliente.getID_CL());
+
+    }
+    
+
 }
 

@@ -205,7 +205,47 @@ public class IscrizioneDAO
 
     }
 
+//forse non la usiamo
 
+    public Iscrizione findIscrizioneByID(int ID_CL, int ID_CO) 
+    {
+        
+        PreparedStatement ps;
+        Iscrizione iscrizione = null;
+
+        try 
+        {
+
+            String sql
+                    = " SELECT * "
+                    + "   FROM iscrizione "
+                    + " WHERE "
+                    + "   ID_CL = ?"
+                    + " AND "
+                    + "   ID_CO = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ID_CL);
+            ps.setInt(2, ID_CO);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) 
+            {
+                iscrizione = read(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+
+        } 
+        catch (SQLException e) 
+        {
+            throw new RuntimeException(e);
+        }
+        
+        return iscrizione;
+
+    }
 
     Iscrizione read(ResultSet rs) 
     {

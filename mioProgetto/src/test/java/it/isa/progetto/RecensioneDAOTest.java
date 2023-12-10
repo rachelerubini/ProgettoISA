@@ -1,4 +1,4 @@
-/*package it.isa.progetto;
+package it.isa.progetto;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
@@ -20,7 +20,7 @@ import org.junit.Test;
 public class RecensioneDAOTest 
 {
     // testo la create verificando che la duplicated controlli che io non possa creare una recensione uguale ad un altra
-    @Test 
+ /*   @Test 
     public void testcreateEsistente() 
     {
         
@@ -64,7 +64,7 @@ public class RecensioneDAOTest
             }
         }
     }
-
+*/
 
     @Test 
     public void testcreateEsistenteSQLException()
@@ -212,4 +212,4 @@ public class RecensioneDAOTest
     }
 }
 
-*/
+
