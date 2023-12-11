@@ -8,7 +8,8 @@ import java.util.ArrayList;
 import org.junit.Test;
 
 
-public class PANELClientiAmministratoreTest{
+public class PANELClientiAmministratoreTest
+{
     //definiamo findAllClienti perchè ci serve per testare il makeButtonText
      public List<Cliente> findAllClienti() 
     {
@@ -35,4 +36,6 @@ public class PANELClientiAmministratoreTest{
         String etichetta1= pca.makeButtonText(cliente);
         assertEquals(etichetta1,"SSN: "+cliente.getSSN()+"\t Nome: "+cliente.getNOME()+"\t Cognome: "+cliente.getCOGNOME());
     }   
-    }
+
+
+}

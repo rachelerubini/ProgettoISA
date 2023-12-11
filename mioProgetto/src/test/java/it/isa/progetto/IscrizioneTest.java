@@ -67,6 +67,8 @@ public class IscrizioneTest
         assertEquals("Fields didn't match", iscrizione.getCorso().getID_CO(), 5);
 
     }*/
+
+    
     @Test
     public void testSetCorso() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -110,6 +112,8 @@ public class IscrizioneTest
         assertEquals("Fields didn't match", iscrizione.getCliente().getID_CL(), 2);
 
     }*/
+
+
     @Test
     public void testSetCliente() throws NoSuchFieldException, IllegalAccessException 
     {

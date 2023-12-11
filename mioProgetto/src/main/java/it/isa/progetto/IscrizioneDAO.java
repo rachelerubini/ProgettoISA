@@ -222,7 +222,9 @@ public class IscrizioneDAO
                     + " WHERE "
                     + "   ID_CL = ?"
                     + " AND "
-                    + "   ID_CO = ?";
+                    + "   ID_CO = ?"
+                    + " AND "
+                    + " DELETED = 'Y' ";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, ID_CL);
