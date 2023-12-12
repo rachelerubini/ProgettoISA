@@ -205,6 +205,43 @@ public class IscrizioneDAO
 
     }
 
+
+    public int countiscritti(int ID_CO){
+        PreparedStatement ps;
+        int iscritti = 0;
+        
+        try 
+        {
+
+            String sql
+                    = " SELECT COUNT(*) "
+                    + "   FROM iscrizione "
+                    + " WHERE "
+                    + "   ID_CO = ?"
+                    + " AND "
+                    + " DELETED='N'";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ID_CO);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) 
+            {
+                iscritti = read(resultSet);
+            }
+            resultSet.close();
+            ps.close();
+
+        } 
+        catch (SQLException e) 
+        {
+            throw new RuntimeException(e);
+        }
+        
+        return iscritti;
+    }
+
 //forse non la usiamo
 
     public Iscrizione findIscrizioneByID(int ID_CL, int ID_CO) 

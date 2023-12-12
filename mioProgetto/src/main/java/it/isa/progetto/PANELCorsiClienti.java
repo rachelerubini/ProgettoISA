@@ -148,13 +148,29 @@ public class PANELCorsiClienti extends javax.swing.JPanel
                         CorsoDAO daoc= df.getCorsoDAO();
        
                         int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
-                            
+                        //com'era:
+
+                        /*
                         //try{
                         dao.createIscrizione(daoc.findCorsoByID_CO(ID_corso), cliente);
                         Corso corso=daoc.findCorsoByID_CO(ID_corso); 
                         JOptionPane.showMessageDialog(null, "Ti sei iscritto al corso: "+corso.getNOME());
-                        //} catch(DuplicatedObjectException ex){}
-                                
+                        //} catch(DuplicatedObjectException ex){}*/ 
+
+                        //prova:     DA PROVARE
+                        int iscritti= dao.countiscritti(ID_corso);
+                        Corso corso=daoc.findCorsoByID_CO(ID_corso); 
+
+                        if (iscritti<10){
+                        dao.createIscrizione(daoc.findCorsoByID_CO(ID_corso), cliente);
+                       
+                        JOptionPane.showMessageDialog(null, "Ti sei iscritto al corso: "+corso.getNOME());
+                        }
+
+                        else{ JOptionPane.showMessageDialog(null, "Non puoi iscriverti al corso "+corso.getNOME()+ " perchè è stato raggiunto il numero massimo");  }
+
+
+                        //ffinee prova        
                         df.commitTransaction();
                         df.closeTransaction();
                     }

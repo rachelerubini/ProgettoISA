@@ -23,7 +23,7 @@ public class PANELRecensioniTest
     }
     
 
-    //Testiamo il makeButtonText: creiamo un corso di prova e verifichiamo che l'etichetta assegnata al corso con il makebutton sia corretta
+    //Testiamo il makeButtonText: creiamo una recensione di prova e verifichiamo che l'etichetta assegnata alla recensiione con il makebutton sia corretta
     @Test 
     public void makeButtonTextTest()
     {
@@ -33,15 +33,17 @@ public class PANELRecensioniTest
         DAOFactory df= new DAOFactory();
         df.beginTransaction();
         RecensioneDAO dao= df.getRecensioneDAO();
-        //QUA VA MESSO COME PARAMETRO UNA DATA DI UNA RECENSIONE
-        Recensione recensione  = dao.findRecensioneByDATA();
+        CorsoDAO daocr= df.getCorsoDAO();
+        ClienteDAO daocl=df.getClienteDAO();
+        Recensione recensione  = dao.findRecensioneByDATA("2021-07-26");
+        String nomeco=  daocr.findCorsoByID_CO(recensione.getCorso().getID_CO()).getNOME();
+        String nomec= daocl.findClienteByID(recensione.getCliente().getID_CL()).getNOME();
         df.commitTransaction();
         df.closeTransaction();
 
         String etichetta1= pr.makeButtonText(recensione);
         //QUA COME SECONDO PARAMETRO CONVIENE SCRIVERE NOI LA STRINGA CHE DEVE USCIRE (GUARDA IL DB)
-        assertEquals(etichetta1,"CORSO: "+nome+"\t VOTO: "+recensione.getVOTO()+"\t CLIENTE: "+nomec +"\t DATA: "+recensione.getDATA());
+        assertEquals(etichetta1,"CORSO: "+nomeco+"\t VOTO: "+recensione.getVOTO()+"\t CLIENTE: "+nomec +"\t DATA: "+recensione.getDATA());
     } 
     
 }
-

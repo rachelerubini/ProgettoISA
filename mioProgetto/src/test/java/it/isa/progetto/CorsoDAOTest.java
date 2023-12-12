@@ -123,8 +123,7 @@ public class CorsoDAOTest
             Statement st = con.createStatement();
 
             String sql = "SELECT COUNT(*)"
-                        +" FROM corso"
-                        +" WHERE DELETED='N'";
+                        +" FROM corso";
             ResultSet rs = st.executeQuery(sql);
             rs.next();
             int numero = rs.getInt(1);   // numero varrà il numro totale di clienti (es.29)
