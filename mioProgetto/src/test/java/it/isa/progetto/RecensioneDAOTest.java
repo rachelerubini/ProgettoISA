@@ -20,7 +20,7 @@ import org.junit.Test;
 public class RecensioneDAOTest 
 {
     // testo la create verificando che la duplicated controlli che io non possa creare una recensione uguale ad un altra
- /*   @Test 
+  @Test 
     public void testcreateEsistente() 
     {
         
@@ -32,8 +32,10 @@ public class RecensioneDAOTest
             Cliente clienteprova = new Cliente();
             RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
             Corso corsoprova = new Corso();
+
+//mi sa che iil problemm È LA CREATE
             dao.create(5, "2012-12-12",corsoprova,clienteprova);
-            assertThrows(DuplicatedObjectException.class, () -> {dao.create(5, "2012-12-12",corsoprova,clienteprova);});
+            assertThrows(DuplicatedObjectException.class, () -> {dao.create(6, "2012-12-12",corsoprova,clienteprova);});
             //verifico che la create mi dia una eccezione duplicated (se ce la dà allora funziona)
 
             
@@ -64,7 +66,7 @@ public class RecensioneDAOTest
             }
         }
     }
-*/
+
 
     @Test 
     public void testcreateEsistenteSQLException()

@@ -305,7 +305,7 @@ public class Frame extends JFrame
                                     CorsoDAO daoc=df.getCorsoDAO();
                                     Corso corso = daoc.findByNomeCorso(nrp.jTextField3.getText());
                                     
-                                    //  Il nome delll corso siamo sicure lo veda ma è ook il  controllo seguentee? perchè il controllo è su corsoe non sul nome del corrso e poi se non esiste davvvvero viene null e non altre cose (come una eccezione null pointer excepption)
+                                    
                                     if (corso == null)
                                     {
                                         JOptionPane.showMessageDialog(nrp, "Il corso inserito non esiste");
