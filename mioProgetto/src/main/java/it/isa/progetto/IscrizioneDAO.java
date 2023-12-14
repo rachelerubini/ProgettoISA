@@ -209,12 +209,13 @@ public class IscrizioneDAO
     public int countiscritti(int ID_CO){
         PreparedStatement ps;
         int iscritti = 0;
-        
+        ArrayList<Iscrizione> TOT = new ArrayList<Iscrizione>();
+        Iscrizione EL;
         try 
         {
 
             String sql
-                    = " SELECT COUNT(*) "
+                    = " SELECT *"
                     + "   FROM iscrizione "
                     + " WHERE "
                     + "   ID_CO = ?"
@@ -226,10 +227,14 @@ public class IscrizioneDAO
 
             ResultSet resultSet = ps.executeQuery();
 
-            if (resultSet.next()) 
+            
+            while (resultSet.next()) 
             {
-                iscritti = read(resultSet);
+                EL = read(resultSet);
+                TOT.add(EL);
+                iscritti=iscritti+1;
             }
+
             resultSet.close();
             ps.close();
 
@@ -241,6 +246,10 @@ public class IscrizioneDAO
         
         return iscritti;
     }
+
+
+
+    
 
 //forse non la usiamo
 

@@ -161,7 +161,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel
                         int iscritti= dao.countiscritti(ID_corso);
                         Corso corso=daoc.findCorsoByID_CO(ID_corso); 
 
-                        if (iscritti<10){
+                        if (iscritti<5){
                         dao.createIscrizione(daoc.findCorsoByID_CO(ID_corso), cliente);
                        
                         JOptionPane.showMessageDialog(null, "Ti sei iscritto al corso: "+corso.getNOME());
