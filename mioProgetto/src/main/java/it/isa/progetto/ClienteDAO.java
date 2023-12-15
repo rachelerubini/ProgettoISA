@@ -195,6 +195,7 @@ public class ClienteDAO
                 + "   FROM cliente "
                 + " WHERE "
                 + "   ID_CL = ?";
+               // + "   AND DELETED = 'N' ";
 
       ps = conn.prepareStatement(sql);
       ps.setInt(1, ID_CL);

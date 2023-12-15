@@ -166,26 +166,36 @@ public class ClienteDAOTest
     }
 
 
-/*
-//Test che mi copre se  provoo a cancellare  un utente che non esiste (Non abbiamo gesstito qiesta coosa nel codice quindi non la testimo)
-@Test
-public void testdeleteNotFoundException()
-{
-    try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
+  // testo la delete verificando che elimini davvero il cliente 
+    @Test 
+    public void testdelete() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-            ClienteDAO dao = new ClienteDAO(con);
-        Cliente cliente = new Cliente();
-        cliente.setMAIL("0");   
+            ClienteDAO dao =new ClienteDAO(con);
+            
+            dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
+            Cliente cl1 = new Cliente();
+            cl1=dao.findByMAILCliente("prova");
+            dao.delete(cl1);
+            assertEquals(null, dao.findByMAILCliente("prova"));
+            //verifico che non  ci sia piu il cliente con mail "prova"
 
-        assertThrows(MissingObjectException.class, () -> {dao.delete(cliente);});
-       
-    }
+            
 
-    catch(Exception e){
-        System.out.println(e.getMessage());
+        }
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        
+        
     }
-}*/
 
 
     // Test che prova a generare un errore sql eliminando il clientee subito dopo aver chiuso la connessione
@@ -210,28 +220,53 @@ public void testdeleteNotFoundException()
 
     }
 
+//test per vedere se funnziona il findbymail
+@Test 
+    public void testfindByMAILCliente() 
+    {
+        
 
-/*
-@Test
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            ClienteDAO dao =new ClienteDAO(con);
+            Cliente cl= new Cliente();
+            cl=dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
+            String SSNcl= cl.getSSN();
+            Cliente cl1= new Cliente();
+            cl1=dao.findByMAILCliente("prova");
+            String SSNcl1=cl1.getSSN();
+            assertEquals(SSNcl, SSNcl1);
+            //verifico che la findbymail mi dia il cliente   giusto 
 
-public void testfindByMAILClienteNotFoundException()
-{
-    try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-        ClienteDAO dao = new ClienteDAO(con);
-        
-        
-        assertThrows(MissingObjectException.class, () -> {dao.findByMAILCliente("0");}); //forse va messo valore mail non numero
-        
+            
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal cliente prova creato sopra
+        finally         
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+                ClienteDAO dao =new ClienteDAO(con);
+            
+                Cliente cliente1 = new Cliente();
+                cliente1 = dao.findByMAILCliente("prova");
+                dao.delete(cliente1);
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
     }
-
-    catch(Exception e){
-        System.out.println(e.getMessage());
-    }
-
-}
-*/
 
 
     @Test 
@@ -256,31 +291,56 @@ public void testfindByMAILClienteNotFoundException()
     }
 
 
-/*
+//test per vedere se funnziona il findbyID
+@Test 
+    public void testfindClienteByID() 
+    {
+        
 
-
- @Test
-public void testfindClienteByIDNotFoundException()
-{
-    try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-            ClienteDAO dao = new ClienteDAO(con);
-        
-        
-        assertThrows(MissingObjectException.class, () -> {dao.findClienteByID("0");});
-        
-       
+            ClienteDAO dao =new ClienteDAO(con);
+            
+            dao.create("prova", "prova","prova","prova","prova", "2012-12-12");
+            
+            Cliente cl1= new Cliente();
+            cl1=dao.findByMAILCliente("prova");
+            
+            Cliente cl2=new Cliente();
+            cl2=dao.findClienteByID(cl1.getID_CL());
+            
+            assertEquals(cl1.getID_CL(), cl2.getID_CL());
+            //verifico che la findbyid mi dia il cliente   giusto 
+
+            
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal cliente prova creato sopra
+        finally         
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+                ClienteDAO dao =new ClienteDAO(con);
+            
+                Cliente cliente1 = new Cliente();
+                cliente1 = dao.findByMAILCliente("prova");
+                dao.delete(cliente1);
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
     }
-
-    catch(Exception e){
-        System.out.println(e.getMessage());
-    }
-}
-
-
-
-*/
 
 
     @Test 

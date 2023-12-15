@@ -44,6 +44,6 @@ public class PANELRecensioniTest
         String etichetta1= pr.makeButtonText(recensione);
         //QUA COME SECONDO PARAMETRO CONVIENE SCRIVERE NOI LA STRINGA CHE DEVE USCIRE (GUARDA IL DB)
         assertEquals(etichetta1,"CORSO: "+nomeco+"\t VOTO: "+recensione.getVOTO()+"\t CLIENTE: "+nomec +"\t DATA: "+recensione.getDATA());
-    } 
+    }
     
 }
