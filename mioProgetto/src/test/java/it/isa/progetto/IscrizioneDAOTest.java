@@ -41,6 +41,40 @@ public class IscrizioneDAOTest
 
     }
 
+    @Test 
+    public void testdelete() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            Cliente clienteprova = new Cliente();
+            Corso corsoprova = new Corso();
+            IscrizioneDAO dao =new IscrizioneDAO(con);
+            
+            ClienteDAO daocl =new ClienteDAO(con);
+            CorsoDAO daocc =new CorsoDAO(con);
+            clienteprova=daocl.findClienteByID(1);
+            corsoprova=daocc.findCorsoByID_CO(1);
+            dao.createIscrizione(corsoprova,clienteprova);
+            int iscritto=dao.findCorsoCliente(clienteprova.getID_CL(),corsoprova.getID_CO());
+            dao.disiscrivi(clienteprova.getID_CL(),corsoprova.getID_CO());
+            assertEquals(0, dao.findCorsoCliente(clienteprova.getID_CL(),corsoprova.getID_CO()));
+            //verifico che non  ci sia piu l'iscrizione
+            
+
+        }
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        
+        
+    }
+
     // Test che prova a generare un errore sql disiscrivendomi al corso subito dopo aver chiuso la connessione
     @Test 
     public void testdeleteSQLException()
