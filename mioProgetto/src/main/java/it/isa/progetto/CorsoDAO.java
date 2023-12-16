@@ -240,7 +240,9 @@ public class CorsoDAO
                     = " SELECT * "
                     + "   FROM corso "
                     + " WHERE "
-                    + "   NOME = ?";
+                    + "   NOME = ?"
+                    + " AND "
+                    + "DELETED='N'";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, NOME);

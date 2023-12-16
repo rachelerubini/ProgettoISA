@@ -31,40 +31,25 @@ public class RecensioneDAOTest
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
             Cliente clienteprova = new Cliente();
             RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
-            Corso corsoprova = new Corso();
+            Corso corso = new Corso();
+            Recensione recensione=new Recensione();
+            recensione=dao.findRecensioneByID(1);
+            Recensione recensionecopia=new Recensione();
+            corso=recensione.getCorso();
+            Cliente cliente = new Cliente();
+            cliente=recensione.getCliente();
 
-//mi sa che iil problemm È LA CREATE
-            dao.create(5, "2012-12-12",corsoprova,clienteprova);
-            assertThrows(DuplicatedObjectException.class, () -> {dao.create(6, "2012-12-12",corsoprova,clienteprova);});
-            //verifico che la create mi dia una eccezione duplicated (se ce la dà allora funziona)
+            assertEquals(null, dao.create(recensione.getVOTO(), recensione.getDATA(),corso,cliente));
+            //verifico che la create di una recensone già esistente non vada a buon fine
 
             
 
-        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        }
         catch(Exception e)
         {  
             System.out.println(e.getMessage());
         }  
 
-        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dala recensione prova creata sopra
-        finally         
-        {
-            try
-            {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-                Cliente clienteprova = new Cliente();
-                RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
-            
-                Recensione recensione1 = new Recensione();
-                recensione1 = dao.findRecensioneByDATA("2012-12-12");
-                dao.delete(recensione1);
-            }
-            catch(Exception e)
-            {
-                System.out.println(e.getMessage());
-            }
-        }
     }
 
 
@@ -76,12 +61,14 @@ public class RecensioneDAOTest
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
             Cliente clienteprova = new Cliente();
-            Corso corsoprova = new Corso();
+            
 
             RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
             con.close();
-        
-            dao.create(5, "2012-12-12",corsoprova,clienteprova);
+
+            Corso corsoprova = new Corso();
+            Cliente cliente = new Cliente();
+            dao.create(5, "2012-12-12",corsoprova,cliente);
         
        }
        catch(Exception e)
@@ -91,6 +78,69 @@ public class RecensioneDAOTest
 
     }
 
+     @Test 
+    public void testfindRecensioneByID() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            
+            Cliente clienteprova = new Cliente();
+            Corso corsoprova = new Corso();
+
+            RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
+            ClienteDAO daocl =new ClienteDAO(con);
+            CorsoDAO daocc =new CorsoDAO(con);
+            clienteprova=daocl.findClienteByID(1);
+            corsoprova=daocc.findCorsoByID_CO(1);
+            Recensione rec=dao.create(6, "1900-12-12",corsoprova,clienteprova);
+            
+            
+            //prendo il corso creato sopra
+            Recensione r= new Recensione();
+            r=dao.findRecensioneByDATA("1900-12-12");
+
+            //cerco un corso con l'id del corso sopra creato
+
+            Recensione r1= new Recensione();
+            r1= dao.findRecensioneByID(r.getID_R());
+
+
+            assertEquals(r1.getDATA(), r.getDATA());
+            //verifico che la findbyid mi dia il corso   giusto 
+
+             con.close();
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal corso prova creato sopra
+        finally         
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+                Cliente clienteprova = new Cliente();
+                RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
+                Recensione c= new Recensione();
+            
+                
+                c = dao.findRecensioneByDATA("1900-12-12");
+                dao.delete(c);
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     @Test 
     public void testfindRecensioneByIDSQLException()
@@ -114,6 +164,64 @@ public class RecensioneDAOTest
 
     }
 
+    @Test 
+    public void testfindRecensioneByData() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            
+            Cliente clienteprova = new Cliente();
+            Corso corsoprova = new Corso();
+
+            RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
+            ClienteDAO daocl =new ClienteDAO(con);
+            CorsoDAO daocc =new CorsoDAO(con);
+            clienteprova=daocl.findClienteByID(1);
+            corsoprova=daocc.findCorsoByID_CO(1);
+            Recensione rec=dao.create(6, "1900-12-12",corsoprova,clienteprova);
+            
+            
+            //prendo il corso creato sopra
+            Recensione r= new Recensione();
+            r=dao.findRecensioneByDATA("1900-12-12");
+
+
+            assertEquals(r.getDATA(), rec.getDATA());
+            //verifico che la findbyid mi dia il corso   giusto 
+
+             con.close();
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal corso prova creato sopra
+        finally         
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+                Cliente clienteprova = new Cliente();
+                RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
+                Recensione c= new Recensione();
+            
+                
+                c = dao.findRecensioneByDATA("1900-12-12");
+                dao.delete(c);
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     @Test 
     public void testfindRecensioneByDATASQLException()
@@ -137,6 +245,42 @@ public class RecensioneDAOTest
 
     }
 
+
+
+     @Test 
+    public void testdelete() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            Cliente clienteprova = new Cliente();
+            Corso corsoprova = new Corso();
+            RecensioneDAO dao =new RecensioneDAO(con, clienteprova);
+            
+            ClienteDAO daocl =new ClienteDAO(con);
+            CorsoDAO daocc =new CorsoDAO(con);
+            clienteprova=daocl.findClienteByID(1);
+            corsoprova=daocc.findCorsoByID_CO(1);
+            dao.create(6, "1900-12-12",corsoprova,clienteprova);
+            Recensione rec=dao.findRecensioneByDATA("1900-12-12");
+            dao.delete(rec);
+            assertEquals(null, dao.findRecensioneByDATA("1900-12-12"));
+            //verifico che non  ci sia piu il corso  "prova"
+
+            
+
+        }
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        
+        
+    }
 
     // Test che prova a generare un errore sql eliminando una recensione subito dopo aver chiuso la connessione
     @Test 

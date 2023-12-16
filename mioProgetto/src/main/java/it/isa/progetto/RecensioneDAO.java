@@ -148,7 +148,8 @@ public class RecensioneDAO
                     = " SELECT * "
                     + "   FROM recensione "
                     + " WHERE "
-                    + "   DATA = ?";
+                    + "   DATA = ?"
+                    + " AND DELETED='N'";
 
             ps = conn.prepareStatement(sql);
             ps.setString(1, DATA);

@@ -87,6 +87,36 @@ public class CorsoDAOTest
 
     }
 
+    @Test 
+    public void testdelete() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            CorsoDAO dao =new CorsoDAO(con);
+            
+            dao.create("prova", "prova","prova");
+            Corso c1 = new Corso();
+            c1=dao.findByNomeCorso("prova");
+            dao.delete(c1);
+            assertEquals(null, dao.findByNomeCorso("prova"));
+            //verifico che non  ci sia piu il corso  "prova"
+
+            
+
+        }
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        
+        
+    }
+
     // Test che prova a generare un errore sql eliminando il corso subito dopo aver chiuso la connessione
     @Test 
     public void testdeleteSQLException()
@@ -160,6 +190,61 @@ public class CorsoDAOTest
         }
     }
 
+    
+    
+    
+    @Test 
+    public void testfindCorsoByID() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            CorsoDAO dao =new CorsoDAO(con);
+            Corso c= new Corso();
+            c=dao.create("prova", "prova","prova");
+            
+            //prendo il corso creato sopra
+            Corso c1= new Corso();
+            c1=dao.findByNomeCorso("prova");
+
+            //cerco un corso con l'id del corso sopra creato
+            Corso co= dao.findCorsoByID_CO(c1.getID_CO());
+
+
+            assertEquals(co.getNOME(), c1.getNOME());
+            //verifico che la findbyid mi dia il corso   giusto 
+
+            
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal corso prova creato sopra
+        finally         
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+                CorsoDAO dao =new CorsoDAO(con);
+                Corso c= new Corso();
+            
+                
+                c = dao.findByNomeCorso("prova");
+                dao.delete(c);
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
     @Test 
     public void testfindCorsoByID_COSQLException()
@@ -178,6 +263,55 @@ public class CorsoDAOTest
        {
         System.out.println(e.getMessage());
        }
+    }
+
+
+     @Test 
+    public void testfindCorsoByNome() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            CorsoDAO dao =new CorsoDAO(con);
+            Corso c= new Corso();
+            c=dao.create("prova", "prova","prova");
+            
+            Corso c1= new Corso();
+            c1=dao.findByNomeCorso("prova");
+            
+            assertEquals(c.getNOME(), c1.getNOME());
+            //verifico che la findbyid mi dia il corso   giusto 
+
+            
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal corso prova creato sopra
+        finally         
+        {
+            try
+            {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+                Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+                CorsoDAO dao =new CorsoDAO(con);
+                Corso c= new Corso();
+            
+                
+                c = dao.findByNomeCorso("prova");
+                dao.delete(c);
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     @Test 

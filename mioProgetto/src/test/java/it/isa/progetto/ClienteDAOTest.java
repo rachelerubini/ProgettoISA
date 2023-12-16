@@ -26,78 +26,7 @@ import org.junit.Test;
 public class ClienteDAOTest 
 {
 
-   /*
-    //QUESTA NON LA FACCIAMO
-    @Test 
-    public void testcreateNonEsistente()
-    {
-
-        try{
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
-
-            
-            
-        
-        Cliente cliente1 = new Cliente();
-        Cliente cliente2 = new Cliente();
-        //Brano brano = new Brano();                            //Noi dobbiamo fare qualcosa al posto delle operazioni che fa lui  con brano?
-        //brano.setId(1);
-
-       ClienteDAO dao =new ClienteDAO(con);
-      
-        
-       cliente1=dao.create("prova", "prova","prova","prova","prova","prova");
-       cliente2.setID_CL(0);
-       cliente2.setSSN("prova");
-       cliente2.setNOME("prova");
-       cliente2.setCOGNOME("prova");
-       cliente2.setMAIL("prova");
-       cliente2.setPASSWORD("prova");
-       cliente2.setNASCITA("prova");
-       cliente2.setDELETED("P"); // va  messa?????
-       int id=cliente1.getID_CL();
-       cliente2.setID_CL(id);
-       cliente1 = dao.findClienteByID(id);
-
-       
-       //dao.creaAscolto(brano, utente1);
-      //dao.creaAscolto(brano, utente1);
-        
-      // utente1 = dao.findById(id);
-      //  HashMap<Brano, Integer> mappa = new HashMap<Brano, Integer>();
-      //  Integer integer = new Integer(2);
-      // mappa.put(brano, integer);
-      //  utente2.setHaAscoltato(mappa);
-       
-
-        
-        assertEquals(cliente1.getID_CL(), cliente2.getID_CL());
-        assertEquals(cliente1.getSSN(), cliente2.getSSN());
-        assertEquals(cliente1.getNOME(), cliente2.getNOME());
-        assertEquals(cliente1.getMAIL(), cliente2.getMAILL());
-        assertEquals(cliente1.getPASSWORD(), cliente2.getPASSWORD());
-        assertEquals(cliente1.getCOGNOME(), cliente2.getCOGNOME());
-        assertEquals(cliente1.getNASCITA(), cliente2.getNASCITA());
-        //assertEquals(cliente1.isDELETED(), cliente2.isDELETED());      //va messo?????????????
-        
-        
-
-        dao.delete(cliente1);
-        
-    }
-
-    catch(Exception ex)
-    {
-        System.out.println(ex.getMessage());
-    }
-
-
-        
-
-    
- }
-*/
+  
 
     // testo la create verificando che la duplicated controlli che io non possa creare un cliente uguale ad un altro
     @Test 
