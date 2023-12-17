@@ -205,7 +205,7 @@ public class IscrizioneDAO
 
     }
 
-
+    //funzione che mi conta gli iscritti ad un corso
     public int countiscritti(int ID_CO){
         PreparedStatement ps;
         int iscritti = 0;
@@ -247,6 +247,48 @@ public class IscrizioneDAO
         return iscritti;
     }
 
+    //mi conta le righe che hanno un certo id cliente associato ad un certo id corso
+    public int countrighe(int ID_CL, int ID_CO){
+        PreparedStatement ps;
+        int iscritti = 0;
+        ArrayList<Iscrizione> TOT = new ArrayList<Iscrizione>();
+        Iscrizione EL;
+        try 
+        {
+
+            String sql
+                    = " SELECT *"
+                    + "   FROM iscrizione "
+                    + " WHERE "
+                    + "   ID_CL = ?"
+                    + " AND "
+                    + "   ID_CO = ?";
+
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ID_CL);
+            ps.setInt(2, ID_CO);
+
+            ResultSet resultSet = ps.executeQuery();
+
+            
+            while (resultSet.next()) 
+            {
+                EL = read(resultSet);
+                TOT.add(EL);
+                iscritti=iscritti+1;
+            }
+
+            resultSet.close();
+            ps.close();
+
+        } 
+        catch (SQLException e) 
+        {
+            throw new RuntimeException(e);
+        }
+        
+        return iscritti;
+    }
 
 
     
@@ -270,7 +312,7 @@ public class IscrizioneDAO
                     + " AND "
                     + "   ID_CO = ?"
                     + " AND "
-                    + " DELETED = 'Y' ";
+                    + " DELETED = 'N' ";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1, ID_CL);
@@ -303,7 +345,17 @@ public class IscrizioneDAO
 
         iscrizione.setCorso(corso);
         iscrizione.setCliente(cliente);
+        try 
+        {
+            iscrizione.getCorso().setID_CO(rs.getInt("ID_CO"));
+        } 
+        catch (SQLException sqle) {}
 
+        try 
+        {
+            iscrizione.getCliente().setID_CL(rs.getInt("ID_CL"));
+        } 
+        catch (SQLException sqle) {}
         try 
         {
             iscrizione.setDELETED(rs.getString("DELETED"));

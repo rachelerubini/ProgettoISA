@@ -48,7 +48,7 @@ public class IscrizioneTest
         //then
         assertEquals("field wasn't retrieved properly", result, "testisDELETED");
     }
-/*
+
    @Test
     public void testGetCorso() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -66,7 +66,7 @@ public class IscrizioneTest
         
         assertEquals("Fields didn't match", iscrizione.getCorso().getID_CO(), 5);
 
-    }*/
+    }
 
     
     @Test
@@ -93,7 +93,7 @@ public class IscrizioneTest
         assertEquals("Fields didn't match", iscrizione.getCorso().getID_CO(), corso.getID_CO());
 
     }
-/*
+
     @Test
     public void testGetCliente() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -111,7 +111,7 @@ public class IscrizioneTest
         
         assertEquals("Fields didn't match", iscrizione.getCliente().getID_CL(), 2);
 
-    }*/
+    }
 
 
     @Test
