@@ -8,9 +8,7 @@ public class PANELNuovaRecensione extends javax.swing.JPanel
     {
         initComponents(cliente);
     }
-
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                        
     private void initComponents(Cliente cliente) 
     {
 
@@ -83,7 +81,7 @@ public class PANELNuovaRecensione extends javax.swing.JPanel
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(107, Short.MAX_VALUE))
         );
-    }// </editor-fold>                        
+    }                        
 
 
     // Variables declaration                     

@@ -9,8 +9,6 @@ public class PANELIscrizione extends javax.swing.JPanel
         initComponents();
     }
 
-    //@SuppressWarnings("unchecked")
-    //<editor-fold defaultstate="collapsed" desc="Generated Code">
     private void initComponents() 
     {
 
@@ -163,7 +161,7 @@ public class PANELIscrizione extends javax.swing.JPanel
         javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
-    }// </editor-fold>
+    }
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) 
     {

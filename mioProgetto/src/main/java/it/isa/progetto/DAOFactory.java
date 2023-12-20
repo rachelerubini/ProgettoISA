@@ -8,32 +8,6 @@ public class DAOFactory
 {
   private Connection connection;
 
-
-  /* 
-  
-  public void beginTransaction() 
-  {
-
-    try 
-    {
-      Class.forName(Configuration.DATABASE_DRIVER);
-      this.connection = DriverManager.getConnection(Configuration.DATABASE_URL);
-      this.connection.setAutoCommit(false);
-
-      System.out.println("connesso");
-
-    }
-    catch(Exception ex)
-    {
-      System.out.println("non connesso");
-    }
-
-  }
-  
-  */
-
-
-
   public void beginTransaction() 
   {
 

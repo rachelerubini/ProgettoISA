@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -26,9 +25,7 @@ public class PANELRecensioni extends javax.swing.JPanel implements ActionListene
     {
         initComponents(cliente, recensioni);
     }
-
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                        
     private void initComponents(Cliente cliente, List<Recensione> recensioni) 
     {
 
@@ -51,14 +48,12 @@ public class PANELRecensioni extends javax.swing.JPanel implements ActionListene
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
         jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            //c'era:        .addGap(0, 495, Short.MAX_VALUE)
-            //brr:
+
             .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            //c'era:         .addGap(0, 0, Short.MAX_VALUE)
-             //brr:
+
              .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
         );
 
@@ -110,7 +105,6 @@ public class PANELRecensioni extends javax.swing.JPanel implements ActionListene
                 // le prossime righe servono perchè quando clicco il bottone voglio che si elimini per quel cliente
                 button.addActionListener((ActionListener) this);
             
-                //panel.setBorder(new MBorder(0, 0, 1, 0, Color.GRAY));       serve?
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridwidth = GridBagConstraints.REMAINDER;
                 gbc.weightx = 1;
@@ -143,7 +137,7 @@ public class PANELRecensioni extends javax.swing.JPanel implements ActionListene
         validate();
         repaint();
 
-    }// </editor-fold>                           
+    }                        
 
 
     public void actionPerformed(ActionEvent e) 
@@ -201,7 +195,7 @@ public class PANELRecensioni extends javax.swing.JPanel implements ActionListene
     }
 
 
-    // Variables declaration - do not modify                     
+    // Variables declaration                   
     javax.swing.JButton jButton1;
     javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

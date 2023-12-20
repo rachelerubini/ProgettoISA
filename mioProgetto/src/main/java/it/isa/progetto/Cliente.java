@@ -1,6 +1,4 @@
 package it.isa.progetto;
-//import java.util.HashMap;
-//package model.mo;
 
 public class Cliente 
 {
@@ -12,26 +10,8 @@ public class Cliente
   private String PASSWORD;
   private String NASCITA;
   private String DELETED;
-  /* N:M */
-  //private Corso[] iscrizione;  //o cosi o con le liste quindi avro per ogni cliente una lsita o array di corso a cui è iscritto
-  /* 1:N */
+  
   private Recensione[] recensioni;
-
-
-
-
-  /*
-  public Corso[] getCorso() 
-  {
-    return iscrizione;
-  }
-
-  public void setCorso(Corso[] iscrizione) 
-  {
-    this.iscrizione = iscrizione;
-  }
-  */
-
 
 
   public int getID_CL() 

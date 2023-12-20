@@ -8,9 +8,7 @@ public class PANELHomepageCliente extends javax.swing.JPanel
     {
         initComponents(cliente);
     }
-
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                         
     private void initComponents(Cliente cliente) 
     {
 
@@ -18,8 +16,6 @@ public class PANELHomepageCliente extends javax.swing.JPanel
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-
-        //this.cliente= cliente;
 
         setPreferredSize(new java.awt.Dimension(400, 300));
         setBackground(new java.awt.Color(243, 226, 243));
@@ -33,12 +29,6 @@ public class PANELHomepageCliente extends javax.swing.JPanel
         jLabel1.setText("Benvenuto cliente! Scegli l'operazione che vuoi svolgere:");
 
         jButton1.setText("Logout");
-        
-        /*jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });*/
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -71,7 +61,7 @@ public class PANELHomepageCliente extends javax.swing.JPanel
                 .addComponent(jButton1)
                 .addGap(31, 31, 31))
         );
-    }// </editor-fold>                              
+    }                            
 
 
     // Variables declaration - do not modify   

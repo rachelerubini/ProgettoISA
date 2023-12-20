@@ -9,8 +9,7 @@ public class PANELHomepageAmministratore extends javax.swing.JPanel
         initComponents(amministratore);
     }
     
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                      
     private void initComponents(Amministratore amministratore) 
     {
     
@@ -64,7 +63,7 @@ public class PANELHomepageAmministratore extends javax.swing.JPanel
                             .addComponent(jButton1)
                             .addGap(27, 27, 27))
                     );
-    }// </editor-fold>                        
+    }                      
     
     
     // Variables declaration - do not modify  

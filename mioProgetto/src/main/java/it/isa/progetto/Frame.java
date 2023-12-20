@@ -8,10 +8,6 @@ import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-//import java.io.File;
-
-
-
 
 
 public class Frame extends JFrame 
@@ -22,8 +18,6 @@ public class Frame extends JFrame
     private PANELHomepage hp = new PANELHomepage();
 
     private Cliente cliente= new Cliente(); 
-    // ma ai panel passiamo questo cliente vuoto creato qui? oppure llo inzializziamo da qualche parte tipo nel login, 
-    //ed è lo stesso  cliente che vorreemo usare nel bottone nuova recensione (cosi fa riferimento al cliente loggato) ->frame riga  403
     
     private PANELHomepageCliente hcp = new PANELHomepageCliente(cliente);
     private Amministratore amministratore= new Amministratore();
@@ -81,22 +75,6 @@ public class Frame extends JFrame
 
     private CardLayout cl = new CardLayout();
 
-    //private PANELHomepageController hpc = new PANELHomepageController();
-    //private PANELHomepageClienteController hcpc = new PANELHomepageClienteController();
-    //private PANELHomepageAmministratoreController hapc = new PANELHomepageAmministratoreController();
-    //private PANELIscrizioneController ipc = new PANELIscrizioneController();
-    //private PANELCorsiClientiController ccpc = new PANELCorsiClientiController();
-    //private PANELRecensioniController rpc = new PANELRecensioniController();
-    //private PANELNuovaRecenesioneController nrpc = new PANELNuovaRecensioneController();
-    //private PANELCorsiAmministratoreController capc = new PANELCorsiAmministratoreController();
-    //private PANELNuovoCorsoController ncpc = new PANELNuovoCorsoController();
-    //private PANELClientiAmministratoreController clapc = new PANELClientiAmministratoreController();
-
-
-    //private PANELClienti cliente= new PANELClienti();
-    //private MainPanel mp = new MainPanel(mpc.findAllBrani(), utente);
-
-
     public Frame() 
     {
 
@@ -115,12 +93,12 @@ public class Frame extends JFrame
         container.add(ncp, "9");
         container.add(clap, "10");
 
-        //parto dall hompegae che è la schermata container 1
+        //parto dalla hompegae che è la schermata container 1
         cl.show(container, "1");
 
         //qua metto tutti i pulsanti della mia applicazione
 
-        //bottoone che dalla home page ti porta neella pagina di registrazione (per  creare nuovo  cliente)
+        //bottone che dalla home page ti porta neella pagina di registrazione (per creare un nuovo cliente)
         hp.jButton7.addActionListener(new ActionListener()
         {
 
@@ -171,12 +149,12 @@ public class Frame extends JFrame
 
                         hcp = new PANELHomepageCliente(cliente);
                         
-                        //prova per paassare clliente:
+                        //prova per paassare cliente:
                         container.add(hcp, "2");
 
                         ccp = new PANELCorsiClienti(cliente,findAllCorsi());
                           
-                        //da homepage cliente vado dai coorsi
+                        //da homepage cliente vado dai corsi
                         hcp.jButton3.addActionListener(new ActionListener()
                         {
                             @Override
@@ -284,10 +262,8 @@ public class Frame extends JFrame
 
     
                         //dalla pagina nuova recensione, creo nuova recensione e vado nella pagina recensioni
-                        //ATTENZIONE,non siamo sicure vada bene il controllo per vedere se il corso esiste!!!
                         nrp.jButton1.addActionListener(new ActionListener()
                         {
-                            // int i=0;
 
                             @Override
                             public void actionPerformed(ActionEvent e) 
@@ -328,10 +304,6 @@ public class Frame extends JFrame
             
                         });
 
-
-
-
-                  
                         
                         //per andare alla homeepage cliente dalla home
                         cl.show(container, "2");

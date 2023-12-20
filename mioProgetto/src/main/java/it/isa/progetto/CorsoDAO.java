@@ -4,11 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.sql.*;
-
 
 
 public class CorsoDAO 
@@ -134,7 +131,6 @@ public class CorsoDAO
     public List<Corso> findAllCorsi()
     {
         PreparedStatement ps;
-        //Statement st;
         Corso corso;
         ArrayList<Corso> corsi = new ArrayList<Corso>();
         
@@ -143,22 +139,7 @@ public class CorsoDAO
         try 
         {
 
-            /*
-            String sql
-                    = " SELECT * "
-                    + " FROM corso ";
-            */
-
-            
-            //st= conn.createStatement();
-            //ResultSet resultSet=st.executeQuery(sql);
-
             ps = conn.prepareStatement(query);
-
-            // ps = MyConnection.getConnection().prepareStatement(query);
-            //String query = "SELECT * FROM corso";
-            //PreparedStatement ps= c.prepareStatement(query);
-            //PreparedStatement ps = conn.prepareStatement(sql);
                     
             ResultSet resultSet = ps.executeQuery();
 
@@ -167,11 +148,7 @@ public class CorsoDAO
                 corso = read(resultSet);
                 corsi.add(corso);
             }
-
-            //resultSet.close();
-            //ps.close();
-            //st.close();
-
+            
         } 
         catch(SQLException e)
         {   

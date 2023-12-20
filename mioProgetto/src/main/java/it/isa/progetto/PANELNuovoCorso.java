@@ -7,9 +7,7 @@ public class PANELNuovoCorso extends javax.swing.JPanel {
     {
         initComponents();
     }
-
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                        
     private void initComponents() 
     {
         jLabel1 = new javax.swing.JLabel();
@@ -83,7 +81,7 @@ public class PANELNuovoCorso extends javax.swing.JPanel {
                 .addContainerGap(99, Short.MAX_VALUE))
         );
     
-    }// </editor-fold>                        
+    }                      
 
 
     // Variables declaration                     

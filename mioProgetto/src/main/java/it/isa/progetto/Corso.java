@@ -1,5 +1,4 @@
 package it.isa.progetto;
-//package model.mo;
 
 public class Corso 
 {
@@ -9,9 +8,7 @@ public class Corso
     private String TIPO;
     private String LIVELLO;
     private String DELETED;
-    /* N:M */
-    //private Cliente[] iscrizione;  // per ogni corso ho la lista di cliente che sono iscritti a quel corso
-    /* 1:N */
+
     private Recensione[] recensioni;
 
 
@@ -74,24 +71,6 @@ public class Corso
     {
         this.recensioni[index] = recensioni;
     }
-
-   
-
-    
-    /*  
-    public Cliente[] getCliente() 
-    {
-        return iscrizione;
-    }
-    
-    public void setCliente(Cliente[] iscrizione) 
-    {
-        this.iscrizione = iscrizione;
-    }
-    */
-
-
-
 
     public String isDELETED() 
     {

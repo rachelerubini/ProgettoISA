@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.BorderLayout;
-//import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -26,9 +25,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel
     {
         initComponents(cliente,corsi);
     }
-
-    // @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                         
     private void initComponents(Cliente cliente, List<Corso> corsi) 
     {
 
@@ -39,8 +36,6 @@ public class PANELCorsiClienti extends javax.swing.JPanel
         jPanel2 = new javax.swing.JPanel();
         pannello=new TestPane();
         pannello1=new TestPane();
-
-        //brr:   this.cliente= cliente;
 
         setPreferredSize(new java.awt.Dimension(400, 300));
         setBackground(new java.awt.Color(243, 226, 243));
@@ -55,12 +50,12 @@ public class PANELCorsiClienti extends javax.swing.JPanel
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           // .addGap(0, 226, Short.MAX_VALUE)
+           
            .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            //.addGap(0, 255, Short.MAX_VALUE)
+            
             .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
             );
 
@@ -68,12 +63,12 @@ public class PANELCorsiClienti extends javax.swing.JPanel
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            //.addGap(0, 249, Short.MAX_VALUE)
+            
             .addComponent(pannello1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-           // .addGap(0, 0, Short.MAX_VALUE)
+           
            .addComponent(pannello1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
            );
 
@@ -148,16 +143,7 @@ public class PANELCorsiClienti extends javax.swing.JPanel
                         CorsoDAO daoc= df.getCorsoDAO();
        
                         int ID_corso= (Integer.parseInt(((JButton)e.getSource()).getName()));
-                        //com'era:
 
-                        /*
-                        //try{
-                        dao.createIscrizione(daoc.findCorsoByID_CO(ID_corso), cliente);
-                        Corso corso=daoc.findCorsoByID_CO(ID_corso); 
-                        JOptionPane.showMessageDialog(null, "Ti sei iscritto al corso: "+corso.getNOME());
-                        //} catch(DuplicatedObjectException ex){}*/ 
-
-                        //prova:     DA PROVARE
                         int iscritti= dao.countiscritti(ID_corso);
                         Corso corso=daoc.findCorsoByID_CO(ID_corso); 
 
@@ -169,14 +155,11 @@ public class PANELCorsiClienti extends javax.swing.JPanel
 
                         else{ JOptionPane.showMessageDialog(null, "Non puoi iscriverti al corso "+corso.getNOME()+ " perchè è stato raggiunto il numero massimo");  }
 
-
-                        //ffinee prova        
                         df.commitTransaction();
                         df.closeTransaction();
                     }
                 });
         
-                //panel.setBorder(new MBorder(0, 0, 1, 0, Color.GRAY));       serve?
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridwidth = GridBagConstraints.REMAINDER;
                 gbc.weightx = 1;
@@ -206,7 +189,6 @@ public class PANELCorsiClienti extends javax.swing.JPanel
         
                 button2.addActionListener(new ActionListener()
                 {
-                    // va fatto un action Permormed diverso per il secondo pannello? si puo? come?????
                     @Override
                     public void actionPerformed(ActionEvent e ) 
                     {
@@ -226,7 +208,6 @@ public class PANELCorsiClienti extends javax.swing.JPanel
                     }
                 });
             
-                //panel.setBorder(new MBorder(0, 0, 1, 0, Color.GRAY));       serve?
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridwidth = GridBagConstraints.REMAINDER;
                 gbc.weightx = 1;
@@ -235,14 +216,13 @@ public class PANELCorsiClienti extends javax.swing.JPanel
             
               
             }
-            //df.commitTransaction();
-            //df.closeTransaction();
+
         }
     
         validate();
         repaint();
     
-    }// </editor-fold>                           
+    }                       
     
 
 

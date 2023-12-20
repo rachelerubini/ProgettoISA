@@ -9,9 +9,7 @@ public class PANELHomepage extends javax.swing.JPanel
     {
         initComponents();
     }
-
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                        
     private void initComponents() 
     {
 
@@ -145,7 +143,7 @@ public class PANELHomepage extends javax.swing.JPanel
 
 	
 
-    }// </editor-fold>                        
+    }                      
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) 
     {                                            

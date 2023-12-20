@@ -8,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -26,8 +25,6 @@ public class PANELClientiAmministratore extends javax.swing.JPanel implements Ac
         initComponents(clienti);
     }
 
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents(List<Cliente> clienti)
     {
 
@@ -48,14 +45,12 @@ public class PANELClientiAmministratore extends javax.swing.JPanel implements Ac
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                // di default c'era:   .addGap(0, 461, Short.MAX_VALUE)
-                //brr:
+                
                 .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
             jPanel1Layout.setVerticalGroup(
                 jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                // di default c'era:    .addGap(0, 299, Short.MAX_VALUE)
-                //brr:
+                
                 .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
             );
     
@@ -105,7 +100,6 @@ public class PANELClientiAmministratore extends javax.swing.JPanel implements Ac
                 // le prossime righe servono perchè quando clicco il bottone voglio che si elimini quel cliente
                 button.addActionListener((ActionListener) this);
 
-                //panel.setBorder(new MBorder(0, 0, 1, 0, Color.GRAY));       serve?
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridwidth = GridBagConstraints.REMAINDER;
                 gbc.weightx = 1;
@@ -117,7 +111,7 @@ public class PANELClientiAmministratore extends javax.swing.JPanel implements Ac
         validate();
         repaint();
 
-    }// </editor-fold>      
+    }    
     
     //aggiunto per il for:  per il i-esimo cliente con delted = N , creo il bottone per eliminarlo
     public String makeButtonText(Cliente cliente)

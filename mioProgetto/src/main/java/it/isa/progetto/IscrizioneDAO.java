@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class IscrizioneDAO 
@@ -102,9 +101,8 @@ public class IscrizioneDAO
       
     //funzione che mi crea una nuova iscrizione
     public Iscrizione createIscrizione(
-        //boolean DELETED,
         Corso corso,
-        Cliente cliente) //throws DuplicatedObjectException 
+        Cliente cliente) 
     {
   
         PreparedStatement ps;
@@ -206,7 +204,8 @@ public class IscrizioneDAO
     }
 
     //funzione che mi conta gli iscritti ad un corso
-    public int countiscritti(int ID_CO){
+    public int countiscritti(int ID_CO)
+    {
         PreparedStatement ps;
         int iscritti = 0;
         ArrayList<Iscrizione> TOT = new ArrayList<Iscrizione>();
@@ -290,11 +289,7 @@ public class IscrizioneDAO
         return iscritti;
     }
 
-
-    
-
-//forse non la usiamo
-
+    //cerco una iscrizione a partire dall'ID di corso e di cliente
     public Iscrizione findIscrizioneByID(int ID_CL, int ID_CO) 
     {
         

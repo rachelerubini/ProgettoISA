@@ -3,7 +3,7 @@ package it.isa.progetto;
 public class Iscrizione 
 {
     private String DELETED;
-    /* N:M */
+
     private Corso corso;
     private Cliente cliente;
 

@@ -79,7 +79,6 @@ public class RecensioneDAO
             int j = 1;
             ps.setInt(j++, recensione.getVOTO());
             ps.setString(j++, recensione.getDATA());
-            //j++;
             ps.setInt(j++, recensione.getCorso().getID_CO());
             ps.setInt(j++, recensione.getCliente().getID_CL());
 

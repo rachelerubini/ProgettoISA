@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -26,9 +25,7 @@ public class PANELCorsiAmministratore extends javax.swing.JPanel implements Acti
     {
         initComponents(corsi);
     }
-
-    //@SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+                        
     private void initComponents(List<Corso> corsi) 
     {
         jLabel1 = new javax.swing.JLabel();
@@ -50,12 +47,12 @@ public class PANELCorsiAmministratore extends javax.swing.JPanel implements Acti
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            //.addGap(0, 449, Short.MAX_VALUE)
+            
             .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            //.addGap(0, 0, Short.MAX_VALUE)
+            
             .addComponent(pannello, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
             );
 
@@ -116,7 +113,7 @@ public class PANELCorsiAmministratore extends javax.swing.JPanel implements Acti
     
         validate();
         repaint();
-    }// </editor-fold>                        
+    }                       
 
 
 
