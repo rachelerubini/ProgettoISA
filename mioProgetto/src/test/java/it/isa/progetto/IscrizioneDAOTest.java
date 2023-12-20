@@ -343,7 +343,7 @@ public class IscrizioneDAOTest
             dao.createIscrizione(corsoprova,clienteprova);
             int iscritto=dao.findCorsoCliente(clienteprova.getID_CL(),corsoprova.getID_CO());
             assertEquals(iscritto, 1);
-            //verifico che la findCorsoCliente mi dia il corso   giusto 
+          
 
             
 
@@ -353,7 +353,7 @@ public class IscrizioneDAOTest
             System.out.println(e.getMessage());
         }  
 
-        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal corso prova creato sopra
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dall'iscrizione di prova creato sopra
         finally         
         {
             try
@@ -369,7 +369,7 @@ public class IscrizioneDAOTest
             clienteprova=daocl.findClienteByID(1);
             corsoprova=daocc.findCorsoByID_CO(1);
             
-            //verifico che la findCorsoCliente mi dia il corso   giusto 
+            
 
             //elimino l'iscrizione fatta
             dao.disiscrivi(clienteprova.getID_CL(),corsoprova.getID_CO());
@@ -398,6 +398,67 @@ public class IscrizioneDAOTest
        {
         System.out.println(e.getMessage());
        }
+    }
+
+    @Test 
+    public void testfindIscrizioneByID() 
+    {
+        
+
+        try
+        {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            Cliente clienteprova = new Cliente();
+            Corso corsoprova = new Corso();
+            IscrizioneDAO dao =new IscrizioneDAO(con);
+            
+            ClienteDAO daocl =new ClienteDAO(con);
+            CorsoDAO daocc =new CorsoDAO(con);
+            clienteprova=daocl.findClienteByID(1);
+            corsoprova=daocc.findCorsoByID_CO(1);
+            dao.createIscrizione(corsoprova,clienteprova);
+            Iscrizione iscrizione=dao.findIscrizioneByID(clienteprova.getID_CL(),corsoprova.getID_CO());
+
+            assertEquals(iscrizione.getCliente().getID_CL(),1);
+            assertEquals(iscrizione.getCorso().getID_CO(),1);
+            assertEquals(iscrizione.isDELETED(),"N");
+            
+
+            
+
+        }// se il test ha funzionato senza darci problemi salto il catch e vado al finally
+        catch(Exception e)
+        {  
+            System.out.println(e.getMessage());
+        }  
+
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dall'iscrizione di prova creato sopra
+        finally         
+        {
+            try
+            {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con= DriverManager.getConnection("jdbc:mysql://localhost/isa-palestra", "root", "GlisCols123");
+            Cliente clienteprova = new Cliente();
+            Corso corsoprova = new Corso();
+            IscrizioneDAO dao =new IscrizioneDAO(con);
+            
+            ClienteDAO daocl =new ClienteDAO(con);
+            CorsoDAO daocc =new CorsoDAO(con);
+            clienteprova=daocl.findClienteByID(1);
+            corsoprova=daocc.findCorsoByID_CO(1);
+            
+           
+
+            //elimino l'iscrizione fatta
+            dao.disiscrivi(clienteprova.getID_CL(),corsoprova.getID_CO());
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     @Test 
