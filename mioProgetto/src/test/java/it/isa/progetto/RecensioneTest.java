@@ -1,12 +1,10 @@
 package it.isa.progetto;
+
 import org.junit.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 import static org.junit.Assert.assertEquals;
-import it.isa.progetto.Corso;
-import it.isa.progetto.Cliente;
 import java.lang.reflect.Field;
-import java.util.HashMap;
 
 //TESTIAMO RECENSIONE.JAVA QUINDI TUTTI I SET E GET DEI SUOI CAMPI
 
@@ -68,6 +66,7 @@ public class RecensioneTest
         assertEquals("Fields didn't match", field.get(recensione), voto);
 
     }
+    
 
     @Test
     public void testGetVOTO() throws NoSuchFieldException, IllegalAccessException 
@@ -106,6 +105,7 @@ public class RecensioneTest
 
     }
 
+
     @Test
     public void testGetDATA() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -124,6 +124,7 @@ public class RecensioneTest
         assertEquals("field wasn't retrieved properly", result, data);
     }
 
+
     @Test
     public void testSetDELETED() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -139,6 +140,7 @@ public class RecensioneTest
         assertEquals("Fields didn't match", field.get(recensione), "testsetDELETED");
 
     }
+
 
     @Test
     public void testisDELETED() throws NoSuchFieldException, IllegalAccessException 
@@ -176,6 +178,8 @@ public class RecensioneTest
         assertEquals("Fields didn't match", recensione.getCorso().getID_CO(), 5);
 
     }
+
+
     @Test
     public void testSetCorso() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -201,7 +205,8 @@ public class RecensioneTest
 
     }
 
-     @Test
+
+    @Test
     public void testGetCliente() throws NoSuchFieldException, IllegalAccessException 
     {
         //given
@@ -219,6 +224,8 @@ public class RecensioneTest
         assertEquals("Fields didn't match", recensione.getCliente().getID_CL(), 6);
 
     }
+
+
     @Test
     public void testSetCliente() throws NoSuchFieldException, IllegalAccessException 
     {

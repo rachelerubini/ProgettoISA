@@ -1,11 +1,7 @@
 
 package it.isa.progetto;
 
-import it.isa.progetto.Corso;
-
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.Test;
 
 
@@ -13,7 +9,7 @@ import org.junit.Test;
 
 public class DAOFactoryTest {
     
-// testiamo la begin transaction, faccendo una transazione (find) per ogni entità e poi verifico che l'oggetto trovato con la find corrisponda con quello che miii aspetto se ocnicide è ok, la transazione è stata effettuata
+    //testiamo la begin transaction, faccendo una transazione (find) per ogni entità e poi verifico che l'oggetto trovato con la find corrisponda con quello che miii aspetto se ocnicide è ok, la transazione è stata effettuata
     @Test
     public void beginTransactionTest()
     {
@@ -45,7 +41,7 @@ public class DAOFactoryTest {
     }
 
 
-//testiamo la roolback sul cliente (se funziona per il cliente funzionerà per tutti)
+    //testiamo la roolback sul cliente (se funziona per il cliente funzionerà per tutti)
     @Test
     public void rollbackTransactionTest()
     {
@@ -62,7 +58,7 @@ public class DAOFactoryTest {
             DAOFactory daoo = new DAOFactory();
             daoo.beginTransaction();
             ClienteDAO udd = daoo.getClienteDAO();
-            assertEquals(null, udd.findByMAILCliente("prova")); //provo a cercare un cliente con mail "prova" ma non c'è (poichè la Rollback è aaaandata a buon fine) infatti è null il risultato della findbyMAIL
+            assertEquals(null, udd.findByMAILCliente("prova")); //provo a cercare un cliente con mail "prova" ma non c'è (poichè la Rollback è andata a buon fine) infatti è null il risultato della findbyMAIL
         }
 
         catch(Exception ex)

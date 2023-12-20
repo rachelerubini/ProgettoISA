@@ -1,21 +1,13 @@
 package it.isa.progetto;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-
 import java.sql.Connection;
-import java.sql.Statement;
-import java.sql.ResultSet;
 import java.sql.DriverManager;
 
-import java.util.*;
-import java.util.List;
-import java.util.ArrayList;
 
 import org.junit.Test;
 
 //TESTIAMO ISCRIZIONEDAO.JAVA QUINDI TUTTE LE FUNZIONI CHE ABBIAMO FATTO AL SUO INTERNO
-//NO EXCEPTIION MA si SQL E AGGIUNGI I TEST DELLLE FUNZIONI
 
 public class IscrizioneDAOTest 
 {
@@ -130,11 +122,10 @@ public class IscrizioneDAOTest
         catch(Exception e)
         {  
             System.out.println(e.getMessage());
-        }  
-
-        
-        
+        }     
     }
+
+
 
     // Test che prova a generare un errore sql disiscrivendomi al corso subito dopo aver chiuso la connessione
     @Test 
@@ -158,7 +149,7 @@ public class IscrizioneDAOTest
 
 
 
-@Test 
+    @Test 
     public void testcountiscritti() 
     {
         
@@ -210,12 +201,7 @@ public class IscrizioneDAOTest
             corsoprova=daocc.findByNomeCorso("prova");
             daocc.delete(corsoprova);
 
-
-
             clienteprova=daocl.findClienteByID(1);
-            
-            
-            //verifico che la findCorsoCliente mi dia il corso   giusto 
 
             //elimino l'iscrizione fatta
             dao.disiscrivi(clienteprova.getID_CL(),corsoprova.getID_CO());
@@ -303,12 +289,7 @@ public class IscrizioneDAOTest
             corsoprova=daocc.findByNomeCorso("prova");
             daocc.delete(corsoprova);
 
-
-
             clienteprova=daocl.findClienteByID(1);
-            
-            
-            //verifico che la findCorsoCliente mi dia il corso   giusto 
 
             //elimino l'iscrizione fatta
             dao.disiscrivi(clienteprova.getID_CL(),corsoprova.getID_CO());

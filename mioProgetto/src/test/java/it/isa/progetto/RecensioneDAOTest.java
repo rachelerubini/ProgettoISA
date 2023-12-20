@@ -1,18 +1,12 @@
 package it.isa.progetto;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
-
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
-import java.util.HashMap;
-
-import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
-
 import org.junit.Test;
 
 //TESTIAMO RECENSIONEDAO.JAVA QUINDI TUTTE LE FUNZIONI CHE ABBIAMO FATTO AL SUO INTERNO
@@ -78,7 +72,7 @@ public class RecensioneDAOTest
 
     }
 
-     @Test 
+    @Test 
     public void testfindRecensioneByID() 
     {
         
@@ -99,18 +93,17 @@ public class RecensioneDAOTest
             Recensione rec=dao.create(6, "1900-12-12",corsoprova,clienteprova);
             
             
-            //prendo il corso creato sopra
+            //prendo la recensione creata sopra
             Recensione r= new Recensione();
             r=dao.findRecensioneByDATA("1900-12-12");
 
-            //cerco un corso con l'id del corso sopra creato
+            //cerco una recensione con la data della recensione sopra creata
 
             Recensione r1= new Recensione();
             r1= dao.findRecensioneByID(r.getID_R());
 
 
             assertEquals(r1.getDATA(), r.getDATA());
-            //verifico che la findbyid mi dia il corso   giusto 
 
              con.close();
 
@@ -120,7 +113,7 @@ public class RecensioneDAOTest
             System.out.println(e.getMessage());
         }  
 
-        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal corso prova creato sopra
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dalla recensione prova creata sopra
         finally         
         {
             try
@@ -185,13 +178,12 @@ public class RecensioneDAOTest
             Recensione rec=dao.create(6, "1900-12-12",corsoprova,clienteprova);
             
             
-            //prendo il corso creato sopra
+            //prendo la recensione creata sopra
             Recensione r= new Recensione();
             r=dao.findRecensioneByDATA("1900-12-12");
 
 
             assertEquals(r.getDATA(), rec.getDATA());
-            //verifico che la findbyid mi dia il corso   giusto 
 
              con.close();
 
@@ -201,7 +193,7 @@ public class RecensioneDAOTest
             System.out.println(e.getMessage());
         }  
 
-        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dal corso prova creato sopra
+        //questo blocco ci serve per pulire (deleted:Y ) il DB Mysql dalla recensione prova creata sopra
         finally         
         {
             try

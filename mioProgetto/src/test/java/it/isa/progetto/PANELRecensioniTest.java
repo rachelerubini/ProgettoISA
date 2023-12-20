@@ -1,6 +1,5 @@
 package it.isa.progetto;
 
-import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import java.util.ArrayList;
@@ -42,7 +41,6 @@ public class PANELRecensioniTest
         df.closeTransaction();
 
         String etichetta1= pr.makeButtonText(recensione);
-        //QUA COME SECONDO PARAMETRO CONVIENE SCRIVERE NOI LA STRINGA CHE DEVE USCIRE (GUARDA IL DB)
         assertEquals(etichetta1,"CORSO: "+nomeco+"\t VOTO: "+recensione.getVOTO()+"\t CLIENTE: "+nomec +"\t DATA: "+recensione.getDATA());
     }
     

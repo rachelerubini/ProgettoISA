@@ -8,20 +8,12 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
-import java.util.HashMap;
-
-import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
-
 import org.junit.Test;
 
 
 //TESTIAMO CLIENTEDAO.JAVA QUINDI TUTTE LE FUNZIONI CHE ABBIAMO FATTO AL SUO INTERNO
-//Non abbiamo fatto i  testdeleteNotFoundException() ovvero il Test che mi copre il missing object (Non abbiamo gesstito qiesta coosa nel codice quindi non la testimo)
-
-//NNNO EXCEPTIION MA si SQL E AGGIUNGI I TEST DELLLE FUNZIONII
-
 
 public class ClienteDAOTest 
 {
@@ -95,7 +87,7 @@ public class ClienteDAOTest
     }
 
 
-  // testo la delete verificando che elimini davvero il cliente 
+    //testo la delete verificando che elimini davvero il cliente 
     @Test 
     public void testdelete() 
     {
@@ -149,8 +141,8 @@ public class ClienteDAOTest
 
     }
 
-//test per vedere se funnziona il findbymail
-@Test 
+    //test per vedere se funnziona il findbymail
+    @Test 
     public void testfindByMAILCliente() 
     {
         
@@ -220,8 +212,8 @@ public class ClienteDAOTest
     }
 
 
-//test per vedere se funnziona il findbyID
-@Test 
+    //test per vedere se funnziona il findbyID
+    @Test 
     public void testfindClienteByID() 
     {
         
@@ -293,10 +285,6 @@ public class ClienteDAOTest
 
     }
 
-
-
-    
-    
 
     // testo il numero di elementi che la findAll restituisce (se unaa chiamata sql che conta i clienti dà lo stesso numero di clienti restituiti dalla  finAllClienti)
     @Test

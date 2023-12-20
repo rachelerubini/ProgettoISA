@@ -6,7 +6,7 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
+
 
 //TESTIAMO AMMINISTRATORE.JAVA QUINDI TUTTI I SET E GET DEI SUOI CAMPI
 
@@ -65,6 +65,8 @@ public class AmministratoreTest
 
     }
 
+
+
     @Test
     public void testGetPASSWORD() throws NoSuchFieldException, IllegalAccessException 
     {
@@ -97,6 +99,8 @@ public class AmministratoreTest
         assertEquals("Fields didn't match", field.get(amministratore), "testsetMAIL");
 
     }
+
+    
 
     @Test
     public void testGetMAIL() throws NoSuchFieldException, IllegalAccessException 

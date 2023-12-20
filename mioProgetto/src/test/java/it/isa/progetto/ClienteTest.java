@@ -7,10 +7,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
-
-
-//Tuttti i test sembrano funzionare correttamente
 
 
 //TESTIAMO CLIENTE.JAVA QUINDI TUTTI I SET E GET DEI SUOI CAMPI
@@ -266,10 +262,7 @@ public class ClienteTest {
 
         //then
         assertEquals("field wasn't retrieved properly", result, "testisDELETED");
-    }
-
-//Non testiamo get e set recensioni perchè non li abbiamo mai utilizzati
-     
+    }     
 
 }
 

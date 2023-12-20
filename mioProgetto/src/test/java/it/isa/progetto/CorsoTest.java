@@ -5,7 +5,6 @@ import org.junit.jupiter.api.TestInstance.Lifecycle;
 import static org.junit.Assert.assertEquals;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
 
 //TESTIAMO CORSO.JAVA QUINDI TUTTI I SET E GET DEI SUOI CAMPI
 
@@ -179,9 +178,6 @@ public class CorsoTest
         assertEquals("field wasn't retrieved properly", result, "testisDELETED");
     }
 
-
-
-    //Non testiamo get e set di recensione perchè non li abbiamo mai utilizzati
 }
 
 

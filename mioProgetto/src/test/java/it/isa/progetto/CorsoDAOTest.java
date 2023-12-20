@@ -7,9 +7,6 @@ import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.DriverManager;
-import java.util.HashMap;
-
-import java.util.*;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -17,8 +14,6 @@ import org.junit.Test;
 
 
 //TESTIAMO CORSODAO.JAVA QUINDI TUTTE LE FUNZIONI CHE ABBIAMO FATTO AL SUO INTERNO
-
-//NO EXCEPTIION MA si SQL E AGGIUNGI I TEST DELLLE FUNZIONI
 
 public class CorsoDAOTest 
 {
@@ -104,18 +99,15 @@ public class CorsoDAOTest
             dao.delete(c1);
             assertEquals(null, dao.findByNomeCorso("prova"));
             //verifico che non  ci sia piu il corso  "prova"
-
-            
-
         }
         catch(Exception e)
         {  
             System.out.println(e.getMessage());
         }  
-
-        
-        
+  
     }
+
+
 
     // Test che prova a generare un errore sql eliminando il corso subito dopo aver chiuso la connessione
     @Test 
@@ -266,7 +258,7 @@ public class CorsoDAOTest
     }
 
 
-     @Test 
+    @Test 
     public void testfindCorsoByNome() 
     {
         
